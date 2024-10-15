@@ -1,0 +1,43 @@
+.ListFood {
+    margin: 1.5rem auto; /* Top and bottom margins */
+    margin-bottom: 113.4px; /* Adjusted bottom margin to reduce space by 3cm */
+    padding: 0.5rem; /* Reduced padding */
+    width: 90%; /* Decreased width */
+    max-width: 700px; /* Decreased max-width */
+    background: #ccbb8ffd; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ListFoodNoElement {
+    text-align: center;
+    margin: 2rem 0; /* Reduced margin */
+    font-size: 20px;
+    color: #666666;
+}
+
+.ItemFood {
+    padding: 8px; /* Reduced padding */
+    margin: 3px 0; /* Further reduced margin */
+    border: 1px solid #ccbb8ffd; 
+    border-radius: 5px; 
+    transition: box-shadow 0.3s ease; 
+    text-decoration: none; 
+    transform: translateX(0.2px);
+}
+
+.ItemFood:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.33); /* Less pronounced shadow */
+}
+
+@media (max-width: 767px) {
+    .ListFood {
+        padding-right: 15px!important; 
+    }
+}
+
+@media (min-width: 768px) {
+    .ListFood {
+        width: 80%; /* Wider on larger screens */
+    }
+}

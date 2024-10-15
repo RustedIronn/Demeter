@@ -1,0 +1,10 @@
+.Loading {
+    text-align: center;
+    margin: 2rem;
+    border-radius: 2rem;
+}
+
+.Loading svg {
+    font-size: 40px;
+    color: #64c469;
+}

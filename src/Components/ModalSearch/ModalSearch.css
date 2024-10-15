@@ -1,0 +1,57 @@
+.ModalSearch {
+    max-width: 40%;
+    flex: 0 0 50%;
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 25px;
+    padding: 30px;
+    z-index: 10;
+    height: 70%;
+    min-width: 520px;
+    border-radius: 5px;
+    transform: translateX(14.3px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.ModalSearchContent {
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    background: white;
+    height: 100%;
+}
+
+.ModalSearchBackdrop {
+    background: #fdfdfd00;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -10;
+}
+
+.ModalSearchContainer {
+    overflow-y: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .ModalSearch {
+        top: 0;
+        height: 100%;
+        top: 0;
+        max-width: 100%;
+        flex: 0 0 50%;
+        top: 80px;
+        min-width: auto;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .ModalSearch {
+        min-width: auto;
+    }
+}

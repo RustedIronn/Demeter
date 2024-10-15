@@ -1,0 +1,70 @@
+.DatePicker {
+    margin: 0.6rem;
+    padding: 1rem; /* Add padding for better spacing */
+    background-color: #6a9e09; /* Set a background color */
+    border-radius: 12px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center align items */
+    transform: translateX(5.56px);
+}
+
+.DatePicker .DatePickerIcon {
+    cursor: pointer;
+    transition: transform 0.3s; /* Smooth transition for hover effects */
+}
+
+.DatePicker .DatePickerIcon:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.DatePicker .DatePickerIcon svg {
+    font-size: 1.5rem; /* Increased icon size for better visibility */
+    color: #ffffff; /* Keep icon color white for contrast */
+}
+
+.DatePicker .DatePickerText {
+    font-size: 1.8rem; /* Adjust font size for better readability */
+    color: #ffffff; /* Keep text color white */
+    margin-left: 0.5rem; /* Space between icon and text */
+    font-weight: 500; /* Medium weight for text */
+}
+
+.DatePickerMobile {
+    margin: 1rem;
+    padding: 0.8rem; /* Add padding for better spacing */
+    background-color: #f5f5f5; /* Light background for contrast */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center align items */
+}
+
+.DatePickerMobile .DatePickerIcon {
+    cursor: pointer;
+    transition: transform 0.3s; /* Smooth transition for hover effects */
+}
+
+.DatePickerMobile .DatePickerIcon:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.DatePickerMobile .DatePickerIcon svg {
+    font-size: 1.5rem; /* Increased icon size for better visibility */
+    color: #3b7045; /* Keep icon color as primary */
+}
+
+.DatePickerMobile .DatePickerText {
+    font-size: 1.5rem; /* Adjust font size for better readability */
+    color: #212121; /* Dark text for contrast */
+    font-weight: bold; /* Keep bold for emphasis */
+    margin-left: 0.5rem; /* Space between icon and text */
+}
+
+.DatePickerIconDisabled svg {
+    color: #bebdf7 !important; /* Disabled icon color */
+}
+
+.DatePickerIconDisabled {
+    cursor: default !important; /* Change cursor for disabled state */
+}

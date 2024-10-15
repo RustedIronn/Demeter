@@ -1,0 +1,52 @@
+/* Components/Login/Login.css */
+/* Login.css */
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    color: red;
+}
+
+.signup-link {
+    cursor: pointer;
+    color: blue;
+    text-align: center;
+}
+
+
+.login-container h2 {
+    margin-bottom: 1rem; /* Space below title */
+}
+
+.login-container input {
+    display: block;
+    width: 100%; /* Full width */
+    margin: 0.5rem 0; /* Space above and below inputs */
+    padding: 0.5rem; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.login-container button {
+    background: #3b7045; /* Match your main color */
+    color: white; /* Text color */
+    padding: 0.5rem;
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+}
+
+.login-container button:hover {
+    background: #8BC34A; /* Hover effect */
+}
+
+.error-message {
+    color: red; /* Error message color */
+    margin-bottom: 1rem; /* Space below error message */
+}

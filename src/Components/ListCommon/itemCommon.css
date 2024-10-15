@@ -1,0 +1,33 @@
+.ItemCommon {
+    height: 60px;
+}
+
+.ItemCommon img {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.ItemCommonText {
+    font-weight: bold;
+}
+
+.ItemCommonTexts {
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.ItemCommonPhoto {
+    width: 80px;
+}
+
+.ItemCommon:nth-child(6n) .ItemCommonTexts {
+    border-bottom: 0;
+}
+
+.ItemCommon:hover {
+    cursor: pointer;
+    background: #b1dfb3;
+}
+
+.ItemCommon:hover .ItemCommonTexts {
+    border: 0;
+}

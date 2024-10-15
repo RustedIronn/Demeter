@@ -1,0 +1,129 @@
+:root {
+    --tooltip-backcolor: #424242;
+    --tooltip-forecolor: #FAFAFA;
+}
+
+.Fab {
+    bottom: 1vh;
+    position: fixed;
+    margin: 1em;
+    right: 3vw;
+}
+
+.FabItem {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 50%;
+    border-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    margin: 20px auto 0;
+    position: relative;
+    -webkit-transition: transform .1s ease-out, height 100ms ease, opacity 100ms ease;
+    transition: transform .1s ease-out, height 100ms ease, opacity 100ms ease;
+    text-decoration: none;
+    background-color: #947832fd;
+    color: rgb(250, 250, 250);
+    text-decoration: none;
+    border: none;
+}
+
+.FabItem:active, .FabItem:focus, .FabItem:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    transition: box-shadow .2s ease;
+    outline: none;
+}
+
+.FabItem:not(:last-child) {
+    width: 40px;
+    height: 0px;
+    margin: 0px auto 0;
+    opacity: 0;
+    -webkit-transform: translateY(50px);
+    -ms-transform: translateY(50px);
+    transform: translateY(50px);
+}
+
+.Fab:hover .FabItem:not(:last-child) {
+    height: 40px;
+    opacity: 1;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    margin: 15px auto 0;
+}
+
+.FabItem:not(:last-child) i {
+    opacity: 0;
+}
+
+.Fab:hover .FabItem:not(:last-child) i {
+    opacity: 1;
+}
+
+.FabItem:nth-last-child(1) {
+    -webkit-transition-delay: 25ms;
+    transition-delay: 25ms;
+    background-size: contain;
+}
+
+.FabItem:not(:last-child):nth-last-child(2) {
+    -webkit-transition-delay: 50ms;
+    transition-delay: 20ms;
+    background-size: contain;
+}
+
+.FabItem:not(:last-child):nth-last-child(3) {
+    -webkit-transition-delay: 75ms;
+    transition-delay: 40ms;
+    background-size: contain;
+}
+
+.FabItem:not(:last-child):nth-last-child(4) {
+    -webkit-transition-delay: 100ms;
+    transition-delay: 60ms;
+    background-size: contain;
+}
+
+[tooltip]:before {
+    bottom: 25%;
+    font-family: arial;
+    font-weight: 600;
+    border-radius: 2px;
+    background: var(--tooltip-backcolor);
+    color: var(--tooltip-forecolor);
+    content: attr(tooltip);
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    padding: 5px 7px;
+    margin-right: 12px;
+    position: absolute;
+    right: 100%;
+    white-space: nowrap;
+}
+
+[tooltip]:hover:before, [tooltip]:hover:after {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .1s ease-in-out;
+}
+
+.FabItem:nth-last-child(1)[tooltip]:hover:before, .FabItem:nth-last-child(1)[tooltip]:hover:after {
+    transition: opacity .1s step-end;
+}
+
+.FabItem.FabRotate:active, .FabItem.FabRotate:focus, .FabItem.FabRotate:hover {
+    transform: rotate(90deg);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.19), 3px 3px 6px rgba(0, 0, 0, 0.23);
+    transition: box-shadow .2s ease, transform .1s ease;
+    outline: none;
+}
+
+.FabItem.FabRotate:nth-last-child(1)[tooltip]:hover:before, .FabItem.FabRotate:nth-last-child(1)[tooltip]:hover:after {
+    transform: rotate(-90deg);
+    bottom: -60%;
+    right: 60%;
+}

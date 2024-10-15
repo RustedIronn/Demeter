@@ -1,0 +1,19 @@
+.CustomToggle {
+    background: #f3f3f3; /* Slightly lighter background */
+    color: #5c5c5c;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.CustomToggle:hover {
+    background: #e0f5e4; /* Light green background on hover */
+    color: #25a72c;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on hover */
+}
+
+.CustomToggle .float-right {
+    margin-left: 10px; /* Adjust this value for more or less spacing */
+}

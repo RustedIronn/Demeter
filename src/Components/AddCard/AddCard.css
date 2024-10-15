@@ -1,0 +1,87 @@
+.AddCard {
+    margin: 1rem;
+}
+
+.AddCardHeader {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.AddCardBody {
+    padding-top: 1rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.AddCardImage {
+    max-width: 80px;
+}
+
+.AddCardTitle {
+    font-size: 28px;
+}
+
+.AddCardSubtitle {
+    color: #646464;
+}
+
+.AddCardClose {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 35px;
+    top: 35px;
+    border: none;
+    background: transparent;
+    color: #55af5a;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.AddCardClose:after {
+    content: "X";
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.AddCardNumber {
+    font-size: 26px;
+    text-align: right;
+    color: #202020;
+}
+
+.AddCardDetail {
+    font-size: 12px;
+    text-align: right;
+    color: #696969;
+    line-height: 4px;
+}
+
+.AddCard .btn-primary {
+    background: #978454fd;
+    box-shadow: 0 2px 5px #777;
+    border: 0;
+    float: right; /* Move the button to the right */
+    margin-bottom: 0.5rem;
+}
+
+.AddCard .btn-primary:focus {
+    background: #17851d!important;
+    box-shadow: none!important;
+    border: 0;
+}
+
+.AddCard .btn-primary:active {
+    background: #039d50!important;
+    box-shadow: none!important;
+    border: 0;
+}
+
+.AddCardTitleSelec {
+    padding-top: 10px;
+    color: #646464;
+    font-weight: bold;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin: 8px 0;
+    text-transform: uppercase;
+}

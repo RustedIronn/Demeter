@@ -1,0 +1,67 @@
+.Search {
+    background: #567940;
+    padding: 0;
+    border-radius: 12px;
+    width: 95.5%;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateX(4px);
+}
+
+.Search .input-group {
+    width: 100%;
+    z-index: 12;
+}
+
+.Search .input-group-text {
+    background: white;
+    padding: 0.375rem 0.75rem; /* Match the padding of .SearchInput */
+    border-radius: 12px 0 0 12px;
+    display: flex;
+    align-items: center;
+    height: 40px; /* Ensure the height matches .SearchInput */
+}
+
+.InputSearchw {
+    margin: 0;
+    font-weight: bold;
+    border: 1px solid #a0e19d;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+    width: calc(100% - 1px);
+    height: 40px;
+    padding: 0.375rem 0.75rem; /* Match the padding with .input-group-text */
+    box-sizing: border-box;
+}
+
+.SearchInput {
+    font-size: 14px;
+    height: 100%;
+    padding: 0.703125rem 0.75rem;
+    line-height: normal;
+    border: none;
+}
+
+
+.SearchInputMobile {
+    font-size: 20px;
+    height: 40px;
+    line-height: normal;
+}
+
+.SearchIconMobile {
+    font-size: 1.8rem;
+    margin: 0 0.5rem;
+}
+
+.SearchInputMobile:focus, .SearchInput:focus {
+    box-shadow: none;
+}
+
+.Search .input-group-prepend {
+    margin-right: 0;
+}
+
+.Search .form-control {
+    color: #212121 !important;
+}

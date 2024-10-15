@@ -1,0 +1,44 @@
+.CardGold {
+    margin: 1rem 0;
+    font-family: 'Trebuchet MS', sans-serif; /* Apply font here */
+}
+
+.CardGoldMobile {
+    margin: 1rem 0;
+    font-family: 'Trebuchet MS', sans-serif; /* Apply font here */
+}
+
+.CardGoldCalories {
+    font-size: 1.5rem; /* Increased font size for better visibility */
+    font-weight: bold; /* Make font bolder */
+    color: #212121;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add subtle text shadow for clarity */
+}
+
+.CardGoldMobile .CardGoldCalories {
+    font-size: 2.5rem; /* Increased font size for mobile */
+    font-weight: bold; /* Make font bolder */
+    color: #212121;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add subtle text shadow for clarity */
+}
+
+.CardGoldSubtitle {
+    font-size: 14px; /* Increased subtitle font size for better visibility */
+    line-height: 1.5; /* Increased line height for readability */
+    color: #666666;
+    font-family: 'Trebuchet MS', sans-serif; /* Apply font here */
+}
+
+@media only screen and (max-width: 768px) {
+    .CardGold,
+    .CardGoldMobile {
+        margin: 0.5rem 0; /* Reduce margin on smaller screens */
+    }
+
+    .CardGoldCalories,
+    .CardGoldMobile .CardGoldCalories {
+        font-size: 1.5rem; /* Adjust font size for mobile */
+        font-family: 'Trebuchet MS', sans-serif; /* Apply font here */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add subtle text shadow for clarity */
+    }
+}
