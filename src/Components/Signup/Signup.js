@@ -1,57 +1,60 @@
-// src/Components/SignUp/SignUp.js
 import React, { useState } from 'react';
-import './Signup.css'; // Import the CSS file for styling
+import { Navigate } from 'react-router-dom'; // Import Navigate for programmatic routing
 
-const SignUp = ({ onSignUp }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
+const Signup = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSignUp = (e) => {
-        e.preventDefault();
-        setError(''); // Reset error message
+  const handleSubmit = () => {
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match'); // Error message when passwords do not match
+      return;
+    }
 
-        // Basic validation for sign-up
-        if (password !== confirmPassword) {
-            setError('Passwords do not match.');
-            return;
-        }
+    // You can add user creation logic here (e.g., saving user data to a database)
+    // For now, we assume successful sign-up
+    setRedirectToLogin(true); // Redirect to login page after successful sign-up
+  };
 
-        // Call the onSignUp prop (implement your sign-up logic here)
-        onSignUp(email, password);
-    };
+  const handleLoginRedirect = () => {
+    setRedirectToLogin(true); // Redirect to login page
+  };
 
-    return (
-        <div className="signup-container">
-            <h2>Create an Account</h2>
-            {error && <p className="error-message">{error}</p>}
-            <form onSubmit={handleSignUp}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-    );
+  if (redirectToLogin) {
+    return <Navigate to="/login" />; // Redirect to the login page
+  }
+
+  return (
+    <div>
+      <h2>Sign Up</h2>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <input
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        placeholder="Confirm Password"
+      />
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>} {/* Display error message if passwords don't match */}
+      <button onClick={handleSubmit}>Sign Up</button>
+      
+      {/* Redirect to login page if the user already has an account */}
+      <button onClick={handleLoginRedirect}>Already have an account? Login</button>
+    </div>
+  );
 };
 
-export default SignUp;
+export default Signup;

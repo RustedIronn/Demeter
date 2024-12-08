@@ -1,56 +1,54 @@
-// src/Components/Login/Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
-import './Login.css'; // Import the CSS file for styling
+import { Navigate } from 'react-router-dom'; // Import Navigate for programmatic routing
 
-const Login = ({ onLogin }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const navigate = useNavigate(); // Hook to access navigation
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [redirectToDashboard, setRedirectToDashboard] = useState(false);
+  const [redirectToSignup, setRedirectToSignup] = useState(false);
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        setError(''); // Reset error message
+  const handleSubmit = () => {
+    // Use the username and password here for your authentication logic.
+    if (username === 'admin' && password === 'password') { // Example authentication
+      setRedirectToDashboard(true); // Set the redirect state to true
+    } else {
+      alert('Invalid credentials');
+    }
+  };
 
-        // Simple validation (replace this with your authentication logic)
-        if (email === 'user@example.com' && password === 'password123') {
-            onLogin(); // Call the onLogin prop after successful login
-        } else {
-            setError('Invalid email or password.'); // Show error message
-        }
-    };
+  const handleSignupRedirect = () => {
+    setRedirectToSignup(true); // Set the redirect to sign-up page
+  };
 
-    const handleSignUpRedirect = () => {
-        navigate('/signup'); // Redirect to Sign Up page
-    };
+  if (redirectToDashboard) {
+    return <Navigate to="/dashboard" />; // Redirect to the dashboard
+  }
 
-    return (
-        <div className="login-container">
-            <h2>Login to Diet Plan App</h2>
-            {error && <p className="error-message">{error}</p>}
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Login</button>
-            </form>
-            <p className="signup-link" onClick={handleSignUpRedirect}>
-                Don’t have an account? Sign Up
-            </p>
-        </div>
-    );
+  if (redirectToSignup) {
+    return <Navigate to="/signup" />; // Redirect to the sign-up page
+  }
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button onClick={handleSubmit}>Login</button>
+      
+      {/* Redirects to the sign-up page when clicked */}
+      <button onClick={handleSignupRedirect}>Sign Up</button>
+    </div>
+  );
 };
 
 export default Login;

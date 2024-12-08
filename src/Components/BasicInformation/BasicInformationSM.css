@@ -12,6 +12,7 @@
     width: 93%; /* Allow full width up to the max */
     transition: max-height 0.3s ease-in-out; /* Smooth transition for expansion */
     overflow: hidden; /* Prevent overflow when collapsing */
+    height: auto;
 }
 
 .BasicInformationMobile.expanded,

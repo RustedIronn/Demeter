@@ -19,36 +19,40 @@ class App extends Component {
   componentDidMount = () => {
     window.addEventListener("resize", this.updateWindowDimensions);
     this.updateWindowDimensions();
-    this.props.dispatch(actionsPersonalData.personalDataSet(data))
-  }
+    this.props.dispatch(actionsPersonalData.personalDataSet(data));
+  };
 
-  componentWillUnmount = () => window.removeEventListener("resize", this.updateWindowDimensions);
-  updateWindowDimensions = () => this.props.dispatch(actionsGeneral.mobileSet(window.innerWidth < 768));
+  componentWillUnmount = () => {
+    window.removeEventListener("resize", this.updateWindowDimensions);
+  };
+
+  updateWindowDimensions = () => {
+    this.props.dispatch(actionsGeneral.mobileSet(window.innerWidth < 768));
+  };
 
   render() {
     return (
       <Container className={this.props.isMobile ? "p-0" : ""} fluid={this.props.isMobile}>
         <Row className={this.props.isMobile ? "m-0" : ""}>
           <Col lg="12" className={this.props.isMobile ? "p-0" : ""}>
+            {/* Always render main content */}
             <Search />
-            {
-              this.props.isMobile &&
+            {this.props.isMobile && (
               <React.Fragment>
                 <BasicInformation />
                 <DatePicker />
                 <Goal />
                 <ListFood />
               </React.Fragment>
-            }
-            {
-              !this.props.isMobile &&
+            )}
+            {!this.props.isMobile && (
               <Container fluid>
                 <Row>
                   <PersonalPanel />
                   <ListFood />
                 </Row>
               </Container>
-            }
+            )}
             <SearchCard />
             <AddCard />
             <Fab handleAddOnClick={this.handleAddOnClick} />
@@ -62,7 +66,7 @@ class App extends Component {
 function mapStateToProps(state, props) {
   return {
     isMobile: state.general.isMobile,
-  }
+  };
 }
 
 export default connect(mapStateToProps)(App);

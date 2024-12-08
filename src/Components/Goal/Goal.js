@@ -5,6 +5,7 @@ import CardGold from './CardGoal';
 import GoalData from './GoalData';
 import './Goal.css';
 import { capitalize } from './../../assets/utils/utils';
+import Exercise from '../Exercise/Exercise';
 
 class Goal extends Component {
     render() {
@@ -33,18 +34,25 @@ class Goal extends Component {
                         className="GoalPercentage"
                         style={{ paddingLeft: ((percentage > 100 ? 100 : percentage) - 5) + '%' }}
                     >
-                        {
-                            `${percentage}%`
-                        }
+                        {`${percentage}%`}
                     </div>
-
                 </div>
                 <div className="d-flex justify-content-between">
-                    {
-                        Object.keys(this.props.caloriesByMealType).map((key, i) => {
-                            return <GoalData key={i} isMobile={this.props.isMobile} text={capitalize(key)} number={this.props.caloriesByMealType[key]} />
-                        })
-                    }
+                    {Object.keys(this.props.caloriesByMealType).map((key, i) => {
+                        return (
+                            <GoalData
+                                key={i}
+                                isMobile={this.props.isMobile}
+                                text={capitalize(key)}
+                                number={this.props.caloriesByMealType[key]}
+                            />
+                        );
+                    })}
+                </div>
+
+                {/* Pass caloriesConsumed to Exercise component */}
+                <div className="mt-4">
+                    <Exercise caloriesBurned={this.props.caloriesConsumed} /> {/* Add caloriesConsumed as prop */}
                 </div>
             </div>
         );
@@ -56,8 +64,8 @@ function mapStateToProps(state, props) {
         isMobile: state.general.isMobile,
         personal: state.personal,
         caloriesConsumed: state.calculatedInformation.caloriesConsumed,
-        caloriesByMealType: state.calculatedInformation.caloriesByMealType
-    }
+        caloriesByMealType: state.calculatedInformation.caloriesByMealType,
+    };
 }
 
 export default connect(mapStateToProps)(Goal);
