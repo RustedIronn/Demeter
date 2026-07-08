@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import ModalSearchContainer from './../ModalSearch/ModalSearchContainer';
 import ModalSearch from './../ModalSearch/ModalSearch';
 import Loading from './../Loading/Loading';
-import ListCommon from './../ListCommon/ListCommon';
-import ListBranded from './../ListBranded/ListBranded';
+import SearchResultsModal from "./../Search/SearchResultsModal";
 import * as actionsGeneral from './../../actions/general';
 
 class SearchCard extends Component {
@@ -21,10 +20,7 @@ class SearchCard extends Component {
                             <Loading loading={this.props.loadingSearch} />
                             {
                                 !this.props.loadingSearch &&
-                                <React.Fragment>
-                                    <ListCommon />
-                                    <ListBranded />
-                                </React.Fragment>
+                                <SearchResultsModal />
                             }
                         </ModalSearch>
                     </ModalSearchContainer>

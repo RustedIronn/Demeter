@@ -4,7 +4,7 @@ import { ProgressBar } from 'react-bootstrap';
 import CardGold from './CardGoal';
 import GoalData from './GoalData';
 import './Goal.css';
-import { capitalize } from './../../assets/utils/utils';
+import { capitalize } from '../../assets/utils/utils';
 import Exercise from '../Exercise/Exercise';
 
 class Goal extends Component {
@@ -29,7 +29,7 @@ class Goal extends Component {
                     />
                 </div>
                 <div className="mb-3">
-                    <ProgressBar now={percentage} label={`${percentage}%`} srOnly />
+                    <ProgressBar now={percentage} label={`${percentage}%`} visuallyHidden />
                     <div
                         className="GoalPercentage"
                         style={{ paddingLeft: ((percentage > 100 ? 100 : percentage) - 5) + '%' }}

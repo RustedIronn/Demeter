@@ -1,13 +1,10 @@
-import { CALORIES_SET } from "./../Reducers/types";
+import { caloriesSet } from "./slice";
 
-export const caloriesSet = (intakeList) => (dispatch) => {
-  dispatch({
-    type: CALORIES_SET,
-    data: getDataCalories(intakeList),
-  });
+export const updateCalories = (intakeList) => (dispatch) => {
+  dispatch(caloriesSet(getDataCalories(intakeList)));
 };
 
-export const getDataCalories = (intakeList) => {
+const getDataCalories = (intakeList) => {
   const calories = {
     caloriesConsumed: 0,
     caloriesByMealType: {

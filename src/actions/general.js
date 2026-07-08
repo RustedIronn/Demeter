@@ -11,7 +11,7 @@ import {
     MEAL_TYPE_SELECTED_SET
 } from "./../Reducers/types";
 import * as actionsPersonalData from './personalData';
-import Constants from './../config';
+import { searchFoods } from "../api/demeter";
 
 export const mobileSet = isMobile => ({
     type: MOBILE_SET,
@@ -19,28 +19,31 @@ export const mobileSet = isMobile => ({
 })
 
 export const searchModalSet = (searchVisible, searchText) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch({
             type: SEARCH_MODAL_SET,
             searchVisible,
             searchText
-        })
+        });
 
-        if (searchText !== "") {
-            dispatch(loadingSearchSet(true));
-            fetch(Constants.API + "/v2/search/instant?query=" + searchText, {
-                headers: {
-                    "x-user-jwt": Constants.USER_JWT,
-                    "x-app-id": Constants.API_ID,
-                    "x-app-key": Constants.API_KEY
-                }
-            }).then(response => response.json()).then((response) => {
-                dispatch(searchItemsSet(response));
-                dispatch(loadingSearchSet(false));
-            });
+        if (!searchText.trim()) return;
+
+        dispatch(loadingSearchSet(true));
+
+        try {
+            const foods = await searchFoods(searchText);
+
+            dispatch(searchItemsSet({
+                common: foods,
+                branded: []
+            }));
+        } catch (error) {
+            console.error(error);
+        } finally {
+            dispatch(loadingSearchSet(false));
         }
-    }
-}
+    };
+};
 
 export const DateSet = (dateSelected, dataPoints) => {
     return (dispatch) => {
@@ -82,59 +85,14 @@ export const mealTypeSelectedSet = (mealTypeSelected) => ({
     mealTypeSelected
 })
 
-export const itemFoodSelectedSet = (serving_qty, serving_unit, food_name) => {
-    return (dispatch) => {
-        let itemFoodSelected = null;
-        dispatch(addModalSet(true));
-        dispatch(loadingAddSet(true));
-        fetch(Constants.API + "/v2/natural/nutrients", {
-            method: 'POST',
-            body: '{ "query": "' + serving_qty + ' ' + serving_unit + ' ' + food_name + '" }',
-            headers: {
-                "x-user-jwt": Constants.USER_JWT,
-                "x-app-id": Constants.API_ID,
-                "x-app-key": Constants.API_KEY,
-                'Content-Type': 'application/json',
-                'accept': 'application/json'
-            }
-        }).then(response => response.json()).then((response) => {
-            if (response.foods.length > 0)
-                itemFoodSelected = response.foods[0];
-            if (itemFoodSelected != null) {
-                dispatch({
-                    type: ITEM_FOOD_SELECTED_SET,
-                    itemFoodSelected
-                })
-                dispatch(loadingAddSet(false));
-            }
-        });
-    }
-}
+export const itemFoodSelectedSet = () => {
+    return () => {
+        console.warn("TODO: Replace Nutritionix item lookup.");
+    };
+};
 
-export const itemFoodSelectedByIdSet = (nix_item_id) => {
-    return (dispatch) => {
-        let itemFoodSelected = null;
-        dispatch(addModalSet(true));
-        dispatch(loadingAddSet(true));
-        fetch(Constants.API + "/v2/search/item?nix_item_id=" + nix_item_id + "&claims=false", {
-            method: 'GET',
-            headers: {
-                "x-app-id": Constants.API_ID,
-                "x-app-key": Constants.API_KEY,
-                'Content-Type': 'application/json',
-                'accept': 'application/json',
-
-            }
-        }).then(response => response.json()).then((response) => {
-            if (response.foods.length > 0)
-                itemFoodSelected = response.foods[0];
-            if (itemFoodSelected != null) {
-                dispatch({
-                    type: ITEM_FOOD_SELECTED_SET,
-                    itemFoodSelected
-                })
-                dispatch(loadingAddSet(false));
-            }
-        });
-    }
-}
+export const itemFoodSelectedByIdSet = () => {
+    return () => {
+        console.warn("TODO: Replace Nutritionix item lookup.");
+    };
+};

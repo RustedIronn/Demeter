@@ -1,18 +1,19 @@
-export const capitalize = (s) => {
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
-}
+export const capitalize = (str = "") =>
+  typeof str === "string"
+    ? str.charAt(0).toUpperCase() + str.slice(1)
+    : "";
 
-export const capitalizeAll = (s) => {
-    if (typeof s !== 'string') return ''
-    return s.replace(/(?:^|\s)\S/g, (a) => { return a.toUpperCase(); });
-}
+export const capitalizeAll = (str = "") =>
+  typeof str === "string"
+    ? str.replace(/\b\w/g, (char) => char.toUpperCase())
+    : "";
 
-export const appendLeadingZeroes = (number) => {
-    if (number <= 9) return "0" + number;
-    return number
-}
+export const appendLeadingZeroes = (number) =>
+  String(number).padStart(2, "0");
 
-export const getDateFormatted = (date) => {
-    return date.getFullYear() + "-" + appendLeadingZeroes(date.getMonth() + 1) + "-" + appendLeadingZeroes(date.getDate())
-}
+export const getDateFormatted = (date) =>
+  [
+    date.getFullYear(),
+    appendLeadingZeroes(date.getMonth() + 1),
+    appendLeadingZeroes(date.getDate()),
+  ].join("-");

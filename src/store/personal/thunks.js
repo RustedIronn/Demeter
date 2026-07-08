@@ -1,34 +1,38 @@
+import { getDateFormatted } from "../../assets/utils/utils";
+
 import {
-  PERSONAL_DATA_SET,
-  INTAKE_LIST_SET,
-  ITEM_FOOD_ADD,
-} from "./../Reducers/types";
+  personalDataSet,
+  intakeListSet,
+  itemFoodAdd,
+} from "./slice";
 
-import { getDateFormatted } from "../assets/utils/utils";
-import * as actionsCalculatedInformation from "./calculatedInformation";
-import * as actionsGeneral from "./general";
+import { updateCalories } from "../calculatedInformation/thunks";
 
-export const personalDataSet = (data) => (dispatch) => {
-  dispatch({
-    type: PERSONAL_DATA_SET,
-    data: { ...data },
-  });
+import {
+  setDate,
+  searchModal,
+} from "../general/thunks";
 
-  dispatch(intakeListSet(data.data_points, new Date()));
+import {
+  mealTypeSelectedSet,
+  servingSizeSet,
+  addModalSet,
+} from "../general/slice";
+
+export const setPersonalData = (data) => (dispatch) => {
+  dispatch(personalDataSet({ ...data }));
+  dispatch(setIntakeList(data.data_points, new Date()));
 };
 
-export const intakeListSet = (dataPoints, date) => (dispatch) => {
-  const intakeList = getIntakeList(dataPoints, date);
+export const setIntakeList =
+  (dataPoints, date) => (dispatch) => {
+    const intakeList = getIntakeList(dataPoints, date);
 
-  dispatch({
-    type: INTAKE_LIST_SET,
-    intakeList,
-  });
+    dispatch(intakeListSet(intakeList));
+    dispatch(updateCalories(intakeList));
+  };
 
-  dispatch(actionsCalculatedInformation.caloriesSet(intakeList));
-};
-
-export const AddItemFoodSet =
+export const addItemFood =
   (dataPointsOld, itemFoodSelected, mealTypeSelected, servingSize) =>
   (dispatch) => {
     const item = {
@@ -67,16 +71,14 @@ export const AddItemFoodSet =
       });
     }
 
-    dispatch({
-      type: ITEM_FOOD_ADD,
-      dataPoints,
-    });
+    dispatch(itemFoodAdd(dataPoints));
 
-    dispatch(actionsGeneral.DateSet(today, dataPoints));
-    dispatch(actionsGeneral.mealTypeSelectedSet(0));
-    dispatch(actionsGeneral.servingSizeSet(0));
-    dispatch(actionsGeneral.addModalSet(false));
-    dispatch(actionsGeneral.searchModalSet(false, ""));
+    dispatch(setDate(today, dataPoints));
+
+    dispatch(mealTypeSelectedSet(0));
+    dispatch(servingSizeSet(0));
+    dispatch(addModalSet(false));
+    dispatch(searchModal(false, ""));
   };
 
 export const getIntakeList = (elements, date) => {
