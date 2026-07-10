@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import * as actionsGeneral from "../../actions/general";
+import { searchModal } from "../../store/general/thunks";
 
 import "./Fab.css";
 
@@ -10,7 +10,7 @@ export default function Fab() {
 
   const handleAddOnClick = () => {
     document.querySelector(".InputSearchw")?.focus();
-    dispatch(actionsGeneral.searchModalSet(true, ""));
+    dispatch(searchModal(true, ""));
   };
 
   return (

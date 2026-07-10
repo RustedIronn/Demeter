@@ -35,16 +35,36 @@ export const setIntakeList =
 export const addItemFood =
   (dataPointsOld, itemFoodSelected, mealTypeSelected, servingSize) =>
   (dispatch) => {
-    const item = {
-      food_name: itemFoodSelected.food_name,
-      serving_unit: itemFoodSelected.serving_unit,
-      serving_weight_grams: itemFoodSelected.serving_weight_grams,
-      serving_qty: itemFoodSelected.serving_qty,
-      nf_calories: itemFoodSelected.nf_calories,
-      serving_size: servingSize,
-      meal_type: mealTypeSelected,
-      thumb: itemFoodSelected.photo?.thumb ?? "",
-    };
+   const serving =
+  itemFoodSelected.servings[itemFoodSelected.selectedServing ?? 0];
+
+const item = {
+  id: itemFoodSelected.id,
+
+  name: itemFoodSelected.name,
+  brand: itemFoodSelected.brand,
+  image: itemFoodSelected.image,
+
+  meal_type: mealTypeSelected,
+
+  serving_size: servingSize,
+
+  serving: {
+    id: serving.id,
+    description: serving.description,
+
+    metricAmount: serving.metricAmount,
+    metricUnit: serving.metricUnit,
+
+    calories: serving.calories,
+    protein: serving.protein,
+    carbs: serving.carbs,
+    fat: serving.fat,
+
+    servingAmount: serving.servingAmount,
+    servingUnit: serving.servingUnit,
+  },
+};
 
     const today = new Date();
     const todayFormatted = getDateFormatted(today);

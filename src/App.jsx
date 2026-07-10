@@ -9,7 +9,6 @@ import BasicInformation from "./Components/BasicInformation/BasicInformation";
 import Goal from "./Components/Goal/Goal";
 import PersonalPanel from "./Components/PersonalPanel/PersonalPanel";
 import ListFood from "./Components/ListFood/ListFood";
-import SearchCard from "./Components/SearchCard/SearchCard";
 import AddCard from "./Components/AddCard/AddCard";
 import Fab from "./Components/Fab/Fab";
 

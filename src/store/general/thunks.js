@@ -68,6 +68,7 @@ export const setDate =
 
 export const itemFoodSelected = (foodId) => async (dispatch) => {
   dispatch(loadingAddSet(true));
+  dispatch(searchModalSet({ searchVisible: false, searchText: "" }));
 
   try {
     const food = await getFood(foodId);

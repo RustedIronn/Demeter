@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InputNumber from 'rc-input-number';
-import * as actionsGeneral from './../../actions/general';
+import { servingSizeSet } from "../../store/general/slice";
 import 'rc-input-number/assets/index.css';
 import './InputNumberCustom.css';
 
 class InputNumberCustom extends Component {
 
-    onChange = (e) => this.props.dispatch(actionsGeneral.servingSizeSet(e))
+    onChange = (value) => {
+    console.log("Input changed:", value);
+    this.props.dispatch(servingSizeSet(value));
+}
 
     onClick = () => {
         let SearchInput = document.getElementsByClassName("SearchInput");

@@ -17,7 +17,7 @@ const getDataCalories = (intakeList) => {
 
   intakeList.forEach((item) => {
     const value = Math.round(
-      (item.nf_calories * item.serving_size) / item.serving_qty
+      item.serving.calories * item.serving_size
     );
 
     calories.caloriesConsumed += value;

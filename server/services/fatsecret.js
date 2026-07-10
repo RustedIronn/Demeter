@@ -61,9 +61,6 @@ async function getAccessToken() {
 async function fatSecretRequest(params) {
   const token = await getAccessToken();
 
-const ip = await axios.get("https://api.ipify.org?format=json");
-console.log("Outgoing IP:", ip.data.ip);
-
   const response = await axios.get(BASE_URL, {
     params,
     headers: {

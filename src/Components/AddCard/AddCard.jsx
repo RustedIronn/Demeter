@@ -2,40 +2,45 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Image, Button, Dropdown } from "react-bootstrap";
 
+import {
+  addModalSet,
+  servingSizeSet,
+  mealTypeSelectedSet,
+} from "../../store/general/slice";
+
 import ModalAddContainer from "./../ModalAdd/ModalAddContainer";
 import ModalAdd from "./../ModalAdd/ModalAdd";
 import Loading from "./../Loading/Loading";
 import CustomToggle from "./CustomToggle";
 import InputNumberCustom from "./../InputNumberCustom/InputNumberCustom";
 
-import * as actionsGeneral from "./../../actions/general";
-import * as actionsPersonalData from "./../../actions/personalData";
-
+import { addItemFood } from "../../store/personal/thunks";
 import { capitalize } from "../../assets/utils/utils";
 
 import "./AddCard.css";
 
 class AddCard extends Component {
   closeModalAdd = () => {
-    this.props.dispatch(actionsGeneral.addModalSet(false));
-    this.props.dispatch(actionsGeneral.servingSizeSet(0));
-  };
+  this.props.dispatch(addModalSet(false));
+  this.props.dispatch(servingSizeSet(0));
+};
 
   handleMealClick = (index) =>
-    this.props.dispatch(actionsGeneral.mealTypeSelectedSet(index));
+  this.props.dispatch(mealTypeSelectedSet(index));
 
   handleAddClick = () => {
-    this.props.dispatch(
-      actionsPersonalData.AddItemFoodSet(
-        this.props.dataPoints,
-        this.props.itemFoodSelected,
-        Object.keys(this.props.caloriesByMealType)[
-          this.props.mealTypeSelected
-        ],
-        this.props.servingSize
-      )
-    );
-  };
+
+  this.props.dispatch(
+    addItemFood(
+      this.props.dataPoints,
+      this.props.itemFoodSelected,
+      Object.keys(this.props.caloriesByMealType)[
+        this.props.mealTypeSelected
+      ],
+      this.props.servingSize
+    )
+  );
+};
 
   render() {
     const { itemFoodSelected } = this.props;

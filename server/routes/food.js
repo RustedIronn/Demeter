@@ -64,21 +64,27 @@ router.get("/food/:id", async (req, res) => {
 
     const food = data.food;
 
-    const servings = (food.servings?.serving ?? []).map((serving) => ({
-      id: serving.serving_id,
-      description: serving.serving_description,
+    const rawServings = Array.isArray(food.servings?.serving)
+  ? food.servings.serving
+  : food.servings?.serving
+    ? [food.servings.serving]
+    : [];
 
-      metricAmount: Number(serving.metric_serving_amount) || 0,
-      metricUnit: serving.metric_serving_unit,
+const servings = rawServings.map((serving) => ({
+  id: serving.serving_id,
+  description: serving.serving_description,
 
-      calories: Number(serving.calories) || 0,
-      protein: Number(serving.protein) || 0,
-      carbs: Number(serving.carbohydrate) || 0,
-      fat: Number(serving.fat) || 0,
+  metricAmount: Number(serving.metric_serving_amount) || 0,
+  metricUnit: serving.metric_serving_unit,
 
-      servingAmount: Number(serving.number_of_units) || 1,
-      servingUnit: serving.measurement_description,
-    }));
+  calories: Number(serving.calories) || 0,
+  protein: Number(serving.protein) || 0,
+  carbs: Number(serving.carbohydrate) || 0,
+  fat: Number(serving.fat) || 0,
+
+  servingAmount: Number(serving.number_of_units) || 1,
+  servingUnit: serving.measurement_description,
+}));
 
     const formattedFood = {
       id: food.food_id,
