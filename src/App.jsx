@@ -16,8 +16,6 @@ import { mobileSet } from "./store/general/slice";
 import { selectIsMobile } from "./store/general/selectors";
 import { setPersonalData } from "./store/personal/thunks";
 
-import { data } from "./data";
-
 export default function App() {
   const dispatch = useDispatch();
   const isMobile = useSelector(selectIsMobile);
@@ -29,7 +27,7 @@ export default function App() {
 
     updateWindowDimensions();
 
-    dispatch(setPersonalData(data));
+    dispatch(setPersonalData());
 
     window.addEventListener("resize", updateWindowDimensions);
 

@@ -1,12 +1,18 @@
-import { caloriesSet } from "./slice";
+import { nutritionSet } from "./slice";
 
-export const updateCalories = (intakeList) => (dispatch) => {
-  dispatch(caloriesSet(getDataCalories(intakeList)));
-};
+export const updateCalories =
+  (intakeList) => (dispatch) => {
+    dispatch(nutritionSet(getNutritionData(intakeList)));
+  };
 
-const getDataCalories = (intakeList) => {
-  const calories = {
+const getNutritionData = (intakeList) => {
+  const nutrition = {
     caloriesConsumed: 0,
+
+    proteinConsumed: 0,
+    carbsConsumed: 0,
+    fatConsumed: 0,
+
     caloriesByMealType: {
       breakfast: 0,
       lunch: 0,
@@ -16,13 +22,37 @@ const getDataCalories = (intakeList) => {
   };
 
   intakeList.forEach((item) => {
-    const value = Math.round(
-      item.serving.calories * item.serving_size
+    const multiplier = item.serving_size;
+
+    const calories = Math.round(
+      item.serving.calories * multiplier
     );
 
-    calories.caloriesConsumed += value;
-    calories.caloriesByMealType[item.meal_type] += value;
+    nutrition.caloriesConsumed += calories;
+
+    nutrition.proteinConsumed +=
+      item.serving.protein * multiplier;
+
+    nutrition.carbsConsumed +=
+      item.serving.carbs * multiplier;
+
+    nutrition.fatConsumed +=
+      item.serving.fat * multiplier;
+
+    nutrition.caloriesByMealType[item.meal_type] += calories;
   });
 
-  return calories;
+  nutrition.proteinConsumed = Math.round(
+    nutrition.proteinConsumed
+  );
+
+  nutrition.carbsConsumed = Math.round(
+    nutrition.carbsConsumed
+  );
+
+  nutrition.fatConsumed = Math.round(
+    nutrition.fatConsumed
+  );
+
+  return nutrition;
 };

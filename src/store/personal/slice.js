@@ -6,8 +6,12 @@ const initialState = {
   height_cm: 0,
   weight_kg: 0,
   daily_goal: 0,
+
   data_points: [],
   intakeList: [],
+
+  water: 0,
+  waterGoal: 8,
 };
 
 const personalSlice = createSlice({
@@ -28,7 +32,15 @@ const personalSlice = createSlice({
 
     dataPointsSet(state, action) {
   state.data_points = action.payload;
-    }
+    },
+
+    waterSet(state, action) {
+  state.water = action.payload;
+},
+
+waterGoalSet(state, action) {
+  state.waterGoal = action.payload;
+},
   },
 });
 
@@ -37,6 +49,9 @@ export const {
   personalUpdated,
   intakeListSet,
   dataPointsSet,
+
+  waterSet,
+  waterGoalSet,
 } = personalSlice.actions;
 
 export default personalSlice.reducer;

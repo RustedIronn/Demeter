@@ -1,7 +1,20 @@
 import { getDateFormatted } from "../../assets/utils/utils";
-import {personalDataSet, personalUpdated, intakeListSet, dataPointsSet,} from "./slice";
+import {
+  loadPersonalStorage,
+  savePersonalStorage,
+} from "../../assets/utils/storage";
+import { data } from "../../data";
+
+import {
+  personalDataSet,
+  personalUpdated,
+  intakeListSet,
+  dataPointsSet,
+  waterSet,
+  waterGoalSet,
+} from "./slice";
+
 import { updateCalories } from "../calculatedInformation/thunks";
-import { stopEditingFood } from "../general/slice";
 
 import {
   setDate,
@@ -12,16 +25,27 @@ import {
   mealTypeSelectedSet,
   servingSizeSet,
   addModalSet,
+  stopEditingFood,
 } from "../general/slice";
 
-export const setPersonalData = (data) => (dispatch) => {
-  dispatch(personalDataSet({ ...data }));
-  dispatch(setIntakeList(data.data_points, new Date()));
+export const setPersonalData = () => (dispatch) => {
+  const savedData = loadPersonalStorage();
+
+  const personalData = savedData ?? data;
+
+  if (!savedData) {
+    savePersonalStorage(personalData);
+  }
+
+  dispatch(personalDataSet(personalData));
+  dispatch(setIntakeList(personalData.data_points, new Date()));
 };
 
 export const updatePersonalData =
-  (payload) => (dispatch) => {
+  (payload) => (dispatch, getState) => {
     dispatch(personalUpdated(payload));
+
+    persistPersonalData(getState);
   };
 
 export const setIntakeList =
@@ -32,7 +56,11 @@ export const setIntakeList =
     dispatch(updateCalories(intakeList));
   };
 
-  const buildFoodItem = (
+const persistPersonalData = (getState) => {
+  savePersonalStorage(getState().personal);
+};
+
+const buildFoodItem = (
   itemFoodSelected,
   mealTypeSelected,
   servingSize
@@ -69,15 +97,20 @@ export const setIntakeList =
     },
   };
 };
-  
+
 export const addItemFood =
-  (dataPointsOld, itemFoodSelected, mealTypeSelected, servingSize) =>
-  (dispatch) => {
-   const item = buildFoodItem(
-  itemFoodSelected,
-  mealTypeSelected,
-  servingSize
-);
+  (
+    dataPointsOld,
+    itemFoodSelected,
+    mealTypeSelected,
+    servingSize
+  ) =>
+  (dispatch, getState) => {
+    const item = buildFoodItem(
+      itemFoodSelected,
+      mealTypeSelected,
+      servingSize
+    );
 
     const today = new Date();
     const todayFormatted = getDateFormatted(today);
@@ -105,8 +138,10 @@ export const addItemFood =
     }
 
     dispatch(dataPointsSet(dataPoints));
-
     dispatch(setDate(today, dataPoints));
+
+    persistPersonalData(getState);
+
     dispatch(stopEditingFood());
 
     dispatch(mealTypeSelectedSet(0));
@@ -115,7 +150,7 @@ export const addItemFood =
     dispatch(searchModal(false, ""));
   };
 
-  export const updateItemFood =
+export const updateItemFood =
   (
     dataPointsOld,
     itemFoodSelected,
@@ -123,7 +158,7 @@ export const addItemFood =
     servingSize,
     editingFoodIndex
   ) =>
-  (dispatch) => {
+  (dispatch, getState) => {
     const item = buildFoodItem(
       itemFoodSelected,
       mealTypeSelected,
@@ -150,6 +185,8 @@ export const addItemFood =
     dispatch(dataPointsSet(dataPoints));
     dispatch(setDate(today, dataPoints));
 
+    persistPersonalData(getState);
+
     dispatch(stopEditingFood());
 
     dispatch(mealTypeSelectedSet(0));
@@ -160,7 +197,7 @@ export const addItemFood =
 
 export const removeItemFood =
   (dataPointsOld, itemIndex) =>
-  (dispatch) => {
+  (dispatch, getState) => {
     const today = new Date();
     const todayFormatted = getDateFormatted(today);
 
@@ -178,14 +215,55 @@ export const removeItemFood =
     });
 
     dispatch(dataPointsSet(dataPoints));
-
     dispatch(setDate(today, dataPoints));
+
+    persistPersonalData(getState);
+  };
+  
+  export const increaseWater =
+  () =>
+  (dispatch, getState) => {
+    const current = getState().personal.water;
+
+    dispatch(waterSet(current + 1));
+
+    persistPersonalData(getState);
+  };
+
+export const decreaseWater =
+  () =>
+  (dispatch, getState) => {
+    const current = getState().personal.water;
+
+    if (current === 0) return;
+
+    dispatch(waterSet(current - 1));
+
+    persistPersonalData(getState);
+  };
+
+export const resetWater =
+  () =>
+  (dispatch, getState) => {
+    dispatch(waterSet(0));
+
+    persistPersonalData(getState);
+  };
+
+export const setWaterGoal =
+  (goal) =>
+  (dispatch, getState) => {
+    dispatch(waterGoalSet(goal));
+
+    persistPersonalData(getState);
   };
 
 export const getIntakeList = (elements, date) => {
   const formattedDate = getDateFormatted(date);
 
   return (
-    elements.find((element) => element.date === formattedDate)?.intake_list ?? []
+    elements.find(
+      (element) => element.date === formattedDate
+    )?.intake_list ?? []
   );
 };

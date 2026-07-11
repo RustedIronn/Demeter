@@ -1,21 +1,15 @@
 .Goal {
-    margin: 1rem auto; /* Adjusted top and bottom margins to decrease overall space */
-    padding: 1rem; /* Reduced padding for a more compact feel */
-    width: 93%; /* Same width as the upper component */
-    max-width: 800px; /* Set a maximum width */
-    border-radius: 12px; /* Rounded corners for a consistent look */
-    background-color: #ccbb8ffd; /* Match the background color of the upper component */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: max-height 0.3s ease; /* Smooth transition for expanding */
-    overflow: hidden; /* Prevent overflow when expanding */
-    max-height: 560px;
+    margin: 1rem auto;
+    padding: 1rem;
+    width: 93%;
+    max-width: 800px;
+
+    border-radius: 12px;
+    background-color: #ccbb8ffd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
     height: auto;
 }
-
-.Goal.expanded { 
-    max-height: 400px; /* Set a maximum height when expanded */
-}
-
 .Goal .progress {
     height: 0.3rem; /* Keep progress bar height minimal */
 }

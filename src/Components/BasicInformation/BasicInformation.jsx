@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Image, Button, Form } from "react-bootstrap";
 
@@ -21,9 +22,23 @@ export default function BasicInformation() {
   const [profilePhoto, setProfilePhoto] = useState(ImageProfile);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleEditToggle = () => {
-    setIsEditing((prev) => !prev);
-  };
+  useEffect(() => {
+  setFirstName(personal.first_name);
+  setLastName(personal.last_name);
+  setWeight(personal.weight_kg);
+  setHeight(personal.height_cm);
+}, [personal]);
+
+ const handleEditToggle = () => {
+  if (isEditing) {
+    setFirstName(personal.first_name);
+    setLastName(personal.last_name);
+    setWeight(personal.weight_kg);
+    setHeight(personal.height_cm);
+  }
+
+  setIsEditing((prev) => !prev);
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;

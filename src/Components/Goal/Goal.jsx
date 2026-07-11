@@ -4,6 +4,7 @@ import { ProgressBar } from "react-bootstrap";
 import CardGold from "./CardGoal";
 import GoalData from "./GoalData";
 import Exercise from "../Exercise/Exercise";
+import WaterCard from "../WaterCard/WaterCard";
 
 import { capitalize } from "../../assets/utils/utils";
 
@@ -12,12 +13,14 @@ import "./Goal.css";
 export default function Goal() {
   const isMobile = useSelector((state) => state.general.isMobile);
   const personal = useSelector((state) => state.personal);
-  const caloriesConsumed = useSelector(
-    (state) => state.calculatedInformation.caloriesConsumed
-  );
-  const caloriesByMealType = useSelector(
-    (state) => state.calculatedInformation.caloriesByMealType
-  );
+
+  const {
+    caloriesConsumed,
+    proteinConsumed,
+    carbsConsumed,
+    fatConsumed,
+    caloriesByMealType,
+  } = useSelector((state) => state.calculatedInformation);
 
   let percentage = Math.round(
     (caloriesConsumed * 100) / personal.daily_goal
@@ -73,9 +76,33 @@ export default function Goal() {
         ))}
       </div>
 
-      <div className="mt-4">
-        <Exercise caloriesBurned={caloriesConsumed} />
+      <div className="d-flex justify-content-between mt-4">
+        <GoalData
+          isMobile={isMobile}
+          text="Protein"
+          number={`${proteinConsumed}g`}
+        />
+
+        <GoalData
+          isMobile={isMobile}
+          text="Carbs"
+          number={`${carbsConsumed}g`}
+        />
+
+        <GoalData
+          isMobile={isMobile}
+          text="Fat"
+          number={`${fatConsumed}g`}
+        />
       </div>
+
+      <div className="mt-4">
+  <Exercise caloriesBurned={caloriesConsumed} />
+</div>
+
+<div className="mt-4">
+  <WaterCard />
+</div>
     </div>
   );
 }
