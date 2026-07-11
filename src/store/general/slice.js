@@ -13,6 +13,8 @@ const initialState = {
   itemFoodSelected: null,
   servingSize: 0,
   mealTypeSelected: 0,
+  isEditingFood: false,
+  editingFoodIndex: null,
 };
 
 const generalSlice = createSlice({
@@ -68,6 +70,17 @@ const generalSlice = createSlice({
     mealTypeSelectedSet(state, action) {
       state.mealTypeSelected = action.payload;
     },
+
+    startEditingFood(state, action) {
+  state.isEditingFood = true;
+  state.editingFoodIndex = action.payload;
+},
+
+stopEditingFood(state) {
+  state.isEditingFood = false;
+  state.editingFoodIndex = null;
+},
+
   },
 });
 
@@ -82,6 +95,8 @@ export const {
   itemFoodSelectedSet,
   servingSizeSet,
   mealTypeSelectedSet,
+  startEditingFood,
+  stopEditingFood,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

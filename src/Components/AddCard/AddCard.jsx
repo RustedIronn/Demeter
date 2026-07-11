@@ -5,15 +5,19 @@ import {
   addModalSet,
   servingSizeSet,
   mealTypeSelectedSet,
+  stopEditingFood,
 } from "../../store/general/slice";
+
+import {
+  addItemFood,
+  updateItemFood,
+} from "../../store/personal/thunks";
 
 import ModalAddContainer from "../ModalAdd/ModalAddContainer";
 import ModalAdd from "../ModalAdd/ModalAdd";
 import Loading from "../Loading/Loading";
 import CustomToggle from "./CustomToggle";
 import InputNumberCustom from "../InputNumberCustom/InputNumberCustom";
-
-import { addItemFood } from "../../store/personal/thunks";
 import { capitalize } from "../../assets/utils/utils";
 
 import "./AddCard.css";
@@ -34,19 +38,38 @@ export default function AddCard() {
   const caloriesByMealType = useSelector(
     (state) => state.calculatedInformation.caloriesByMealType
   );
+  const isEditingFood = useSelector(
+  (state) => state.general.isEditingFood
+);
+
+const editingFoodIndex = useSelector(
+  (state) => state.general.editingFoodIndex
+);
 
   const mealTypes = Object.keys(caloriesByMealType);
 
-  const closeModalAdd = () => {
-    dispatch(addModalSet(false));
-    dispatch(servingSizeSet(0));
-  };
+ const closeModalAdd = () => {
+  dispatch(addModalSet(false));
+  dispatch(servingSizeSet(0));
+  dispatch(stopEditingFood());
+};
 
   const handleMealClick = (index) => {
     dispatch(mealTypeSelectedSet(index));
   };
 
   const handleAddClick = () => {
+  if (isEditingFood) {
+    dispatch(
+      updateItemFood(
+        dataPoints,
+        itemFoodSelected,
+        mealTypes[mealTypeSelected],
+        servingSize,
+        editingFoodIndex
+      )
+    );
+  } else {
     dispatch(
       addItemFood(
         dataPoints,
@@ -55,7 +78,8 @@ export default function AddCard() {
         servingSize
       )
     );
-  };
+  }
+};
 
   const serving =
     itemFoodSelected?.servings?.[
@@ -121,9 +145,9 @@ export default function AddCard() {
             </div>
 
             <div className="AddCardFooter">
-              <div className="AddCardTitleSelec">
-                Add to today
-              </div>
+             <div className="AddCardTitleSelec">
+  {isEditingFood ? "Edit food" : "Add to today"}
+</div>
 
               <Dropdown>
                 <Dropdown.Toggle
@@ -153,7 +177,7 @@ export default function AddCard() {
                   onClick={handleAddClick}
                   disabled={multiplier <= 0}
                 >
-                  ADD
+                  {isEditingFood ? "SAVE" : "ADD"}
                 </Button>
               </div>
             </div>

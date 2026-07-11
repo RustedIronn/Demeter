@@ -1,6 +1,7 @@
 import { getDateFormatted } from "../../assets/utils/utils";
 import {personalDataSet, personalUpdated, intakeListSet, dataPointsSet,} from "./slice";
 import { updateCalories } from "../calculatedInformation/thunks";
+import { stopEditingFood } from "../general/slice";
 
 import {
   setDate,
@@ -31,40 +32,52 @@ export const setIntakeList =
     dispatch(updateCalories(intakeList));
   };
 
+  const buildFoodItem = (
+  itemFoodSelected,
+  mealTypeSelected,
+  servingSize
+) => {
+  const serving =
+    itemFoodSelected.servings[
+      itemFoodSelected.selectedServing ?? 0
+    ];
+
+  return {
+    id: itemFoodSelected.id,
+    name: itemFoodSelected.name,
+    brand: itemFoodSelected.brand,
+    image: itemFoodSelected.image,
+
+    meal_type: mealTypeSelected,
+
+    serving_size: servingSize,
+
+    serving: {
+      id: serving.id,
+      description: serving.description,
+
+      metricAmount: serving.metricAmount,
+      metricUnit: serving.metricUnit,
+
+      calories: serving.calories,
+      protein: serving.protein,
+      carbs: serving.carbs,
+      fat: serving.fat,
+
+      servingAmount: serving.servingAmount,
+      servingUnit: serving.servingUnit,
+    },
+  };
+};
   
 export const addItemFood =
   (dataPointsOld, itemFoodSelected, mealTypeSelected, servingSize) =>
   (dispatch) => {
-   const serving =
-  itemFoodSelected.servings[itemFoodSelected.selectedServing ?? 0];
-
-const item = {
-  id: itemFoodSelected.id,
-
-  name: itemFoodSelected.name,
-  brand: itemFoodSelected.brand,
-  image: itemFoodSelected.image,
-
-  meal_type: mealTypeSelected,
-
-  serving_size: servingSize,
-
-  serving: {
-    id: serving.id,
-    description: serving.description,
-
-    metricAmount: serving.metricAmount,
-    metricUnit: serving.metricUnit,
-
-    calories: serving.calories,
-    protein: serving.protein,
-    carbs: serving.carbs,
-    fat: serving.fat,
-
-    servingAmount: serving.servingAmount,
-    servingUnit: serving.servingUnit,
-  },
-};
+   const item = buildFoodItem(
+  itemFoodSelected,
+  mealTypeSelected,
+  servingSize
+);
 
     const today = new Date();
     const todayFormatted = getDateFormatted(today);
@@ -94,6 +107,50 @@ const item = {
     dispatch(dataPointsSet(dataPoints));
 
     dispatch(setDate(today, dataPoints));
+    dispatch(stopEditingFood());
+
+    dispatch(mealTypeSelectedSet(0));
+    dispatch(servingSizeSet(0));
+    dispatch(addModalSet(false));
+    dispatch(searchModal(false, ""));
+  };
+
+  export const updateItemFood =
+  (
+    dataPointsOld,
+    itemFoodSelected,
+    mealTypeSelected,
+    servingSize,
+    editingFoodIndex
+  ) =>
+  (dispatch) => {
+    const item = buildFoodItem(
+      itemFoodSelected,
+      mealTypeSelected,
+      servingSize
+    );
+
+    const today = new Date();
+    const todayFormatted = getDateFormatted(today);
+
+    const dataPoints = dataPointsOld.map((element) => {
+      if (element.date !== todayFormatted) {
+        return element;
+      }
+
+      const intakeList = [...element.intake_list];
+      intakeList[editingFoodIndex] = item;
+
+      return {
+        ...element,
+        intake_list: intakeList,
+      };
+    });
+
+    dispatch(dataPointsSet(dataPoints));
+    dispatch(setDate(today, dataPoints));
+
+    dispatch(stopEditingFood());
 
     dispatch(mealTypeSelectedSet(0));
     dispatch(servingSizeSet(0));

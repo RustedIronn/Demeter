@@ -11,3 +11,5 @@ export const selectSelectedFood = (state) => state.general.itemFoodSelected;
 export const selectServingSize = (state) => state.general.servingSize;
 export const selectMealType = (state) => state.general.mealTypeSelected;
 export const selectSelectedDate = (state) => state.general.dateSelected;
+export const selectIsEditingFood = (state) => state.general.isEditingFood;
+export const selectEditingFoodIndex = (state) => state.general.editingFoodIndex;
