@@ -1,71 +1,81 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ProgressBar } from 'react-bootstrap';
-import CardGold from './CardGoal';
-import GoalData from './GoalData';
-import './Goal.css';
-import { capitalize } from '../../assets/utils/utils';
-import Exercise from '../Exercise/Exercise';
+import { useSelector } from "react-redux";
+import { ProgressBar } from "react-bootstrap";
 
-class Goal extends Component {
-    render() {
-        let percentage = Math.round(this.props.caloriesConsumed * 100 / this.props.personal.daily_goal);
-        if (this.props.caloriesConsumed === 0 && this.props.personal.daily_goal === 0) percentage = 0;
+import CardGold from "./CardGoal";
+import GoalData from "./GoalData";
+import Exercise from "../Exercise/Exercise";
 
-        return (
-            <div className="Goal noselect">
-                <div className="d-flex justify-content-between">
-                    <CardGold
-                        isMobile={this.props.isMobile}
-                        calories={this.props.caloriesConsumed}
-                        subtitle="consumed"
-                        align="left"
-                    />
-                    <CardGold
-                        isMobile={this.props.isMobile}
-                        calories={this.props.personal.daily_goal}
-                        subtitle="daily goal"
-                        align="right"
-                    />
-                </div>
-                <div className="mb-3">
-                    <ProgressBar now={percentage} label={`${percentage}%`} visuallyHidden />
-                    <div
-                        className="GoalPercentage"
-                        style={{ paddingLeft: ((percentage > 100 ? 100 : percentage) - 5) + '%' }}
-                    >
-                        {`${percentage}%`}
-                    </div>
-                </div>
-                <div className="d-flex justify-content-between">
-                    {Object.keys(this.props.caloriesByMealType).map((key, i) => {
-                        return (
-                            <GoalData
-                                key={i}
-                                isMobile={this.props.isMobile}
-                                text={capitalize(key)}
-                                number={this.props.caloriesByMealType[key]}
-                            />
-                        );
-                    })}
-                </div>
+import { capitalize } from "../../assets/utils/utils";
 
-                {/* Pass caloriesConsumed to Exercise component */}
-                <div className="mt-4">
-                    <Exercise caloriesBurned={this.props.caloriesConsumed} /> {/* Add caloriesConsumed as prop */}
-                </div>
-            </div>
-        );
-    }
+import "./Goal.css";
+
+export default function Goal() {
+  const isMobile = useSelector((state) => state.general.isMobile);
+  const personal = useSelector((state) => state.personal);
+  const caloriesConsumed = useSelector(
+    (state) => state.calculatedInformation.caloriesConsumed
+  );
+  const caloriesByMealType = useSelector(
+    (state) => state.calculatedInformation.caloriesByMealType
+  );
+
+  let percentage = Math.round(
+    (caloriesConsumed * 100) / personal.daily_goal
+  );
+
+  if (caloriesConsumed === 0 && personal.daily_goal === 0) {
+    percentage = 0;
+  }
+
+  return (
+    <div className="Goal noselect">
+      <div className="d-flex justify-content-between">
+        <CardGold
+          isMobile={isMobile}
+          calories={caloriesConsumed}
+          subtitle="consumed"
+          align="left"
+        />
+
+        <CardGold
+          isMobile={isMobile}
+          calories={personal.daily_goal}
+          subtitle="daily goal"
+          align="right"
+        />
+      </div>
+
+      <div className="mb-3">
+        <ProgressBar
+          now={percentage}
+          label={`${percentage}%`}
+          visuallyHidden
+        />
+
+        <div
+          className="GoalPercentage"
+          style={{
+            paddingLeft: `${Math.min(percentage, 100) - 5}%`,
+          }}
+        >
+          {percentage}%
+        </div>
+      </div>
+
+      <div className="d-flex justify-content-between">
+        {Object.keys(caloriesByMealType).map((key, i) => (
+          <GoalData
+            key={i}
+            isMobile={isMobile}
+            text={capitalize(key)}
+            number={caloriesByMealType[key]}
+          />
+        ))}
+      </div>
+
+      <div className="mt-4">
+        <Exercise caloriesBurned={caloriesConsumed} />
+      </div>
+    </div>
+  );
 }
-
-function mapStateToProps(state, props) {
-    return {
-        isMobile: state.general.isMobile,
-        personal: state.personal,
-        caloriesConsumed: state.calculatedInformation.caloriesConsumed,
-        caloriesByMealType: state.calculatedInformation.caloriesByMealType,
-    };
-}
-
-export default connect(mapStateToProps)(Goal);

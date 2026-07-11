@@ -1,4 +1,5 @@
 import { getDateFormatted } from "../../assets/utils/utils";
+import { personalUpdated } from "./slice";
 
 import {
   personalDataSet,
@@ -23,6 +24,11 @@ export const setPersonalData = (data) => (dispatch) => {
   dispatch(personalDataSet({ ...data }));
   dispatch(setIntakeList(data.data_points, new Date()));
 };
+
+export const updatePersonalData =
+  (payload) => (dispatch) => {
+    dispatch(personalUpdated(payload));
+  };
 
 export const setIntakeList =
   (dataPoints, date) => (dispatch) => {

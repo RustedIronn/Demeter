@@ -8,7 +8,7 @@ import {
   selectSearchResults,
 } from "../../store/general/selectors";
 
-import "../ModalSearch/ModalSearch.css";
+import "../Search/ModalSearch.css";
 import "./SearchResultsModal.css";
 
 export default function SearchResultsModal() {

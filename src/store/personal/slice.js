@@ -18,6 +18,10 @@ const personalSlice = createSlice({
       Object.assign(state, action.payload);
     },
 
+    personalUpdated(state, action) {
+      Object.assign(state, action.payload);
+    },
+
     intakeListSet(state, action) {
       state.intakeList = action.payload;
     },
@@ -30,6 +34,7 @@ const personalSlice = createSlice({
 
 export const {
   personalDataSet,
+  personalUpdated,
   intakeListSet,
   itemFoodAdd,
 } = personalSlice.actions;

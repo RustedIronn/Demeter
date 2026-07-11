@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Image } from 'react-bootstrap';
-import { capitalize, capitalizeAll } from '../../assets/utils/utils';
-import './ItemFood.css';
+import { Image } from "react-bootstrap";
 
-class ItemFood extends Component {
-    render() {
+import { capitalize, capitalizeAll } from "../../assets/utils/utils";
+
+import "./ItemFood.css";
+
+export default function ItemFood({ item }) {
+
+  if (!item) return null;
+
   const {
     image,
     name,
     serving,
     serving_size,
     meal_type,
-  } = this.props;
+  } = item;
 
   return (
     <div className="ItemFood d-flex bd-highlight mt-3 mb-3 noselect">
@@ -49,12 +51,3 @@ class ItemFood extends Component {
     </div>
   );
 }
-}
-
-function mapStateToProps(state, props) {
-    return {
-        ...state.personal.intakeList[props.index]
-    }
-}
-
-export default connect(mapStateToProps)(ItemFood);
