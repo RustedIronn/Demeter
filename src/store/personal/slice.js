@@ -26,9 +26,9 @@ const personalSlice = createSlice({
       state.intakeList = action.payload;
     },
 
-    itemFoodAdd(state, action) {
-      state.data_points = action.payload;
-    },
+    dataPointsSet(state, action) {
+  state.data_points = action.payload;
+    }
   },
 });
 
@@ -36,7 +36,7 @@ export const {
   personalDataSet,
   personalUpdated,
   intakeListSet,
-  itemFoodAdd,
+  dataPointsSet,
 } = personalSlice.actions;
 
 export default personalSlice.reducer;

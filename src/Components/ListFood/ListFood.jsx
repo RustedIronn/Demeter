@@ -24,7 +24,10 @@ export default function ListFood() {
     <Col md="7" className="ListFood pr-0">
       {intakeList.map((item, index) => (
         <div className="ItemFood" key={index}>
-          <ItemFood item={item} />
+          <ItemFood
+  item={item}
+  index={index}
+          />
         </div>
       ))}
 

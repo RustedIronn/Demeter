@@ -1,12 +1,5 @@
 import { getDateFormatted } from "../../assets/utils/utils";
-import { personalUpdated } from "./slice";
-
-import {
-  personalDataSet,
-  intakeListSet,
-  itemFoodAdd,
-} from "./slice";
-
+import {personalDataSet, personalUpdated, intakeListSet, dataPointsSet,} from "./slice";
 import { updateCalories } from "../calculatedInformation/thunks";
 
 import {
@@ -38,6 +31,7 @@ export const setIntakeList =
     dispatch(updateCalories(intakeList));
   };
 
+  
 export const addItemFood =
   (dataPointsOld, itemFoodSelected, mealTypeSelected, servingSize) =>
   (dispatch) => {
@@ -97,7 +91,7 @@ const item = {
       });
     }
 
-    dispatch(itemFoodAdd(dataPoints));
+    dispatch(dataPointsSet(dataPoints));
 
     dispatch(setDate(today, dataPoints));
 
@@ -105,6 +99,30 @@ const item = {
     dispatch(servingSizeSet(0));
     dispatch(addModalSet(false));
     dispatch(searchModal(false, ""));
+  };
+
+export const removeItemFood =
+  (dataPointsOld, itemIndex) =>
+  (dispatch) => {
+    const today = new Date();
+    const todayFormatted = getDateFormatted(today);
+
+    const dataPoints = dataPointsOld.map((element) => {
+      if (element.date !== todayFormatted) {
+        return element;
+      }
+
+      return {
+        ...element,
+        intake_list: element.intake_list.filter(
+          (_, index) => index !== itemIndex
+        ),
+      };
+    });
+
+    dispatch(dataPointsSet(dataPoints));
+
+    dispatch(setDate(today, dataPoints));
   };
 
 export const getIntakeList = (elements, date) => {
