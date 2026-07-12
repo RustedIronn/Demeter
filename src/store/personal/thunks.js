@@ -11,7 +11,13 @@ import {
   intakeListSet,
   dataPointsSet,
   waterSet,
-  waterGoalSet,
+  waterGoalSet, 
+  weightHistorySet,
+  goalWeightSet,
+  goalDateSet,
+  proteinGoalSet,
+  carbsGoalSet,
+  fatGoalSet,
 } from "./slice";
 
 import { updateCalories } from "../calculatedInformation/thunks";
@@ -37,13 +43,52 @@ export const setPersonalData = () => (dispatch) => {
     savePersonalStorage(personalData);
   }
 
-  dispatch(personalDataSet(personalData));
-  dispatch(setIntakeList(personalData.data_points, new Date()));
+  const selectedDate = new Date();
+
+dispatch(personalDataSet(personalData));
+dispatch(setIntakeList(personalData.data_points, selectedDate));
 };
 
 export const updatePersonalData =
   (payload) => (dispatch, getState) => {
+    const oldWeight = getState().personal.weight_kg;
+
     dispatch(personalUpdated(payload));
+
+    if (
+  payload.weight_kg !== undefined &&
+  payload.weight_kg !== oldWeight
+) {
+      const history =
+        getState().personal.weight_history ?? [];
+
+      const selectedDate =
+  getState().general.dateSelected;
+
+const selectedDateFormatted =
+  getDateFormatted(selectedDate);
+
+const newEntry = {
+  date: selectedDateFormatted,
+  weight: payload.weight_kg,
+};
+
+const existingIndex = history.findIndex(
+  (entry) =>
+    entry.date === selectedDateFormatted
+);
+
+      let updatedHistory;
+
+      if (existingIndex !== -1) {
+        updatedHistory = [...history];
+        updatedHistory[existingIndex] = newEntry;
+      } else {
+        updatedHistory = [...history, newEntry];
+      }
+
+      dispatch(weightHistorySet(updatedHistory));
+    }
 
     persistPersonalData(getState);
   };
@@ -112,13 +157,16 @@ export const addItemFood =
       servingSize
     );
 
-    const today = new Date();
-    const todayFormatted = getDateFormatted(today);
+    const selectedDate =
+  getState().general.dateSelected;
+
+const selectedDateFormatted =
+  getDateFormatted(selectedDate);
 
     let added = false;
 
     const dataPoints = dataPointsOld.map((element) => {
-      if (element.date !== todayFormatted) {
+      if (element.date !== selectedDateFormatted) {
         return element;
       }
 
@@ -132,13 +180,13 @@ export const addItemFood =
 
     if (!added) {
       dataPoints.push({
-        date: todayFormatted,
+        date: selectedDateFormatted,
         intake_list: [item],
       });
     }
 
     dispatch(dataPointsSet(dataPoints));
-    dispatch(setDate(today, dataPoints));
+    dispatch(setDate(selectedDate, dataPoints));
 
     persistPersonalData(getState);
 
@@ -165,11 +213,14 @@ export const updateItemFood =
       servingSize
     );
 
-    const today = new Date();
-    const todayFormatted = getDateFormatted(today);
+    const selectedDate =
+  getState().general.dateSelected;
+
+const selectedDateFormatted =
+  getDateFormatted(selectedDate);
 
     const dataPoints = dataPointsOld.map((element) => {
-      if (element.date !== todayFormatted) {
+      if (element.date !== selectedDateFormatted) {
         return element;
       }
 
@@ -183,7 +234,7 @@ export const updateItemFood =
     });
 
     dispatch(dataPointsSet(dataPoints));
-    dispatch(setDate(today, dataPoints));
+    dispatch(setDate(selectedDate, dataPoints));
 
     persistPersonalData(getState);
 
@@ -198,11 +249,14 @@ export const updateItemFood =
 export const removeItemFood =
   (dataPointsOld, itemIndex) =>
   (dispatch, getState) => {
-    const today = new Date();
-    const todayFormatted = getDateFormatted(today);
+    const selectedDate =
+  getState().general.dateSelected;
+
+const selectedDateFormatted =
+  getDateFormatted(selectedDate);
 
     const dataPoints = dataPointsOld.map((element) => {
-      if (element.date !== todayFormatted) {
+      if (element.date !== selectedDateFormatted) {
         return element;
       }
 
@@ -215,17 +269,44 @@ export const removeItemFood =
     });
 
     dispatch(dataPointsSet(dataPoints));
-    dispatch(setDate(today, dataPoints));
+    dispatch(setDate(selectedDate, dataPoints));
 
     persistPersonalData(getState);
   };
   
-  export const increaseWater =
+export const increaseWater =
   () =>
   (dispatch, getState) => {
-    const current = getState().personal.water;
+    const selectedDate =
+      getState().general.dateSelected;
 
-    dispatch(waterSet(current + 1));
+    const selectedDateFormatted =
+      getDateFormatted(selectedDate);
+
+    const dataPoints =
+      getState().personal.data_points.map((day) => {
+        if (day.date !== selectedDateFormatted) {
+          return day;
+        }
+
+        return {
+          ...day,
+          water: (day.water ?? 0) + 1,
+        };
+      });
+
+    dispatch(dataPointsSet(dataPoints));
+
+    dispatch(
+      waterSet({
+        date: selectedDateFormatted,
+        water:
+          dataPoints.find(
+            (day) =>
+              day.date === selectedDateFormatted
+          )?.water ?? 0,
+      })
+    );
 
     persistPersonalData(getState);
   };
@@ -233,11 +314,39 @@ export const removeItemFood =
 export const decreaseWater =
   () =>
   (dispatch, getState) => {
-    const current = getState().personal.water;
+    const selectedDate =
+      getState().general.dateSelected;
 
-    if (current === 0) return;
+    const selectedDateFormatted =
+      getDateFormatted(selectedDate);
 
-    dispatch(waterSet(current - 1));
+    const dataPoints =
+      getState().personal.data_points.map((day) => {
+        if (day.date !== selectedDateFormatted) {
+          return day;
+        }
+
+        return {
+          ...day,
+          water: Math.max(
+            (day.water ?? 0) - 1,
+            0
+          ),
+        };
+      });
+
+    dispatch(dataPointsSet(dataPoints));
+
+    dispatch(
+      waterSet({
+        date: selectedDateFormatted,
+        water:
+          dataPoints.find(
+            (day) =>
+              day.date === selectedDateFormatted
+          )?.water ?? 0,
+      })
+    );
 
     persistPersonalData(getState);
   };
@@ -245,15 +354,72 @@ export const decreaseWater =
 export const resetWater =
   () =>
   (dispatch, getState) => {
-    dispatch(waterSet(0));
+    const selectedDate =
+      getState().general.dateSelected;
+
+    const selectedDateFormatted =
+      getDateFormatted(selectedDate);
+
+    const dataPoints =
+      getState().personal.data_points.map((day) => {
+        if (day.date !== selectedDateFormatted) {
+          return day;
+        }
+
+        return {
+          ...day,
+          water: 0,
+        };
+      });
+
+    dispatch(dataPointsSet(dataPoints));
+
+    dispatch(
+      waterSet({
+        date: selectedDateFormatted,
+        water: 0,
+      })
+    );
 
     persistPersonalData(getState);
   };
 
-export const setWaterGoal =
+  export const setGoalWeight =
+  (weight) =>
+  (dispatch, getState) => {
+    dispatch(goalWeightSet(weight));
+
+    persistPersonalData(getState);
+  };
+
+export const setGoalDate =
+  (date) =>
+  (dispatch, getState) => {
+    dispatch(goalDateSet(date));
+
+    persistPersonalData(getState);
+  };
+
+export const setProteinGoal =
   (goal) =>
   (dispatch, getState) => {
-    dispatch(waterGoalSet(goal));
+    dispatch(proteinGoalSet(goal));
+
+    persistPersonalData(getState);
+  };
+
+export const setCarbsGoal =
+  (goal) =>
+  (dispatch, getState) => {
+    dispatch(carbsGoalSet(goal));
+
+    persistPersonalData(getState);
+  };
+
+export const setFatGoal =
+  (goal) =>
+  (dispatch, getState) => {
+    dispatch(fatGoalSet(goal));
 
     persistPersonalData(getState);
   };

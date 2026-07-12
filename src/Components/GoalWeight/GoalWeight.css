@@ -1,0 +1,23 @@
+.GoalWeight {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #111;
+}
+
+.GoalWeight h4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.GoalWeightRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.GoalWeightStatus {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+}

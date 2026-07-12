@@ -1,11 +1,15 @@
 import { useSelector } from "react-redux";
 import { ProgressBar } from "react-bootstrap";
-
 import CardGold from "./CardGoal";
 import GoalData from "./GoalData";
 import Exercise from "../Exercise/Exercise";
 import WaterCard from "../WaterCard/WaterCard";
-
+import WeightHistory from "../WeightHistory/WeightHistory";
+import GoalWeight from "../GoalWeight/GoalWeight";
+import NutritionGoals from "../NutritionGoals/NutritionGoals";
+import NutritionHistory from "../NutritionHistory/NutritionHistory";
+import Analytics from "../Analytics/Analytics";
+import Streak from "../Streak/Streak";
 import { capitalize } from "../../assets/utils/utils";
 
 import "./Goal.css";
@@ -103,6 +107,24 @@ export default function Goal() {
 <div className="mt-4">
   <WaterCard />
 </div>
+<div className="mt-4">
+  <WeightHistory />
+</div>
+<div className="mt-4">
+  <GoalWeight />
+</div>
+<div className="mt-4">
+  <NutritionGoals />
+</div>
+<div className="mt-4">
+  <NutritionHistory />
+</div>
+<div className="mt-4">
+  <Analytics />
+  </div>
+  <div className="mt-4">
+  <Streak />
+  </div>
     </div>
   );
 }

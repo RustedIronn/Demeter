@@ -1,0 +1,11 @@
+.NutritionHistory {
+  margin-top: 20px;
+  padding: 20px;
+  background: #111;
+  border-radius: 12px;
+}
+
+.NutritionHistory h4 {
+  text-align: center;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,17 @@
+.NutritionGoals {
+  margin-top: 20px;
+  padding: 20px;
+  background: #111;
+  border-radius: 12px;
+}
+
+.NutritionGoals h4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.NutritionGoalsRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}

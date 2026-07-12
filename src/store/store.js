@@ -4,7 +4,6 @@ import generalReducer from "./general/slice";
 import personalReducer from "./personal/slice";
 import calculatedInformationReducer from "./calculatedInformation/slice";
 import authReducer from "./auth/slice";
-import waterReducer from "./personal/water/slice";
 
 const store = configureStore({
   reducer: {
@@ -12,7 +11,6 @@ const store = configureStore({
     personal: personalReducer,
     calculatedInformation: calculatedInformationReducer,
     auth: authReducer,
-    water: waterReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
