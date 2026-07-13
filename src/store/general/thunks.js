@@ -1,4 +1,4 @@
-import { searchFoods, getFood } from "../../api/demeter";
+import { searchFoods, getFood } from "@/api/demeter";
 
 import {
   searchModalSet,

@@ -1,40 +1,39 @@
-import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-import Search from "./Components/Search/Search";
-import SearchResultsModal from "./Components/Search/SearchResultsModal";
-import DatePicker from "./Components/DatePicker/DatePicker";
-import BasicInformation from "./Components/BasicInformation/BasicInformation";
-import Goal from "./Components/Goal/Goal";
-import PersonalPanel from "./Components/PersonalPanel/PersonalPanel";
-import ListFood from "./Components/ListFood/ListFood";
-import AddCard from "./Components/AddCard/AddCard";
-import Fab from "./Components/Fab/Fab";
+import Search from "@/components/nutrition/Search/Search";
+import DatePicker from "@/components/dashboard/DatePicker/DatePicker";
+import PersonalPanel from "@/components/dashboard/PersonalPanel/PersonalPanel";
+import Goal from "@/components/nutrition/Goal/Goal";
+import BasicInformation from "@/components/profile/BasicInformation/BasicInformation";
+import ListFood from "@/components/nutrition/ListFood/ListFood";
+import AddCard from "@/components/nutrition/AddCard/AddCard";
+import SearchResultsModal from "@/components/nutrition/Search/SearchResultsModal";
+import Fab from "@/components/shared/Fab/Fab";
 
-import { mobileSet } from "./store/general/slice";
-import { selectIsMobile } from "./store/general/selectors";
-import { setPersonalData } from "./store/personal/thunks";
+import { mobileSet } from "@/store/general/slice";
+import { selectIsMobile } from "@/store/general/selectors";
+import { setPersonalData } from "@/store/personal/thunks";
 
 export default function App() {
   const dispatch = useDispatch();
   const isMobile = useSelector(selectIsMobile);
 
   useEffect(() => {
-    const updateWindowDimensions = () => {
-      dispatch(mobileSet(window.innerWidth < 768));
-    };
+  const updateWindowDimensions = () => {
+    dispatch(mobileSet(window.innerWidth < 768));
+  };
 
-    updateWindowDimensions();
+  window.addEventListener("resize", updateWindowDimensions);
+  updateWindowDimensions();
 
-    dispatch(setPersonalData());
+  dispatch(setPersonalData());
 
-    window.addEventListener("resize", updateWindowDimensions);
-
-    return () => {
-      window.removeEventListener("resize", updateWindowDimensions);
-    };
-  }, [dispatch]);
+  return () => {
+    window.removeEventListener("resize", updateWindowDimensions);
+  };
+}, [dispatch]);
 
   return (
     <Container className={isMobile ? "p-0" : ""} fluid={isMobile}>

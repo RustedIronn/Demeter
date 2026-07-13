@@ -1,0 +1,62 @@
+.SearchResultsModalOverlay {
+    max-width: 40%;
+    width: 100%;
+
+    position: fixed;
+    inset: 25px 0 auto;
+
+    margin: 0 auto;
+    padding: 30px;
+
+    height: 70%;
+    min-width: 520px;
+
+    z-index: 10;
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.SearchResultsModalContainer {
+    overflow-y: auto;
+}
+
+.SearchResultsModalContent {
+    height: 100%;
+
+    padding: 10px;
+
+    border-radius: 6px;
+    background: white;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.SearchResultsModalBackdrop {
+    position: fixed;
+    inset: 0;
+
+    z-index: -10;
+
+    background: transparent;
+}
+
+.SearchResultsModal h4 {
+    margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+    .SearchResultsModalOverlay {
+        top: 80px;
+
+        max-width: 100%;
+        min-width: auto;
+        height: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .SearchResultsModalOverlay {
+        min-width: auto;
+    }
+}

@@ -1,17 +1,15 @@
-import { getDateFormatted } from "../../assets/utils/utils";
+import { getDateFormatted } from "@/assets/utils/utils";
 import {
   loadPersonalStorage,
   savePersonalStorage,
-} from "../../assets/utils/storage";
+} from "@/assets/utils/storage";
 import { data } from "../../data";
 
 import {
   personalDataSet,
   personalUpdated,
   intakeListSet,
-  dataPointsSet,
-  waterSet,
-  waterGoalSet, 
+  dataPointsSet, 
   weightHistorySet,
   goalWeightSet,
   goalDateSet,
@@ -277,36 +275,36 @@ const selectedDateFormatted =
 export const increaseWater =
   () =>
   (dispatch, getState) => {
-    const selectedDate =
-      getState().general.dateSelected;
-
+    const selectedDate = getState().general.dateSelected;
     const selectedDateFormatted =
       getDateFormatted(selectedDate);
 
-    const dataPoints =
-      getState().personal.data_points.map((day) => {
+    let found = false;
+
+    const dataPoints = getState().personal.data_points.map(
+      (day) => {
         if (day.date !== selectedDateFormatted) {
           return day;
         }
+
+        found = true;
 
         return {
           ...day,
           water: (day.water ?? 0) + 1,
         };
+      }
+    );
+
+    if (!found) {
+      dataPoints.push({
+        date: selectedDateFormatted,
+        intake_list: [],
+        water: 1,
       });
+    }
 
     dispatch(dataPointsSet(dataPoints));
-
-    dispatch(
-      waterSet({
-        date: selectedDateFormatted,
-        water:
-          dataPoints.find(
-            (day) =>
-              day.date === selectedDateFormatted
-          )?.water ?? 0,
-      })
-    );
 
     persistPersonalData(getState);
   };
@@ -314,39 +312,33 @@ export const increaseWater =
 export const decreaseWater =
   () =>
   (dispatch, getState) => {
-    const selectedDate =
-      getState().general.dateSelected;
+    const selectedDate = getState().general.dateSelected;
+    const selectedDateFormatted = getDateFormatted(selectedDate);
 
-    const selectedDateFormatted =
-      getDateFormatted(selectedDate);
+    let found = false;
 
-    const dataPoints =
-      getState().personal.data_points.map((day) => {
-        if (day.date !== selectedDateFormatted) {
-          return day;
-        }
+    const dataPoints = getState().personal.data_points.map((day) => {
+      if (day.date !== selectedDateFormatted) {
+        return day;
+      }
 
-        return {
-          ...day,
-          water: Math.max(
-            (day.water ?? 0) - 1,
-            0
-          ),
-        };
+      found = true;
+
+      return {
+        ...day,
+        water: Math.max((day.water ?? 0) - 1, 0),
+      };
+    });
+
+    if (!found) {
+      dataPoints.push({
+        date: selectedDateFormatted,
+        intake_list: [],
+        water: 0,
       });
+    }
 
     dispatch(dataPointsSet(dataPoints));
-
-    dispatch(
-      waterSet({
-        date: selectedDateFormatted,
-        water:
-          dataPoints.find(
-            (day) =>
-              day.date === selectedDateFormatted
-          )?.water ?? 0,
-      })
-    );
 
     persistPersonalData(getState);
   };
@@ -354,32 +346,33 @@ export const decreaseWater =
 export const resetWater =
   () =>
   (dispatch, getState) => {
-    const selectedDate =
-      getState().general.dateSelected;
+    const selectedDate = getState().general.dateSelected;
+    const selectedDateFormatted = getDateFormatted(selectedDate);
 
-    const selectedDateFormatted =
-      getDateFormatted(selectedDate);
+    let found = false;
 
-    const dataPoints =
-      getState().personal.data_points.map((day) => {
-        if (day.date !== selectedDateFormatted) {
-          return day;
-        }
+    const dataPoints = getState().personal.data_points.map((day) => {
+      if (day.date !== selectedDateFormatted) {
+        return day;
+      }
 
-        return {
-          ...day,
-          water: 0,
-        };
+      found = true;
+
+      return {
+        ...day,
+        water: 0,
+      };
+    });
+
+    if (!found) {
+      dataPoints.push({
+        date: selectedDateFormatted,
+        intake_list: [],
+        water: 0,
       });
+    }
 
     dispatch(dataPointsSet(dataPoints));
-
-    dispatch(
-      waterSet({
-        date: selectedDateFormatted,
-        water: 0,
-      })
-    );
 
     persistPersonalData(getState);
   };
