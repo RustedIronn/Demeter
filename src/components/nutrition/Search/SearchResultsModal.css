@@ -1,62 +1,116 @@
 .SearchResultsModalOverlay {
-    max-width: 40%;
-    width: 100%;
+  position: fixed;
 
-    position: fixed;
-    inset: 25px 0 auto;
+  inset: 0;
 
-    margin: 0 auto;
-    padding: 30px;
+  z-index: 9999;
 
-    height: 70%;
-    min-width: 520px;
+  display: flex;
 
-    z-index: 10;
+  align-items: center;
 
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  justify-content: center;
+
+  padding: 20px;
 }
+
 
 .SearchResultsModalContainer {
-    overflow-y: auto;
+  width: 100%;
+
+  max-width: 600px;
+
+  max-height: 85vh;
+
+  z-index: 2;
 }
+
 
 .SearchResultsModalContent {
-    height: 100%;
+  background: var(--color-card);
 
-    padding: 10px;
+  border: 1px solid var(--color-border);
 
-    border-radius: 6px;
-    background: white;
+  border-radius: var(--radius-lg);
 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-lg);
+
+  padding: var(--space-lg);
+
+  max-height: 85vh;
+
+  overflow: hidden;
 }
+
+
+.SearchResultsModalHeader {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: var(--space-lg);
+}
+
+
+.SearchResultsModalHeader h2 {
+  margin: 0;
+}
+
+
+.SearchResultsClose {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 36px;
+
+  height: 36px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  background: var(--color-surface);
+
+  color: var(--color-text);
+
+  cursor: pointer;
+}
+
+
+.SearchResultsList {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  overflow-y: auto;
+
+  max-height: 65vh;
+}
+
+
+.SearchLoading,
+.SearchEmpty {
+  text-align: center;
+
+  padding: 30px;
+
+  color: var(--color-text-muted);
+}
+
 
 .SearchResultsModalBackdrop {
-    position: fixed;
-    inset: 0;
+  position: fixed;
 
-    z-index: -10;
+  inset: 0;
 
-    background: transparent;
-}
+  background: rgba(0,0,0,0.55);
 
-.SearchResultsModal h4 {
-    margin-bottom: 16px;
-}
-
-@media (max-width: 768px) {
-    .SearchResultsModalOverlay {
-        top: 80px;
-
-        max-width: 100%;
-        min-width: auto;
-        height: 100%;
-    }
-}
-
-@media (max-width: 400px) {
-    .SearchResultsModalOverlay {
-        min-width: auto;
-    }
+  z-index: 1;
 }

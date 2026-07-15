@@ -1,14 +1,92 @@
-.card-surface {
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-}
+:root {
+  /* =========================
+     Backgrounds
+  ========================= */
 
-.text-muted {
-  color: var(--color-text-muted);
-}
+  --color-bg: #2B1B2E;
+  --color-card: #4A3352;
+  --color-surface: #3A2842;
 
-.text-secondary {
-  color: var(--color-text-secondary);
+
+  /* =========================
+     Text
+  ========================= */
+
+  --color-text: #F7EFE4;
+  --color-text-muted: #C7B6C9;
+  --color-text-secondary: #D8C8D9;
+
+
+  /* =========================
+     Brand / Actions
+  ========================= */
+
+  --color-primary: #E8A33D;
+  --color-primary-hover: #F2B755;
+
+
+  /* =========================
+     Status Colors
+  ========================= */
+
+  --color-success: #7A8B69;
+  --color-warning: #D66845;
+  --color-danger: #C6323E;
+
+
+  /* =========================
+     Special Accents
+  ========================= */
+
+  --color-water: #5AA9E6;
+
+
+  /* =========================
+     Borders
+  ========================= */
+
+  --color-border: rgba(247, 239, 228, 0.12);
+
+
+  /* =========================
+     Shadows
+  ========================= */
+
+  --shadow-sm:
+    0 2px 8px rgba(0, 0, 0, 0.15);
+
+  --shadow-md:
+    0 8px 24px rgba(0, 0, 0, 0.2);
+
+  --shadow-lg:
+    0 16px 40px rgba(0, 0, 0, 0.25);
+
+
+  /* =========================
+     Radius
+  ========================= */
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+
+  /* =========================
+     Spacing
+  ========================= */
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+
+  /* =========================
+     Animation
+  ========================= */
+
+  --transition:
+    0.2s ease;
 }

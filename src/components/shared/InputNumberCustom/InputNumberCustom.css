@@ -1,72 +1,79 @@
 .InputNumberCustom {
-    background: #e8e8e8;
-    border-bottom: 2px solid #9a9a9a;
-    position: relative;
-    padding: 8px 0 0 15px;
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
 }
 
-.InputNumberCustom span.InputNumberCustomTitle {
-    color: #5c5c5c;
-    font-size: 14px;
-    font-weight: bold;
-    position: absolute;
+
+.InputNumberCustomTitle {
+  font-weight: 600;
+
+  color: var(--color-text-secondary);
 }
 
-.InputNumberCustom .form-control, .InputNumberCustom .form-control:focus, .InputNumberCustom .form-control:active, .InputNumberCustom .form-control:hover {
-    border: 0!important;
-    background: transparent!important;
-    box-shadow: none!important;
+
+.ServingControl {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  background: var(--color-surface);
+
+  padding: 10px;
+
+  border-radius: var(--radius-md);
 }
 
-.rc-input-number-handler {
-    line-height: 20px;
-    height: 25px
+
+.ServingControl button {
+  width: 34px;
+
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: none;
+
+  background: var(--color-primary);
+
+  color: var(--color-bg);
+
+  cursor: pointer;
+
+  transition: var(--transition);
 }
 
-.rc-input-number-handler-up {
-    border: 0;
-    vertical-align: bottom;
-    padding-top: 8px;
+
+.ServingControl button:hover {
+  transform: scale(1.05);
 }
 
-.rc-input-number-handler-wrap {
-    border: 0;
-    margin-right: 10px;
+
+.ServingValue {
+  min-width: 45px;
+
+  text-align: center;
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  color: var(--color-text);
 }
 
-.rc-input-number-input {
-    background: transparent;
-    text-align: left;
-    font-weight: bold;
-    color: #1e1e1e;
-    padding-top: 10px;
-}
-
-.rc-input-number {
-    font-size: 17px;
-    height: 50px;
-}
-
-.InputNumberCustom svg {
-    font-size: 12px;
-}
 
 .InputNumberCustomSubtitle {
-    color: #5c5c5c;
-    position: absolute;
-    bottom: -24px;
-    font-size: 14px;
-    white-space: nowrap;
-}
+  color: var(--color-text-muted);
 
-.InputNumberCustom:hover .InputNumberCustomSubtitle {
-    color: #17851d;
-}
-
-.InputNumberCustom:hover span.InputNumberCustomTitle {
-    color: #17851d;
-}
-
-.InputNumberCustom:hover {
-    border-bottom: 2px solid #17851d;
+  font-size: .9rem;
 }

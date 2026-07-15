@@ -1,7 +1,12 @@
-import { Image, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
+import {
+  Pencil,
+  Trash2,
+} from "lucide-react";
+
 import { removeItemFood } from "@/store/personal/thunks";
+
 import { capitalize, capitalizeAll } from "@/assets/utils/utils";
 
 import {
@@ -14,6 +19,7 @@ import {
 
 import "./ItemFood.css";
 
+
 export default function ItemFood({ item, index }) {
   const dispatch = useDispatch();
 
@@ -21,7 +27,9 @@ export default function ItemFood({ item, index }) {
     (state) => state.personal.data_points
   );
 
+
   if (!item) return null;
+
 
   const {
     image,
@@ -31,93 +39,136 @@ export default function ItemFood({ item, index }) {
     meal_type,
   } = item;
 
+
   const handleDelete = () => {
     dispatch(removeItemFood(dataPoints, index));
   };
 
+
   const handleEdit = () => {
-  dispatch(startEditingFood(index));
+    dispatch(startEditingFood(index));
 
-  dispatch(
-    itemFoodSelectedSet({
-      ...item,
-      servings: [
-        {
-          ...serving,
-        },
-      ],
-      selectedServing: 0,
-    })
-  );
+    dispatch(
+      itemFoodSelectedSet({
+        ...item,
+        servings: [
+          {
+            ...serving,
+          },
+        ],
+        selectedServing: 0,
+      })
+    );
 
-  dispatch(servingSizeSet(serving_size));
 
-  const mealTypes = [
-    "breakfast",
-    "lunch",
-    "dinner",
-    "snack",
-  ];
+    dispatch(servingSizeSet(serving_size));
 
-  dispatch(
-    mealTypeSelectedSet(
-      mealTypes.indexOf(meal_type)
-    )
-  );
 
-  dispatch(addModalSet(true));
-};
+    const mealTypes = [
+      "breakfast",
+      "lunch",
+      "dinner",
+      "snack",
+    ];
+
+
+    dispatch(
+      mealTypeSelectedSet(
+        mealTypes.indexOf(meal_type)
+      )
+    );
+
+
+    dispatch(addModalSet(true));
+  };
+
 
   return (
-    <div className="ItemFood d-flex bd-highlight mt-3 mb-3 noselect">
-      <div className="p-2 bd-highlight">
-        <Image src={image} />
+    <div className="ItemFood">
+
+      <div className="ItemFoodImage">
+
+        <img
+          src={image}
+          alt={name}
+        />
+
       </div>
 
-      <div className="w-100 d-flex justify-content-between ItemFoodTexts">
-        <div className="p-2 bd-highlight">
-          <div className="ItemFoodText">
+
+      <div className="ItemFoodContent">
+
+        <div className="ItemFoodMain">
+
+          <h3>
             {capitalizeAll(name)}
-          </div>
+          </h3>
 
-          <div className="ItemFoodSubtitle">
-            {serving_size} {serving.servingUnit}
-            {serving.metricAmount
-              ? ` (${Math.round(
-                  serving.metricAmount * serving_size
-                )} ${serving.metricUnit})`
-              : ""}
-          </div>
-        </div>
 
-        <div className="p-2 bd-highlight text-right">
-          <div className="ItemFoodText">
-            {Math.round(serving.calories * serving_size)} cal
-          </div>
-
-          <div className="ItemFoodSubtitle">
+          <span className="MealType">
             {capitalize(meal_type)}
+          </span>
+
+
+          <p>
+            {serving_size} {serving.servingUnit}
+
+            {serving.metricAmount &&
+              ` (${Math.round(
+                serving.metricAmount * serving_size
+              )} ${serving.metricUnit})`
+            }
+          </p>
+
+        </div>
+
+
+
+        <div className="ItemFoodStats">
+
+          <strong>
+            {Math.round(
+              serving.calories * serving_size
+            )} kcal
+          </strong>
+
+
+          <div className="MacroText">
+            P {Math.round(serving.protein * serving_size)}g
+
+            {" • "}
+
+            C {Math.round(serving.carbs * serving_size)}g
+
+            {" • "}
+
+            F {Math.round(serving.fat * serving_size)}g
           </div>
 
-          <div className="d-flex justify-content-end gap-2 mt-2">
-  <Button
-    variant="primary"
-    size="sm"
-    onClick={handleEdit}
-  >
-    Edit
-  </Button>
 
-  <Button
-    variant="danger"
-    size="sm"
-    onClick={handleDelete}
-  >
-    Delete
-  </Button>
-</div>
+          <div className="ItemFoodActions">
+
+            <button
+              onClick={handleEdit}
+              className="EditButton"
+            >
+              <Pencil size={16}/>
+            </button>
+
+
+            <button
+              onClick={handleDelete}
+              className="DeleteButton"
+            >
+              <Trash2 size={16}/>
+            </button>
+
+          </div>
+
         </div>
+
       </div>
+
     </div>
   );
 }

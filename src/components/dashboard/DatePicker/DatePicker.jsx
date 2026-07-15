@@ -1,104 +1,110 @@
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 import { setDate } from "@/store/general/thunks";
+
 import {
-  selectIsMobile,
   selectSelectedDate,
 } from "@/store/general/selectors";
-import { selectDataPoints } from "@/store/personal/selectors";
+
+import {
+  selectDataPoints,
+} from "@/store/personal/selectors";
 
 import "./DatePicker.css";
+
 
 export default function DatePicker() {
   const dispatch = useDispatch();
 
-  const isMobile = useSelector(selectIsMobile);
-  const dateSelected = useSelector(selectSelectedDate);
-  const dataPoints = useSelector(selectDataPoints);
+  const dateSelected = useSelector(
+    selectSelectedDate
+  );
+
+  const dataPoints = useSelector(
+    selectDataPoints
+  );
+
 
   const today = new Date();
-  const yesterday = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() - 1
-  );
-  const beforeYesterday = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() - 2
-  );
+
 
   const isToday =
-    today.toLocaleDateString().substring(0, 10) ===
-    dateSelected.toLocaleDateString().substring(0, 10);
+    today.toDateString() ===
+    dateSelected.toDateString();
 
-  const isYesterday =
-    yesterday.toLocaleDateString().substring(0, 10) ===
-    dateSelected.toLocaleDateString().substring(0, 10);
 
-  const isBeforeYesterday =
-    beforeYesterday.toLocaleDateString().substring(0, 10) ===
-    dateSelected.toLocaleDateString().substring(0, 10);
+  const handleNext = () => {
+    const newDate = new Date(dateSelected);
 
-  const handleNextOnClick = () => {
-    const newDate = new Date(
-      dateSelected.getFullYear(),
-      dateSelected.getMonth(),
-      dateSelected.getDate() + 1
+    newDate.setDate(
+      newDate.getDate() + 1
     );
 
-    dispatch(setDate(newDate, dataPoints));
+    dispatch(
+      setDate(newDate, dataPoints)
+    );
   };
 
-  const handleBackOnClick = () => {
-    const newDate = new Date(
-      dateSelected.getFullYear(),
-      dateSelected.getMonth(),
-      dateSelected.getDate() - 1
+
+  const handleBack = () => {
+    const newDate = new Date(dateSelected);
+
+    newDate.setDate(
+      newDate.getDate() - 1
     );
 
-    dispatch(setDate(newDate, dataPoints));
+    dispatch(
+      setDate(newDate, dataPoints)
+    );
   };
+
+
+  const formatted =
+    dateSelected.toLocaleDateString(
+      "en-US",
+      {
+        weekday: "long",
+        month: "short",
+        day: "numeric",
+      }
+    );
+
 
   return (
-    <div
-      className={`${
-        isMobile ? "DatePickerMobile" : "DatePicker"
-      } d-flex justify-content-between pl-4 pr-4`}
-    >
-      <div
-        className={`${
-          isBeforeYesterday ? "DatePickerIconDisabled " : ""
-        }align-self-center text-left DatePickerIcon`}
-        onClick={isBeforeYesterday ? undefined : handleBackOnClick}
+    <div className="DatePicker">
+
+      <button
+        className="DatePickerButton"
+        onClick={handleBack}
       >
-        <FontAwesomeIcon icon="chevron-left" />
+        <ChevronLeft size={20}/>
+      </button>
+
+
+      <div className="DatePickerDate">
+
+        <span>
+          {isToday
+            ? "Today"
+            : formatted}
+        </span>
+
       </div>
 
-      <div className="DatePickerText noselect">
-        {isToday && "Today"}
 
-        {isYesterday && "Yesterday"}
-
-        {!isToday && !isYesterday && (
-          <span title={dateSelected.toLocaleDateString()}>
-            {dateSelected.toLocaleDateString("en-GB", {
-              day: "2-digit",
-              month: "short",
-            })}
-          </span>
-        )}
-      </div>
-
-      <div
-        className={`${
-          isToday ? "DatePickerIconDisabled " : ""
-        }align-self-center text-right DatePickerIcon`}
-        onClick={isToday ? undefined : handleNextOnClick}
+      <button
+        className="DatePickerButton"
+        onClick={isToday ? undefined : handleNext}
+        disabled={isToday}
       >
-        <FontAwesomeIcon icon="chevron-right" />
-      </div>
+        <ChevronRight size={20}/>
+      </button>
+
+
     </div>
   );
 }

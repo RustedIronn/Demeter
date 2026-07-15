@@ -1,87 +1,188 @@
 .AddCard {
-    margin: 1rem;
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--space-lg);
+
+  color: var(--color-text);
 }
+
+
+/* Header */
 
 .AddCardHeader {
-    border-bottom: 1px solid #e0e0e0;
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
 }
 
-.AddCardBody {
-    padding-top: 1rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid #e0e0e0;
-}
 
 .AddCardImage {
-    max-width: 80px;
+  width: 90px;
+
+  height: 90px;
+
+  object-fit: cover;
+
+  border-radius: var(--radius-md);
 }
 
-.AddCardTitle {
-    font-size: 28px;
+
+.AddCardHeader h2 {
+  margin: 0;
+
+  font-size: 1.4rem;
 }
 
-.AddCardSubtitle {
-    color: #646464;
+
+.AddCardHeader p {
+  margin-top: 6px;
+
+  color: var(--color-text-muted);
 }
 
-.AddCardClose {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right: 35px;
-    top: 35px;
-    border: none;
-    background: transparent;
-    color: #55af5a;
-    cursor: pointer;
-    font-size: 13px;
+
+
+/* Stats */
+
+.AddCardStats {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: var(--space-md);
 }
 
-.AddCardClose:after {
-    content: "X";
-    font-weight: bold;
-    font-size: 22px;
+
+.AddCardStats div {
+  background: var(--color-surface);
+
+  border-radius: var(--radius-md);
+
+  padding: var(--space-md);
+
+  text-align: center;
 }
 
-.AddCardNumber {
-    font-size: 26px;
-    text-align: right;
-    color: #202020;
+
+.AddCardStats strong {
+  display: block;
+
+  font-size: 1.6rem;
+
+  color: var(--color-primary);
 }
 
-.AddCardDetail {
-    font-size: 12px;
-    text-align: right;
-    color: #696969;
-    line-height: 4px;
+
+.AddCardStats span {
+  color: var(--color-text-muted);
+
+  font-size: .9rem;
 }
 
-.AddCard .btn-primary {
-    background: #978454fd;
-    box-shadow: 0 2px 5px #777;
-    border: 0;
-    float: right; /* Move the button to the right */
-    margin-bottom: 0.5rem;
+
+
+/* Serving */
+
+.AddCardServing {
+  background: var(--color-surface);
+
+  padding: var(--space-md);
+
+  border-radius: var(--radius-md);
 }
 
-.AddCard .btn-primary:focus {
-    background: #17851d!important;
-    box-shadow: none!important;
-    border: 0;
+
+
+/* Meal selection */
+
+.AddCardMeal p {
+  margin-bottom: 12px;
+
+  color: var(--color-text-secondary);
+
+  font-weight: 600;
 }
 
-.AddCard .btn-primary:active {
-    background: #039d50!important;
-    box-shadow: none!important;
-    border: 0;
+
+.MealButtons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
 }
 
-.AddCardTitleSelec {
-    padding-top: 10px;
-    color: #646464;
-    font-weight: bold;
-    font-size: 11px;
-    letter-spacing: 1px;
-    margin: 8px 0;
-    text-transform: uppercase;
+
+.MealButton {
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  border: 1px solid var(--color-border);
+
+  background: transparent;
+
+  color: var(--color-text);
+
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+
+
+.MealButton:hover {
+  border-color: var(--color-primary);
+}
+
+
+.MealButton.active {
+  background: var(--color-primary);
+
+  color: var(--color-bg);
+
+  border-color: var(--color-primary);
+}
+
+
+
+/* Add button */
+
+.AddFoodButton {
+  width: 100%;
+
+  padding: 14px;
+
+  border-radius: var(--radius-md);
+
+  border: none;
+
+  background: var(--color-primary);
+
+  color: var(--color-bg);
+
+  font-weight: 700;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+
+
+.AddFoodButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  background: var(--color-primary-hover);
+}
+
+
+.AddFoodButton:disabled {
+  opacity: .5;
+
+  cursor: not-allowed;
 }

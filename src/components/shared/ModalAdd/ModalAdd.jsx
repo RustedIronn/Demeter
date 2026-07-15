@@ -10,8 +10,10 @@ const ModalAdd = (props) => {
                 </div>
             </div>
             <button
-                onClick={props.closeModal}
-                className="AddCardClose" />
+  onClick={props.closeModal}
+  className="AddCardClose"
+  aria-label="Close modal"
+/>
             <div className="ModalAddBackdrop"></div>
         </div>
     );

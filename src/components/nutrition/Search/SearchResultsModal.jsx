@@ -1,6 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { searchModalSet } from "@/store/general/slice";
+import {
+  X,
+} from "lucide-react";
+
+import {
+  searchModalSet,
+} from "@/store/general/slice";
+
 import {
   selectLoadingSearch,
   selectSearchResults,
@@ -11,60 +18,112 @@ import SearchResultCard from "./SearchResultCard";
 
 import "./SearchResultsModal.css";
 
+
 export default function SearchResultsModal() {
   const dispatch = useDispatch();
 
-  const searchVisible = useSelector(selectSearchVisible);
-  const loading = useSelector(selectLoadingSearch);
-  const foods = useSelector(selectSearchResults);
+
+  const searchVisible = useSelector(
+    selectSearchVisible
+  );
+
+  const loading = useSelector(
+    selectLoadingSearch
+  );
+
+  const foods = useSelector(
+    selectSearchResults
+  );
+
 
   const closeModal = () => {
-    dispatch(searchModalSet(false));
+    dispatch(
+      searchModalSet({
+        searchVisible: false,
+        searchText: "",
+      })
+    );
   };
+
 
   if (!searchVisible) return null;
 
+
   return (
     <div className="SearchResultsModalOverlay">
-      <div
-        className={
-          "SearchResultsModalContainer " +
-          (loading || foods.length === 0 ? "" : "h-100")
-        }
-      >
-        <div
-          className={
-            "SearchResultsModalContent " +
-            (loading || foods.length === 0 ? "" : "h-100")
-          }
-        >
-          <div
-            style={{
-              overflowY: "auto",
-              height: "100%",
-            }}
-          >
-            <div className="SearchResultsModal">
-              <h4>Search Results</h4>
 
-              {loading && <p>Loading...</p>}
 
-              {!loading &&
-                foods.map((food) => (
-                  <SearchResultCard
-                    key={food.id}
-                    food={food}
-                  />
-                ))}
-            </div>
+      <div className="SearchResultsModalContainer">
+
+
+        <div className="SearchResultsModalContent">
+
+
+          <div className="SearchResultsModalHeader">
+
+            <h2>
+              Search Results
+            </h2>
+
+
+            <button
+              onClick={closeModal}
+              className="SearchResultsClose"
+            >
+              <X size={20}/>
+            </button>
+
           </div>
+
+
+
+          <div className="SearchResultsList">
+
+
+            {loading && (
+              <p className="SearchLoading">
+                Searching...
+              </p>
+            )}
+
+
+
+            {!loading &&
+              foods.length === 0 && (
+
+              <p className="SearchEmpty">
+                No foods found.
+              </p>
+
+            )}
+
+
+
+            {!loading &&
+              foods.map((food) => (
+
+                <SearchResultCard
+                  key={food.id}
+                  food={food}
+                />
+
+              ))}
+
+
+          </div>
+
+
         </div>
+
+
       </div>
+
 
       <div
         className="SearchResultsModalBackdrop"
         onClick={closeModal}
       />
+
     </div>
   );
 }

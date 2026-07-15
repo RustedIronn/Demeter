@@ -1,29 +1,52 @@
+import { useDispatch } from "react-redux";
+
+import { itemFoodSelected } from "@/store/general/thunks";
+
 import "./SearchResultCard.css";
 
-import { useDispatch } from "react-redux";
-import { itemFoodSelected } from "@/store/general/thunks";
 
 export default function SearchResultCard({ food }) {
   const dispatch = useDispatch();
 
+
   return (
-    <div
+    <button
       className="SearchResultCard"
-      onClick={() => dispatch(itemFoodSelected(food.id))}
+      onClick={() =>
+        dispatch(itemFoodSelected(food.id))
+      }
     >
+
       <img
         src={food.image}
         alt={food.name}
         className="SearchResultCardImage"
       />
 
+
       <div className="SearchResultCardContent">
-        <h5>{food.name}</h5>
 
-        {food.brand && <p>{food.brand}</p>}
+        <h3>
+          {food.name}
+        </h3>
 
-        {food.description && <small>{food.description}</small>}
+
+        {food.brand && (
+          <p>
+            {food.brand}
+          </p>
+        )}
+
+
+        {food.description && (
+          <span>
+            {food.description}
+          </span>
+        )}
+
       </div>
-    </div>
+
+
+    </button>
   );
 }

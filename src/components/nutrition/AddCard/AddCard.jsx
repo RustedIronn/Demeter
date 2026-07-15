@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Image, Button, Dropdown } from "react-bootstrap";
+import {
+  ChevronDown,
+} from "lucide-react";
 
 import {
   addModalSet,
@@ -16,7 +18,6 @@ import {
 import ModalPortal from "@/components/shared/ModalAdd/ModalPortal";
 import ModalAdd from "@/components/shared/ModalAdd/ModalAdd";
 import Loading from "@/components/shared/Loading/Loading";
-import CustomToggle from "./CustomToggle";
 import InputNumberCustom from "@/components/shared/InputNumberCustom/InputNumberCustom";
 import { capitalize } from "@/assets/utils/utils";
 
@@ -102,88 +103,130 @@ const editingFoodIndex = useSelector(
 
   return (
     <ModalPortal>
-      <ModalAdd closeModal={closeModalAdd}>
-        <Loading loading={loadingAdd} />
+<ModalAdd closeModal={closeModalAdd}>
 
-        {!loadingAdd && itemFoodSelected && serving && (
-          <div className="AddCard">
-            <div className="AddCardHeader d-flex justify-content-between">
-              <div>
-                <Image
-                  className="AddCardImage"
-                  src={itemFoodSelected.image}
-                />
+  <Loading loading={loadingAdd} />
 
-                <div className="AddCardTitle">
-                  {capitalize(itemFoodSelected.name)}
-                </div>
 
-                <div className="AddCardSubtitle">
-                  {itemFoodSelected.brand
-                    ? capitalize(itemFoodSelected.brand)
-                    : null}
-                </div>
-              </div>
-            </div>
+  {!loadingAdd && itemFoodSelected && serving && (
 
-            <div className="AddCardBody d-flex justify-content-between">
-              <div>
-                <InputNumberCustom
-                  serving_unit={serving.description}
-                />
-              </div>
+    <div className="AddCard">
 
-              <div>
-                <div className="AddCardNumber">{grams}</div>
-                <div className="AddCardDetail">grams</div>
-              </div>
 
-              <div>
-                <div className="AddCardNumber">{calories}</div>
-                <div className="AddCardDetail">calories</div>
-              </div>
-            </div>
+      <div className="AddCardHeader">
 
-            <div className="AddCardFooter">
-             <div className="AddCardTitleSelec">
-  {isEditingFood ? "Edit food" : "Add to today"}
-</div>
+        <img
+          className="AddCardImage"
+          src={itemFoodSelected.image}
+          alt={itemFoodSelected.name}
+        />
 
-              <Dropdown>
-                <Dropdown.Toggle
-                  as={CustomToggle}
-                  id="dropdown-custom-components"
-                >
-                  {capitalize(mealTypes[mealTypeSelected])}
-                </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  {mealTypes.map((key, index) => (
-                    <Dropdown.Item
-                      key={index}
-                      as="button"
-                      onClick={() => handleMealClick(index)}
-                    >
-                      {capitalize(key)}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
+        <div>
 
-              <div className="text-right mt-3">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={handleAddClick}
-                  disabled={multiplier <= 0}
-                >
-                  {isEditingFood ? "SAVE" : "ADD"}
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </ModalAdd>
+          <h2>
+            {capitalize(itemFoodSelected.name)}
+          </h2>
+
+
+          {itemFoodSelected.brand && (
+            <p>
+              {capitalize(itemFoodSelected.brand)}
+            </p>
+          )}
+
+        </div>
+
+      </div>
+
+
+
+      <div className="AddCardStats">
+
+        <div>
+          <strong>
+            {grams}
+          </strong>
+
+          <span>
+            grams
+          </span>
+        </div>
+
+
+        <div>
+          <strong>
+            {calories}
+          </strong>
+
+          <span>
+            calories
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div className="AddCardServing">
+
+        <InputNumberCustom
+          serving_unit={serving.description}
+        />
+
+      </div>
+
+
+
+      <div className="AddCardMeal">
+
+        <p>
+          {isEditingFood
+            ? "Edit food"
+            : "Add to today"}
+        </p>
+
+
+        <div className="MealButtons">
+
+          {mealTypes.map((type, index) => (
+
+            <button
+              key={type}
+              className={
+                mealTypeSelected === index
+                  ? "MealButton active"
+                  : "MealButton"
+              }
+              onClick={() =>
+                handleMealClick(index)
+              }
+            >
+              {capitalize(type)}
+            </button>
+
+          ))}
+
+        </div>
+
+      </div>
+
+
+
+      <button
+        className="AddFoodButton"
+        onClick={handleAddClick}
+        disabled={multiplier <= 0}
+      >
+        {isEditingFood ? "Save Changes" : "Add Meal"}
+      </button>
+
+
+    </div>
+
+  )}
+
+</ModalAdd>
     </ModalPortal>
   );
 }

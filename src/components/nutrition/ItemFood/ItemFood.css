@@ -1,23 +1,137 @@
-.ItemFood img {
-    max-width: 50px;
+.ItemFood {
+  display: flex;
+
+  gap: 16px;
+
+  padding: 16px;
+
+  background: var(--color-surface);
+
+  border-radius: var(--radius-md);
+
+  border: 1px solid var(--color-border);
 }
 
-.ItemFoodText {
-    font-weight: bold;
+
+.ItemFoodImage img {
+  width: 80px;
+
+  height: 80px;
+
+  object-fit: cover;
+
+  border-radius: var(--radius-md);
 }
 
-.ItemFoodSubtitle {
-    color: #666666;
+
+.ItemFoodContent {
+  flex: 1;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
 }
 
-@media only screen and (max-width: 740px) {
-    .ItemFood:first-child {
-        padding-top: 1rem;
-    }
-    .ItemFoodText {
-        font-size: 19px;
-    }
-    .ItemFoodSubtitle {
-        line-height: 30px;
-    }
+
+.ItemFoodMain h3 {
+  margin: 0;
+
+  font-size: 1.1rem;
+}
+
+
+.ItemFoodMain p {
+  margin-top: 8px;
+
+  color: var(--color-text-muted);
+}
+
+
+.MealType {
+  display: inline-block;
+
+  margin-top: 6px;
+
+  color: var(--color-primary);
+
+  font-size: .9rem;
+}
+
+
+.ItemFoodStats {
+  text-align: right;
+}
+
+
+.ItemFoodStats strong {
+  font-size: 1.1rem;
+}
+
+
+.MacroText {
+  color: var(--color-text-muted);
+
+  font-size: .85rem;
+
+  margin-top: 6px;
+}
+
+
+.ItemFoodActions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+
+.ItemFoodActions button {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 32px;
+
+  height: 32px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+
+.EditButton {
+  background: var(--color-primary);
+
+  color: var(--color-bg);
+}
+
+
+.DeleteButton {
+  background: var(--color-danger);
+
+  color: white;
+}
+
+
+@media(max-width:700px) {
+
+  .ItemFoodContent {
+    flex-direction: column;
+  }
+
+
+  .ItemFoodStats {
+    text-align: left;
+  }
+
 }

@@ -1,41 +1,64 @@
 import { useSelector } from "react-redux";
-import { Col } from "react-bootstrap";
 
 import ItemFood from "@/components/nutrition/ItemFood/ItemFood";
 
 import "./ListFood.css";
+
 
 export default function ListFood() {
   const intakeList = useSelector(
     (state) => state.personal.intakeList
   );
 
-  const dateSelected = useSelector(
-    (state) => state.general.dateSelected
-  );
-
-  const today = new Date();
-
-  const isToday =
-    today.toLocaleDateString().substring(0, 10) ===
-    dateSelected.toLocaleDateString().substring(0, 10);
 
   return (
-    <Col md="7" className="ListFood pr-0">
-      {intakeList.map((item, index) => (
-        <div className="ItemFood" key={index}>
-          <ItemFood
-  item={item}
-  index={index}
-          />
-        </div>
-      ))}
+    <section className="ListFood">
 
-      {intakeList.length === 0 && (
-        <div className="ListFoodNoElement noselect">
-          No food item added{isToday ? " yet" : ""}.
+      <div className="ListFoodHeader">
+        <h2>
+          Today's Meals
+        </h2>
+
+        <span>
+          {intakeList.length} items
+        </span>
+      </div>
+
+
+      {intakeList.length === 0 ? (
+
+        <div className="ListFoodEmpty">
+          <p>
+            No meals added yet.
+          </p>
+
+          <span>
+            Start tracking your nutrition by adding food.
+          </span>
         </div>
+
+      ) : (
+
+        <div className="FoodItems">
+
+          {intakeList.map((item, index) => (
+
+            <div
+              className="FoodItemWrapper"
+              key={index}
+            >
+              <ItemFood
+                item={item}
+                index={index}
+              />
+            </div>
+
+          ))}
+
+        </div>
+
       )}
-    </Col>
+
+    </section>
   );
 }
