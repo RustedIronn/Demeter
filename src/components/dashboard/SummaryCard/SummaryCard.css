@@ -1,0 +1,58 @@
+.SummaryCard {
+  background: var(--color-card);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius-md);
+
+  padding: var(--space-lg);
+
+  box-shadow: var(--shadow-md);
+
+  transition: var(--transition);
+}
+
+
+.SummaryCard:hover {
+  transform: translateY(-3px);
+
+  box-shadow: var(--shadow-lg);
+}
+
+
+.SummaryCardHeader {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: var(--color-text-secondary);
+
+  font-weight: 600;
+}
+
+
+.SummaryCardIcon {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.SummaryCard h2 {
+  margin-top: 20px;
+
+  font-size: 2rem;
+
+  color: var(--color-text);
+}
+
+
+.SummaryCard p {
+  margin: 8px 0 0;
+
+  color: var(--color-text-muted);
+}

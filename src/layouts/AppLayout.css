@@ -1,0 +1,18 @@
+.AppLayout {
+  display: flex;
+  height: 100vh;
+  background: var(--color-bg);
+}
+
+.MainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.PageContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+}

@@ -1,0 +1,87 @@
+.RecentMeals {
+  margin-top: var(--space-xxl);
+
+  background: var(--color-card);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius-md);
+
+  padding: var(--space-lg);
+
+  box-shadow: var(--shadow-md);
+}
+
+
+.RecentMealsHeader {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.RecentMealsHeader button {
+  background: none;
+
+  border: none;
+
+  color: var(--color-primary);
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.RecentMealsHeader span {
+  color: var(--color-text-muted);
+}
+
+
+.MealItem {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 16px 0;
+
+  border-bottom:
+    1px solid var(--color-border);
+}
+
+
+.MealItem:last-child {
+  border-bottom: none;
+}
+
+
+.MealItem h4 {
+  margin: 0;
+
+  font-size: 1rem;
+}
+
+
+.MealItem p {
+  margin: 4px 0 0;
+
+  color: var(--color-text-muted);
+
+  text-transform: capitalize;
+}
+
+
+.MealItem span {
+  color: var(--color-primary);
+
+  font-weight: 600;
+}
+
+
+.EmptyMeals {
+  color: var(--color-text-muted);
+}

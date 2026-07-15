@@ -1,0 +1,40 @@
+.ProgressCard {
+  background: var(--color-card);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius-md);
+
+  padding: var(--space-lg);
+}
+
+
+.ProgressCardHeader {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+
+  color: var(--color-text);
+}
+
+
+.ProgressTrack {
+  height: 10px;
+
+  background: var(--color-surface);
+
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+
+.ProgressFill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  transition: width .3s ease;
+}

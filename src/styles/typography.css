@@ -1,0 +1,30 @@
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+
+html,
+body {
+  font-family: "Manrope", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text);
+  font-weight: 700;
+  margin: 0;
+}
+
+p,
+span,
+label {
+  color: var(--color-text-secondary);
+}
+
+small {
+  color: var(--color-text-muted);
+}

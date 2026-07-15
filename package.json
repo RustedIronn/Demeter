@@ -10,6 +10,7 @@
     "server": "node --env-file=.env server/server.js"
   },
   "dependencies": {
+    "@fontsource/manrope": "^5.2.8",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -20,11 +21,14 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "framer-motion": "^12.42.2",
+    "lucide-react": "^1.24.0",
     "rc-input-number": "^9.5.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^18.3.1",
     "react-redux": "^9.3.0",
+    "react-router-dom": "^7.18.1",
     "recharts": "^3.9.2",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0"
