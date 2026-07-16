@@ -1,3 +1,4 @@
+import { Scale } from "lucide-react";
 import { useSelector } from "react-redux";
 import {
   ResponsiveContainer,
@@ -39,13 +40,29 @@ export default function WeightHistory() {
   };
 
   if (!history || history.length === 0) {
-    return (
-      <div className="WeightHistory">
-        <h4>Weight History</h4>
-        <p>No weight history available.</p>
+  return (
+    <section className="WeightHistory">
+
+      <div className="WeightHistoryHeader">
+
+        <div className="WeightHistoryIcon">
+          <Scale />
+        </div>
+
+        <div>
+          <h2>Weight History</h2>
+          <p>Your progress over time</p>
+        </div>
+
       </div>
-    );
-  }
+
+      <div className="WeightHistoryEmpty">
+        No weight history available.
+      </div>
+
+    </section>
+  );
+}
 
   const chartData = [...history]
     .sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -55,31 +72,67 @@ export default function WeightHistory() {
     }));
 
   return (
-    <div className="WeightHistory">
-      <h4>Weight History</h4>
+  <section className="WeightHistory">
 
-      <ResponsiveContainer
-        width="100%"
-        height={250}
-      >
-        <LineChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" />
+    <div className="WeightHistoryHeader">
 
-          <XAxis dataKey="label" />
+      <div className="WeightHistoryIcon">
+        <Scale />
+      </div>
 
-          <YAxis />
+      <div>
+        <h2>Weight History</h2>
+        <p>Your progress over time</p>
+      </div>
 
-          <Tooltip />
-
-          <Line
-            type="monotone"
-            dataKey="weight"
-            stroke="#4CAF50"
-            strokeWidth={3}
-            dot={{ r: 5 }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
     </div>
-  );
+
+    <ResponsiveContainer
+      width="100%"
+      height={250}
+    >
+      <LineChart data={chartData}>
+
+        <CartesianGrid
+          stroke="var(--color-border)"
+          strokeDasharray="3 3"
+        />
+
+        <XAxis
+          dataKey="label"
+          stroke="var(--color-text-muted)"
+        />
+
+        <YAxis
+          stroke="var(--color-text-muted)"
+        />
+
+        <Tooltip
+          contentStyle={{
+            background: "var(--color-card)",
+            border: "1px solid var(--color-border)",
+            borderRadius: "12px",
+            color: "var(--color-text)",
+          }}
+        />
+
+        <Line
+          type="monotone"
+          dataKey="weight"
+          stroke="var(--color-success)"
+          strokeWidth={3}
+          dot={{
+            r: 5,
+            fill: "var(--color-success)",
+          }}
+          activeDot={{
+            r: 7,
+          }}
+        />
+
+      </LineChart>
+    </ResponsiveContainer>
+
+  </section>
+);
 }

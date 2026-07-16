@@ -1,17 +1,127 @@
 .NutritionGoals {
-  margin-top: 20px;
-  padding: 20px;
-  background: #111;
-  border-radius: 12px;
+  background: var(--color-card);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+
+  padding: var(--space-xl);
 }
 
-.NutritionGoals h4 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.NutritionGoalsRow {
+.NutritionGoalsHeader {
   display: flex;
+
   justify-content: space-between;
-  margin-bottom: 12px;
+
+  align-items: center;
+
+  margin-bottom: var(--space-lg);
+}
+
+.NutritionGoalsHeader h2 {
+  margin: 0;
+}
+
+.NutritionGoalsHeader button {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  border: none;
+
+  border-radius: var(--radius-md);
+
+  padding: 10px 16px;
+
+  background: var(--color-primary);
+
+  color: var(--color-bg);
+
+  cursor: pointer;
+}
+
+.NutritionGoalsGrid {
+  display: grid;
+
+  gap: 14px;
+}
+
+.GoalInput {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 14px;
+
+  background: var(--color-surface);
+
+  border-radius: var(--radius-md);
+}
+
+.GoalInput span {
+  color: var(--color-text-muted);
+}
+
+.GoalInput strong {
+  color: var(--color-text);
+}
+
+.GoalInput input {
+  width: 100px;
+
+  padding: 8px 10px;
+
+  border-radius: var(--radius-sm);
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-card);
+
+  color: var(--color-text);
+
+  text-align: right;
+}
+
+.NutritionGoalActions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  margin-top: var(--space-lg);
+}
+
+.NutritionGoalActions button {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  border: none;
+
+  border-radius: var(--radius-md);
+
+  padding: 10px 16px;
+
+  cursor: pointer;
+}
+
+.NutritionGoalActions .Save {
+  background: var(--color-success);
+
+  color: white;
+}
+
+.NutritionGoalActions .Cancel {
+  background: var(--color-danger);
+
+  color: white;
 }

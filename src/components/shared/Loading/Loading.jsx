@@ -1,18 +1,24 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './Loading.css';
+import { LoaderCircle } from "lucide-react";
 
-const Loading = (props) => {
-    return (
-        <React.Fragment>
-            {
-                props.loading &&
-                <div className="Loading">
-                    <FontAwesomeIcon icon="spinner" className="fa-pulse" />
-                </div>
-            }
-        </React.Fragment>
-    )
+import "./Loading.css";
+
+export default function Loading({
+  loading,
+}) {
+
+  if (!loading) return null;
+
+  return (
+
+    <div className="Loading">
+
+      <LoaderCircle
+        size={36}
+        className="LoadingSpinner"
+      />
+
+    </div>
+
+  );
+
 }
-
-export default Loading;

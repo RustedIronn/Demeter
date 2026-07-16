@@ -1,13 +1,20 @@
-import React from 'react';
-import './CircleData.css';
+import "./CircleData.css";
 
-const CircleData = (props) => {
-    return (
-        <div className={"rounded-circle " + ((props.mobile) ? "CircleDataMobile" : "CircleData")}>
-            <div className="CircleDataText">{props.number}</div>
-            <div className="CircleDataUnit">{props.unit}</div>
-        </div>
-    );
+export default function CircleData({
+  number,
+  unit,
+}) {
+  return (
+    <div className="CircleData">
+
+      <strong>
+        {number || "--"}
+      </strong>
+
+      <span>
+        {unit}
+      </span>
+
+    </div>
+  );
 }
-
-export default CircleData;

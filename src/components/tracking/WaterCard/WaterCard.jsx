@@ -1,5 +1,5 @@
-import { Button, ProgressBar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Droplets, Minus, Plus } from "lucide-react";
 
 import {
   increaseWater,
@@ -32,43 +32,60 @@ export default function WaterCard() {
   const percentage =
     waterGoal === 0
       ? 0
-      : Math.min(
-          (water / waterGoal) * 100,
-          100
-        );
+      : Math.min((water / waterGoal) * 100, 100);
 
   return (
-    <div className="WaterCard">
-      <h5>💧 Water Intake</h5>
+    <section className="WaterCard">
 
-      <div className="WaterCardValue">
+      <div className="WaterHeader">
+
+        <div className="WaterIcon">
+          <Droplets />
+        </div>
+
+        <div>
+          <h2>Water Intake</h2>
+          <p>Stay hydrated throughout the day</p>
+        </div>
+
+      </div>
+
+      <div className="WaterValue">
         {water} / {waterGoal} glasses
       </div>
 
-      <ProgressBar
-        now={percentage}
-        className="mb-3"
-      />
+      <div className="WaterProgress">
 
-      <div className="d-flex justify-content-center gap-2">
-        <Button
-          variant="outline-primary"
+        <div
+          className="WaterProgressFill"
+          style={{
+            width: `${percentage}%`,
+          }}
+        />
+
+      </div>
+
+      <div className="WaterActions">
+
+        <button
           onClick={() =>
             dispatch(decreaseWater())
           }
         >
-          −
-        </Button>
+          <Minus size={18} />
+        </button>
 
-        <Button
-          variant="primary"
+        <button
+          className="Primary"
           onClick={() =>
             dispatch(increaseWater())
           }
         >
-          +
-        </Button>
+          <Plus size={18} />
+        </button>
+
       </div>
-    </div>
+
+    </section>
   );
 }

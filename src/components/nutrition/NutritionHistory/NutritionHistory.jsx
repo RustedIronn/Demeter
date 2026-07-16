@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { ChartLine } from "lucide-react";
+
 import { getNutritionTotals } from "@/assets/utils/nutritionAnalytics";
 
 import {
@@ -12,61 +14,133 @@ import {
   Tooltip,
 } from "recharts";
 
-import { Form } from "react-bootstrap";
-
 import "./NutritionHistory.css";
 
 export default function NutritionHistory() {
-    
-    const [metric, setMetric] = useState("calories");
 
-const dataPoints = useSelector(
-  (state) => state.personal.data_points
-);
-  
-const chartData = useMemo(() => {
-  return dataPoints.map((day) => ({
-    date: day.date,
-    ...getNutritionTotals(day.intake_list),
-  }));
-}, [dataPoints]);
+  const [metric, setMetric] = useState("calories");
+
+  const dataPoints = useSelector(
+    (state) => state.personal.data_points
+  );
+
+  const chartData = useMemo(() => {
+
+    return dataPoints.map((day) => ({
+
+      date: new Date(day.date).toLocaleDateString(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "short",
+        }
+      ),
+
+      ...getNutritionTotals(day.intake_list),
+
+    }));
+
+  }, [dataPoints]);
 
   return (
-    <div className="NutritionHistory">
-  <h4>📈 Nutrition History</h4>
 
-  <Form.Select
-    className="mb-3"
-    value={metric}
-    onChange={(e) => setMetric(e.target.value)}
-  >
-    <option value="calories">Calories</option>
-    <option value="protein">Protein</option>
-    <option value="carbs">Carbs</option>
-    <option value="fat">Fat</option>
-  </Form.Select>
+    <section className="NutritionHistory">
 
-  <ResponsiveContainer
-    width="100%"
-    height={250}
-  >
-    <LineChart data={chartData}>
-      <CartesianGrid strokeDasharray="3 3" />
+      <div className="NutritionHistoryHeader">
 
-      <XAxis dataKey="date" />
+        <div className="NutritionHistoryIcon">
+          <ChartLine />
+        </div>
 
-      <YAxis />
+        <div>
 
-      <Tooltip />
+          <h2>
+            Nutrition History
+          </h2>
 
-      <Line
-        type="monotone"
-        dataKey={metric}
-        stroke="#4CAF50"
-        strokeWidth={3}
-      />
-    </LineChart>
-  </ResponsiveContainer>
-</div>
+          <p>
+            Daily nutrition trends
+          </p>
+
+        </div>
+
+      </div>
+
+      <div className="MetricTabs">
+
+        {[
+          "calories",
+          "protein",
+          "carbs",
+          "fat",
+        ].map((item) => (
+
+          <button
+            key={item}
+            className={
+              metric === item
+                ? "Active"
+                : ""
+            }
+            onClick={() =>
+              setMetric(item)
+            }
+          >
+            {item}
+          </button>
+
+        ))}
+
+      </div>
+
+      <ResponsiveContainer
+        width="100%"
+        height={260}
+      >
+
+        <LineChart data={chartData}>
+
+          <CartesianGrid
+            stroke="var(--color-border)"
+            strokeDasharray="3 3"
+          />
+
+          <XAxis
+            dataKey="date"
+            stroke="var(--color-text-muted)"
+          />
+
+          <YAxis
+            stroke="var(--color-text-muted)"
+          />
+
+          <Tooltip
+            contentStyle={{
+              background: "var(--color-card)",
+              border: "1px solid var(--color-border)",
+              borderRadius: "12px",
+            }}
+          />
+
+          <Line
+            type="monotone"
+            dataKey={metric}
+            stroke="var(--color-success)"
+            strokeWidth={3}
+            dot={{
+              r: 4,
+            }}
+            activeDot={{
+              r: 7,
+            }}
+          />
+
+        </LineChart>
+
+      </ResponsiveContainer>
+
+    </section>
+
   );
+
 }

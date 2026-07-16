@@ -10,9 +10,9 @@ import AppLayout from "@/layouts/AppLayout";
 import Today from "@/pages/Today/Today";
 import Diary from "@/pages/Diary/Diary";
 
-import Goals from "@/pages/Goals";
-import Insights from "@/pages/Insights";
-import Profile from "@/pages/Profile";
+import Goals from "@/pages/Goals/Goals";
+import Insights from "@/pages/Insights/Insights";
+import Profile from "@/pages/Profile/Profile";
 
 
 export default function AppRoutes() {

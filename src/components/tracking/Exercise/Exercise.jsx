@@ -1,59 +1,70 @@
-import { useEffect, useState } from "react";
-import { Alert, ListGroup } from "react-bootstrap";
+import { useMemo } from "react";
+import { Dumbbell } from "lucide-react";
+import { useSelector } from "react-redux";
 
 import "./Exercise.css";
 
-export default function Exercise({ caloriesBurned }) {
-  const [workoutSuggestions, setWorkoutSuggestions] = useState([]);
+export default function Exercise() {
+  const caloriesConsumed = useSelector(
+    (state) => state.calculatedInformation.caloriesConsumed
+  );
 
-  useEffect(() => {
-    let suggestions = [];
-
-    if (caloriesBurned < 100) {
-      suggestions = [
-        "No additional exercise needed, you have burned a small amount of calories.",
-      ];
-    } else if (caloriesBurned < 500) {
-      suggestions = [
-        "You can go for a walk or do light stretching exercises.",
-      ];
-    } else if (caloriesBurned < 1500) {
-      suggestions = [
-        "Consider doing a moderate workout like cycling or brisk walking.",
-      ];
-    } else {
-      suggestions = [
-        "Go for a high-intensity workout like interval training or swimming to burn even more calories.",
-      ];
+  const recommendation = useMemo(() => {
+    if (caloriesConsumed <= 500) {
+      return {
+        title: "Light Activity",
+        text: "A relaxed walk or some stretching is enough for today.",
+      };
     }
 
-    setWorkoutSuggestions(suggestions);
-  }, [caloriesBurned]);
+    if (caloriesConsumed <= 1500) {
+      return {
+        title: "Moderate Activity",
+        text: "A 30–45 minute walk, cycling, or light gym session would complement today's intake.",
+      };
+    }
+
+    return {
+      title: "High Activity",
+      text: "A longer workout or strength session would be a good match for today's nutrition.",
+    };
+  }, [caloriesConsumed]);
 
   return (
-    <div className="Exercise noselect">
-      <h3>Exercise Tracker</h3>
+    <section className="Exercise">
 
-      {caloriesBurned > 0 && (
-        <Alert variant="info">
-          You will burn <strong>{caloriesBurned} calories</strong> from the
-          following exercise.
-        </Alert>
-      )}
+      <div className="ExerciseHeader">
 
-      {workoutSuggestions.length > 0 && (
-        <>
-          <h4>Suggested Workouts:</h4>
+        <div className="ExerciseIcon">
+          <Dumbbell />
+        </div>
 
-          <ListGroup>
-            {workoutSuggestions.map((suggestion, index) => (
-              <ListGroup.Item key={index}>
-                {suggestion}
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-        </>
-      )}
-    </div>
+        <div>
+          <h2>Activity Suggestion</h2>
+
+          <p>
+            Based on today's nutrition
+          </p>
+        </div>
+
+      </div>
+
+      <div className="ExerciseCalories">
+        {caloriesConsumed} kcal consumed
+      </div>
+
+      <div className="ExerciseSuggestion">
+
+        <strong>
+          {recommendation.title}
+        </strong>
+
+        <p>
+          {recommendation.text}
+        </p>
+
+      </div>
+
+    </section>
   );
 }

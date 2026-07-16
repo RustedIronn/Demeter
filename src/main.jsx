@@ -10,9 +10,9 @@ import AppLayout from "@/layouts/AppLayout";
 
 import Today from "@/pages/Today/Today";
 import Diary from "@/pages/Diary/Diary";
-import Insights from "@/pages/Insights";
-import Goals from "@/pages/Goals";
-import Profile from "@/pages/Profile";
+import Insights from "@/pages/Insights/Insights";
+import Goals from "@/pages/Goals/Goals";
+import Profile from "@/pages/Profile/Profile";
 
 import "@/styles/variables.css";
 import "@/styles/globals.css";

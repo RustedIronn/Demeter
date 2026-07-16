@@ -1,11 +1,60 @@
-.NutritionHistory {
-  margin-top: 20px;
-  padding: 20px;
-  background: #111;
-  border-radius: 12px;
+.NutritionHistory{
+  background:var(--color-card);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-md);
+  padding:var(--space-xl);
 }
 
-.NutritionHistory h4 {
-  text-align: center;
-  margin-bottom: 20px;
+.NutritionHistoryHeader{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:24px;
+}
+
+.NutritionHistoryIcon{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(122,139,105,.15);
+  color:var(--color-success);
+}
+
+.NutritionHistoryHeader h2{
+  margin:0;
+}
+
+.NutritionHistoryHeader p{
+  margin:4px 0 0;
+  color:var(--color-text-muted);
+}
+
+.MetricTabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:24px;
+}
+
+.MetricTabs button{
+  border:none;
+  background:var(--color-surface);
+  color:var(--color-text);
+  padding:10px 18px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:var(--transition);
+}
+
+.MetricTabs button:hover{
+  transform:translateY(-2px);
+}
+
+.MetricTabs .Active{
+  background:var(--color-success);
+  color:white;
 }

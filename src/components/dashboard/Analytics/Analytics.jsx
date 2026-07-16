@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { Form } from "react-bootstrap";
+import { BarChart3 } from "lucide-react";
+
 import {
   getNutritionAverage,
   getGoalAchievement,
@@ -10,155 +11,247 @@ import "./Analytics.css";
 
 export default function Analytics() {
 
-const [period, setPeriod] = useState("week");
+  const [period, setPeriod] = useState("week");
 
-const personal = useSelector(
-  (state) => state.personal
-);
-
-const analytics = useMemo(() => {
-  const now = new Date();
-
-  const filtered = personal.data_points.filter((day) => {
-    const date = new Date(day.date);
-
-    if (period === "week") {
-      return (
-        (now - date) / (1000 * 60 * 60 * 24) <= 7
-      );
-    }
-
-    if (period === "month") {
-      return (
-        date.getMonth() === now.getMonth() &&
-        date.getFullYear() ===
-          now.getFullYear()
-      );
-    }
-
-    return (
-      date.getFullYear() ===
-      now.getFullYear()
-    );
-  });
-
-const averages =
-  getNutritionAverage(filtered);
-
-const achievements =
-  getGoalAchievement(
-    filtered,
-    {
-      calories: personal.daily_goal,
-      protein: personal.protein_goal,
-      carbs: personal.carbs_goal,
-      fat: personal.fat_goal,
-    }
+  const personal = useSelector(
+    (state) => state.personal
   );
 
-return {
-  averageCalories: averages.calories,
-  averageProtein: averages.protein,
-  averageCarbs: averages.carbs,
-  averageFat: averages.fat,
-  loggedDays: averages.loggedDays,
+  const analytics = useMemo(() => {
 
-  achievements,
-};
-}, [
-  period,
-  personal.data_points,
-  personal.daily_goal,
-  personal.protein_goal,
-  personal.carbs_goal,
-  personal.fat_goal,
-]);
+    const now = new Date();
+
+    const filtered =
+      personal.data_points.filter((day) => {
+
+        const date = new Date(day.date);
+
+        if (period === "week") {
+          return (
+            (now - date) /
+              (1000 * 60 * 60 * 24) <=
+            7
+          );
+        }
+
+        if (period === "month") {
+          return (
+            date.getMonth() === now.getMonth() &&
+            date.getFullYear() === now.getFullYear()
+          );
+        }
+
+        return (
+          date.getFullYear() ===
+          now.getFullYear()
+        );
+
+      });
+
+    const averages =
+      getNutritionAverage(filtered);
+
+    const achievements =
+      getGoalAchievement(filtered,{
+        calories: personal.daily_goal,
+        protein: personal.protein_goal,
+        carbs: personal.carbs_goal,
+        fat: personal.fat_goal,
+      });
+
+    return {
+
+      ...averages,
+
+      achievements,
+
+    };
+
+  },[
+    period,
+    personal,
+  ]);
 
   return (
-    <div className="Analytics">
-  <h4>📅 Analytics</h4>
 
-  <Form.Select
-    className="mb-3"
-    value={period}
-    onChange={(e) =>
-      setPeriod(e.target.value)
-    }
-  >
-    <option value="week">Week</option>
-    <option value="month">Month</option>
-    <option value="year">Year</option>
-  </Form.Select>
+    <section className="Analytics">
 
-  <div className="AnalyticsRow">
-    <span>Average Calories</span>
-    <strong>
-      {analytics.averageCalories}
-    </strong>
-  </div>
+      <div className="AnalyticsHeader">
 
-  <div className="AnalyticsRow">
-    <span>Average Protein</span>
-    <strong>
-      {analytics.averageProtein} g
-    </strong>
-  </div>
+        <div className="AnalyticsIcon">
+          <BarChart3/>
+        </div>
 
-  <div className="AnalyticsRow">
-    <span>Average Carbs</span>
-    <strong>
-      {analytics.averageCarbs} g
-    </strong>
-  </div>
+        <div>
 
-  <div className="AnalyticsRow">
-    <span>Average Fat</span>
-    <strong>
-      {analytics.averageFat} g
-    </strong>
-  </div>
+          <h2>
+            Analytics
+          </h2>
 
-  <div className="AnalyticsRow">
-    <span>Logged Days</span>
-    <strong>
-      {analytics.loggedDays}
-    </strong>
-  </div>
-  <div className="AnalyticsRow">
-  <span>Calories Goal</span>
-  <strong>
-    {analytics.achievements.caloriesHit}
-    /
-    {analytics.achievements.totalDays}
-  </strong>
-</div>
+          <p>
+            Nutrition overview
+          </p>
 
-<div className="AnalyticsRow">
-  <span>Protein Goal</span>
-  <strong>
-    {analytics.achievements.proteinHit}
-    /
-    {analytics.achievements.totalDays}
-  </strong>
-</div>
+        </div>
 
-<div className="AnalyticsRow">
-  <span>Carbs Goal</span>
-  <strong>
-    {analytics.achievements.carbsHit}
-    /
-    {analytics.achievements.totalDays}
-  </strong>
-</div>
+      </div>
 
-<div className="AnalyticsRow">
-  <span>Fat Goal</span>
-  <strong>
-    {analytics.achievements.fatHit}
-    /
-    {analytics.achievements.totalDays}
-  </strong>
-</div>
-</div>
+
+      <div className="AnalyticsTabs">
+
+        {["week","month","year"].map((item)=>(
+          <button
+            key={item}
+            className={
+              period===item
+                ? "Active"
+                : ""
+            }
+            onClick={()=>
+              setPeriod(item)
+            }
+          >
+            {item}
+          </button>
+        ))}
+
+      </div>
+
+
+      <div className="AnalyticsGrid">
+
+        <Stat
+          title="Calories"
+          value={analytics.averageCalories}
+          unit="kcal"
+        />
+
+        <Stat
+          title="Protein"
+          value={analytics.averageProtein}
+          unit="g"
+        />
+
+        <Stat
+          title="Carbs"
+          value={analytics.averageCarbs}
+          unit="g"
+        />
+
+        <Stat
+          title="Fat"
+          value={analytics.averageFat}
+          unit="g"
+        />
+
+        <Stat
+          title="Logged Days"
+          value={analytics.loggedDays}
+        />
+
+      </div>
+
+
+      <div className="GoalHits">
+
+        <h3>
+          Goal Achievement
+        </h3>
+
+        <GoalHit
+          title="Calories"
+          hit={
+            analytics.achievements.caloriesHit
+          }
+          total={
+            analytics.achievements.totalDays
+          }
+        />
+
+        <GoalHit
+          title="Protein"
+          hit={
+            analytics.achievements.proteinHit
+          }
+          total={
+            analytics.achievements.totalDays
+          }
+        />
+
+        <GoalHit
+          title="Carbs"
+          hit={
+            analytics.achievements.carbsHit
+          }
+          total={
+            analytics.achievements.totalDays
+          }
+        />
+
+        <GoalHit
+          title="Fat"
+          hit={
+            analytics.achievements.fatHit
+          }
+          total={
+            analytics.achievements.totalDays
+          }
+        />
+
+      </div>
+
+    </section>
+
   );
+
+}
+
+function Stat({
+  title,
+  value,
+  unit,
+}){
+
+  return(
+
+    <div className="Stat">
+
+      <span>{title}</span>
+
+      <strong>
+
+        {value}
+
+        {unit && ` ${unit}`}
+
+      </strong>
+
+    </div>
+
+  );
+
+}
+
+function GoalHit({
+  title,
+  hit,
+  total,
+}){
+
+  return(
+
+    <div className="GoalHit">
+
+      <span>{title}</span>
+
+      <strong>
+
+        {hit}/{total}
+
+      </strong>
+
+    </div>
+
+  );
+
 }

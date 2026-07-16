@@ -1,162 +1,161 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form } from "react-bootstrap";
+import { Pencil, Save, X } from "lucide-react";
 
-import {
-  updatePersonalData,
-} from "@/store/personal/thunks";
+import { updatePersonalData } from "@/store/personal/thunks";
+
 import "./NutritionGoals.css";
 
 export default function NutritionGoals() {
+  const dispatch = useDispatch();
+
   const personal = useSelector(
     (state) => state.personal
   );
 
-  const dispatch = useDispatch();
+  const [isEditing, setIsEditing] = useState(false);
 
-const [isEditing, setIsEditing] = useState(false);
+  const [calories, setCalories] = useState(personal.daily_goal);
+  const [protein, setProtein] = useState(personal.protein_goal);
+  const [carbs, setCarbs] = useState(personal.carbs_goal);
+  const [fat, setFat] = useState(personal.fat_goal);
 
-const [calories, setCalories] = useState(
-  personal.daily_goal
-);
+  useEffect(() => {
+    setCalories(personal.daily_goal);
+    setProtein(personal.protein_goal);
+    setCarbs(personal.carbs_goal);
+    setFat(personal.fat_goal);
+  }, [
+    personal.daily_goal,
+    personal.protein_goal,
+    personal.carbs_goal,
+    personal.fat_goal,
+  ]);
 
-const [protein, setProtein] = useState(
-  personal.protein_goal
-);
+  const saveGoals = () => {
+    dispatch(
+      updatePersonalData({
+        daily_goal: calories,
+        protein_goal: protein,
+        carbs_goal: carbs,
+        fat_goal: fat,
+      })
+    );
 
-const [carbs, setCarbs] = useState(
-  personal.carbs_goal
-);
+    setIsEditing(false);
+  };
 
-const [fat, setFat] = useState(
-  personal.fat_goal
-);
+  const cancelEdit = () => {
+    setCalories(personal.daily_goal);
+    setProtein(personal.protein_goal);
+    setCarbs(personal.carbs_goal);
+    setFat(personal.fat_goal);
 
-useEffect(() => {
-  setCalories(personal.daily_goal);
-  setProtein(personal.protein_goal);
-  setCarbs(personal.carbs_goal);
-  setFat(personal.fat_goal);
-}, [
-  personal.daily_goal,
-  personal.protein_goal,
-  personal.carbs_goal,
-  personal.fat_goal,
-]);
+    setIsEditing(false);
+  };
 
   return (
-    <div className="NutritionGoals">
-      <h4>🍗 Nutrition Goals</h4>
+    <section className="NutritionGoals">
 
-      <div className="NutritionGoalsRow">
-  <span>Calories</span>
+      <div className="NutritionGoalsHeader">
+        <h2>Nutrition Goals</h2>
 
-  {isEditing ? (
-    <Form.Control
-      type="number"
-      value={calories}
-      onChange={(e) =>
-        setCalories(Number(e.target.value))
-      }
-      style={{ width: "100px" }}
-    />
-  ) : (
-    <strong>{personal.daily_goal} cal</strong>
-  )}
-</div>
+        {!isEditing && (
+          <button onClick={() => setIsEditing(true)}>
+            <Pencil size={16} />
+            Edit
+          </button>
+        )}
+      </div>
 
-      <div className="NutritionGoalsRow">
-  <span>Protein</span>
+      <div className="NutritionGoalsGrid">
 
-  {isEditing ? (
-    <Form.Control
-      type="number"
-      value={protein}
-      onChange={(e) =>
-        setProtein(Number(e.target.value))
-      }
-      style={{ width: "100px" }}
-    />
-  ) : (
-    <strong>{personal.protein_goal} g</strong>
-  )}
-</div>
+        <GoalInput
+          label="Calories"
+          unit="kcal"
+          value={calories}
+          editing={isEditing}
+          onChange={setCalories}
+        />
 
-     <div className="NutritionGoalsRow">
-  <span>Carbs</span>
+        <GoalInput
+          label="Protein"
+          unit="g"
+          value={protein}
+          editing={isEditing}
+          onChange={setProtein}
+        />
 
-  {isEditing ? (
-    <Form.Control
-      type="number"
-      value={carbs}
-      onChange={(e) =>
-        setCarbs(Number(e.target.value))
-      }
-      style={{ width: "100px" }}
-    />
-  ) : (
-    <strong>{personal.carbs_goal} g</strong>
-  )}
-</div>
-<div className="NutritionGoalsRow">
-  <span>Fat</span>
+        <GoalInput
+          label="Carbs"
+          unit="g"
+          value={carbs}
+          editing={isEditing}
+          onChange={setCarbs}
+        />
 
-  {isEditing ? (
-    <Form.Control
-      type="number"
-      value={fat}
-      onChange={(e) =>
-        setFat(Number(e.target.value))
-      }
-      style={{ width: "100px" }}
-    />
-  ) : (
-    <strong>{personal.fat_goal} g</strong>
-  )}
-</div>
-<div className="mt-3 text-center">
-  {isEditing ? (
-    <>
-      <Button
-        variant="success"
-        className="me-2"
-        onClick={() => {
-          dispatch(
-            updatePersonalData({
-              daily_goal: calories,
-              protein_goal: protein,
-              carbs_goal: carbs,
-              fat_goal: fat,
-            })
-          );
-          setIsEditing(false);
-        }}
-      >
-        Save
-      </Button>
+        <GoalInput
+          label="Fat"
+          unit="g"
+          value={fat}
+          editing={isEditing}
+          onChange={setFat}
+        />
 
-      <Button
-        variant="secondary"
-        onClick={() => {
-          setCalories(personal.daily_goal);
-          setProtein(personal.protein_goal);
-          setCarbs(personal.carbs_goal);
-          setFat(personal.fat_goal);
+      </div>
 
-          setIsEditing(false);
-        }}
-      >
-        Cancel
-      </Button>
-    </>
-  ) : (
-    <Button
-      onClick={() => setIsEditing(true)}
-    >
-      Edit Goals
-    </Button>
-  )}
-</div>
+      {isEditing && (
+        <div className="NutritionGoalActions">
+
+          <button
+            className="Cancel"
+            onClick={cancelEdit}
+          >
+            <X size={16} />
+            Cancel
+          </button>
+
+          <button
+            className="Save"
+            onClick={saveGoals}
+          >
+            <Save size={16} />
+            Save
+          </button>
+
+        </div>
+      )}
+
+    </section>
+  );
+}
+
+function GoalInput({
+  label,
+  unit,
+  value,
+  editing,
+  onChange,
+}) {
+  return (
+    <div className="GoalInput">
+
+      <span>{label}</span>
+
+      {editing ? (
+        <input
+          type="number"
+          value={value}
+          onChange={(e) =>
+            onChange(Number(e.target.value))
+          }
+        />
+      ) : (
+        <strong>
+          {value} {unit}
+        </strong>
+      )}
+
     </div>
   );
 }

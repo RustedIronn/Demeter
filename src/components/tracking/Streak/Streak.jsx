@@ -1,15 +1,14 @@
 import { useSelector } from "react-redux";
+import { Flame } from "lucide-react";
+
 import { getStreakData } from "@/assets/utils/nutritionAnalytics";
 
 import "./Streak.css";
 
-
 export default function Streak() {
-
   const personal = useSelector(
     (state) => state.personal
   );
-
 
   const streak = getStreakData(
     personal.data_points,
@@ -19,29 +18,42 @@ export default function Streak() {
     }
   );
 
-
   return (
-    <div className="Streak">
+    <section className="Streak">
 
-      <h4>🔥 Streak</h4>
+      <div className="StreakHeader">
 
-      <div className="StreakRow">
-        <span>Current Streak</span>
+        <div className="StreakIcon">
+          <Flame />
+        </div>
 
-        <strong>
-          {streak.currentStreak} days
-        </strong>
+        <div>
+          <h2>Streak</h2>
+          <p>Keep your momentum going</p>
+        </div>
+
       </div>
 
+      <div className="StreakGrid">
 
-      <div className="StreakRow">
-        <span>Longest Streak</span>
+        <div className="StreakItem">
+          <span>Current</span>
 
-        <strong>
-          {streak.longestStreak} days
-        </strong>
+          <strong>
+            {streak.currentStreak} days
+          </strong>
+        </div>
+
+        <div className="StreakItem">
+          <span>Longest</span>
+
+          <strong>
+            {streak.longestStreak} days
+          </strong>
+        </div>
+
       </div>
 
-    </div>
+    </section>
   );
 }

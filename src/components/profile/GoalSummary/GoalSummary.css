@@ -1,0 +1,179 @@
+.GoalSummary {
+  background: var(--color-card);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  padding: var(--space-xl);
+
+  box-shadow: var(--shadow-md);
+
+  color: var(--color-text);
+}
+
+
+.GoalSummary h2 {
+  margin: 0 0 var(--space-lg);
+
+  font-size: 1.3rem;
+}
+
+
+
+/* calorie progress */
+
+.GoalProgress {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding: var(--space-md);
+
+  background: var(--color-surface);
+
+  border-radius: var(--radius-md);
+
+}
+
+
+.GoalProgress svg {
+
+  width: 34px;
+
+  height: 34px;
+
+  color: var(--color-primary);
+
+}
+
+
+.GoalProgress strong {
+
+  display: block;
+
+  font-size: 1.2rem;
+
+  margin-bottom: 10px;
+
+}
+
+
+
+.ProgressTrack {
+
+  width: 220px;
+
+  height: 10px;
+
+  background: var(--color-border);
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+}
+
+
+.ProgressFill {
+
+  height: 100%;
+
+  background: var(--color-primary);
+
+  border-radius: inherit;
+
+  transition: width .3s ease;
+
+}
+
+
+
+/* macros */
+
+.MacroGrid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px;
+
+  margin-top: var(--space-lg);
+
+}
+
+
+.MacroGrid > div {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: var(--space-md);
+
+  background: var(--color-surface);
+
+  border-radius: var(--radius-md);
+
+}
+
+
+.MacroGrid svg {
+
+  color: var(--color-secondary);
+
+}
+
+
+.MacroGrid span {
+
+  color: var(--color-text-muted);
+
+  font-size: .85rem;
+
+}
+
+
+.MacroGrid strong {
+
+  font-size: 1.1rem;
+
+}
+
+
+
+/* mobile */
+
+@media(max-width:600px) {
+
+  .GoalProgress {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+  }
+
+
+  .ProgressTrack {
+
+    width: 100%;
+
+  }
+
+
+  .MacroGrid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}

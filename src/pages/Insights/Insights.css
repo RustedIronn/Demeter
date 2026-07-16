@@ -1,0 +1,21 @@
+.Insights {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: var(--space-lg);
+}
+
+.PageHeader {
+  margin-bottom: var(--space-xl);
+}
+
+.PageHeader p {
+  color: var(--color-text-muted);
+}
+
+.InsightsGrid {
+  display: grid;
+
+  gap: var(--space-lg);
+}

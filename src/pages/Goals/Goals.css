@@ -1,0 +1,33 @@
+.Goals {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: var(--space-lg);
+}
+
+.PageHeader {
+  margin-bottom: var(--space-xl);
+}
+
+.PageHeader h1 {
+  margin: 0;
+}
+
+.PageHeader p {
+  color: var(--color-text-muted);
+}
+
+.GoalsGrid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: var(--space-lg);
+}
+
+@media (max-width: 900px) {
+  .GoalsGrid {
+    grid-template-columns: 1fr;
+  }
+}
