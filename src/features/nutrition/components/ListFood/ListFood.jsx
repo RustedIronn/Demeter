@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-
+import Card from "@/shared/ui/Card/Card";
 import ItemFood from "@/features/nutrition/components/ItemFood/ItemFood";
 
 import "./ListFood.css";
@@ -12,7 +12,7 @@ export default function ListFood() {
 
 
   return (
-    <section className="ListFood">
+    <Card className="ListFood">
 
       <div className="ListFoodHeader">
         <h2>
@@ -59,6 +59,6 @@ export default function ListFood() {
 
       )}
 
-    </section>
+    </Card>
   );
 }

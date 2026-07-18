@@ -1,14 +1,3 @@
-.ProgressCard {
-  background: var(--color-card);
-
-  border: 1px solid var(--color-border);
-
-  border-radius: var(--radius-md);
-
-  padding: var(--space-lg);
-}
-
-
 .ProgressCardHeader {
   display: flex;
 

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Pencil, Save, X, Target } from "lucide-react";
-
+import Card from "@/shared/ui/Card/Card";
+import Input from "@/shared/ui/Input/Input";
 import { setGoalWeight } from "@/features/profile/store/thunks";
-
+import Button from "@/shared/ui/Button/Button";
 import "./GoalWeight.css";
 
 export default function GoalWeight() {
@@ -49,7 +50,7 @@ export default function GoalWeight() {
   };
 
   return (
-    <section className="GoalWeight">
+    <Card className="GoalWeight">
 
       <div className="GoalWeightHeader">
 
@@ -75,13 +76,12 @@ export default function GoalWeight() {
           <span>Goal</span>
 
           {isEditing ? (
-            <input
-              type="number"
-              value={goal}
-              onChange={(e) =>
-                setGoal(Number(e.target.value))
-              }
-            />
+           <Input
+  className="GoalWeightInput"
+  type="number"
+  value={goal}
+  onChange={(e) => setGoal(Number(e.target.value))}
+/>
           ) : (
             <strong>
               {goalWeight > 0
@@ -100,32 +100,32 @@ export default function GoalWeight() {
       <div className="GoalWeightActions">
 
         {!isEditing ? (
-          <button onClick={() => setIsEditing(true)}>
+          <Button onClick={() => setIsEditing(true)}>
             <Pencil size={16} />
             Edit Goal
-          </button>
+          </Button>
         ) : (
           <>
-            <button
-              className="Cancel"
-              onClick={cancelEdit}
-            >
+           <Button
+  variant="secondary"
+  onClick={cancelEdit}
+>
               <X size={16} />
               Cancel
-            </button>
+            </Button>
 
-            <button
-              className="Save"
-              onClick={saveGoal}
-            >
+           <Button
+  variant="primary"
+  onClick={saveGoal}
+>
               <Save size={16} />
               Save
-            </button>
+            </Button>
           </>
         )}
 
       </div>
 
-    </section>
+    </Card>
   );
 }

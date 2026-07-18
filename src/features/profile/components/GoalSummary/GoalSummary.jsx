@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-
+import Card from "@/shared/ui/Card/Card";
 import {
   Flame,
   Apple,
@@ -40,7 +40,7 @@ export default function GoalSummary() {
 
 
   return (
-    <section className="GoalSummary">
+    <Card className="GoalSummary">
 
 
       <h2>
@@ -106,6 +106,6 @@ export default function GoalSummary() {
       </div>
 
 
-    </section>
+    </Card>
   );
 }

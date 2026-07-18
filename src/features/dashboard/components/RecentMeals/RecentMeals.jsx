@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import Card from "@/shared/ui/Card/Card";
 
 import { useSelector } from "react-redux";
 
@@ -13,12 +13,7 @@ export default function RecentMeals() {
   const navigate = useNavigate();
 
   return (
-    <motion.section
-  className="RecentMeals"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.4, delay: 0.3 }}
->
+    <Card className="RecentMeals">
       <div className="RecentMealsHeader">
 
   <h2>Recent Meals</h2>
@@ -58,6 +53,6 @@ export default function RecentMeals() {
         ))
       )}
 
-    </motion.section>
+    </Card>
   );
 }

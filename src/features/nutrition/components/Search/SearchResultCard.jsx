@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-
+import Card from "@/shared/ui/Card/Card";
 import { itemFoodSelected } from "@/features/nutrition/store/thunks";
 
 import "./SearchResultCard.css";
@@ -10,12 +10,13 @@ export default function SearchResultCard({ food }) {
 
 
   return (
-    <button
-      className="SearchResultCard"
-      onClick={() =>
-        dispatch(itemFoodSelected(food.id))
-      }
-    >
+    <Card
+  className="SearchResultCard"
+  clickable
+  onClick={() =>
+    dispatch(itemFoodSelected(food.id))
+  }
+>
 
       <img
         src={food.image}
@@ -47,6 +48,6 @@ export default function SearchResultCard({ food }) {
       </div>
 
 
-    </button>
+    </Card>
   );
 }

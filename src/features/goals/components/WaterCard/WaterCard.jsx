@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Droplets, Minus, Plus } from "lucide-react";
 import Card from "@/shared/ui/Card/Card";
-import CardHeader from "@/shared/ui/CardHeader/CardHeader";
+import Button from "@/shared/ui/Button/Button";
 import {
   increaseWater,
   decreaseWater,
@@ -66,18 +66,19 @@ export default function WaterCard() {
 
     <div className="WaterActions">
 
-      <button
-        onClick={() => dispatch(decreaseWater())}
-      >
-        <Minus size={18} />
-      </button>
+     <Button
+  variant="secondary"
+  onClick={() => dispatch(decreaseWater())}
+>
+  <Minus size={18} />
+</Button>
 
-      <button
-        className="Primary"
-        onClick={() => dispatch(increaseWater())}
-      >
-        <Plus size={18} />
-      </button>
+<Button
+  variant="primary"
+  onClick={() => dispatch(increaseWater())}
+>
+  <Plus size={18} />
+</Button>
 
     </div>
 

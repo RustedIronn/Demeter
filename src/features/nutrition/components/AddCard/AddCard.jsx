@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Button from "@/shared/ui/Button/Button";
 import {
   ChevronDown,
 } from "lucide-react";
@@ -213,13 +214,13 @@ const editingFoodIndex = useSelector(
 
 
 
-      <button
+      <Button
         className="AddFoodButton"
         onClick={handleAddClick}
         disabled={multiplier <= 0}
       >
         {isEditingFood ? "Save Changes" : "Add Meal"}
-      </button>
+      </Button>
 
 
     </div>

@@ -1,26 +1,8 @@
-.GoalSummary {
-  background: var(--color-card);
-
-  border: 1px solid var(--color-border);
-
-  border-radius: var(--radius-lg);
-
-  padding: var(--space-xl);
-
-  box-shadow: var(--shadow-md);
-
-  color: var(--color-text);
-}
-
-
 .GoalSummary h2 {
   margin: 0 0 var(--space-lg);
 
   font-size: 1.3rem;
 }
-
-
-
 /* calorie progress */
 
 .GoalProgress {

@@ -147,10 +147,6 @@
   border-color: var(--color-primary);
 }
 
-
-
-/* Add button */
-
 .AddFoodButton {
   width: 100%;
 
@@ -158,17 +154,9 @@
 
   border-radius: var(--radius-md);
 
-  border: none;
-
-  background: var(--color-primary);
-
-  color: var(--color-bg);
-
   font-weight: 700;
 
   font-size: 1rem;
-
-  cursor: pointer;
 
   transition: var(--transition);
 }

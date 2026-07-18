@@ -13,13 +13,7 @@
 
   height: 60px;
 
-  border: none;
-
   border-radius: 50%;
-
-  background: var(--color-primary);
-
-  color: var(--color-bg);
 
   display: flex;
 
@@ -27,13 +21,6 @@
 
   justify-content: center;
 
-  cursor: pointer;
-
   box-shadow: var(--shadow-lg);
 
-  transition: var(--transition);
-}
-
-.FabButton:hover {
-  transform: translateY(-4px) scale(1.05);
 }

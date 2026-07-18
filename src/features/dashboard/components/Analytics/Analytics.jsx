@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { BarChart3 } from "lucide-react";
+import Card from "@/shared/ui/Card/Card";
 
 import {
   getNutritionAverage,
@@ -74,7 +75,7 @@ export default function Analytics() {
 
   return (
 
-    <section className="Analytics">
+    <Card className="Analytics">
 
       <div className="AnalyticsHeader">
 
@@ -200,7 +201,7 @@ export default function Analytics() {
 
       </div>
 
-    </section>
+    </Card>
 
   );
 

@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { Plus } from "lucide-react";
 
+import Button from "@/shared/ui/Button/Button";
+
 import { searchModal } from "@/features/nutrition/store/thunks";
 
 import "./Fab.css";
@@ -23,13 +25,13 @@ export default function Fab() {
   return (
     <div className="Fab">
 
-      <button
+      <Button
         className="FabButton"
         title="Add Food"
         onClick={handleAddOnClick}
       >
         <Plus size={22} />
-      </button>
+      </Button>
 
     </div>
   );

@@ -1,25 +1,28 @@
 .Loading {
+  position: fixed;
+
+  inset: 0;
 
   display: flex;
 
-  justify-content: center;
-
   align-items: center;
 
-  padding: 40px;
+  justify-content: center;
 
+  background: rgba(0,0,0,0.25);
+
+  z-index: 9999;
 }
+
 
 .LoadingSpinner {
-
-  color: var(--color-primary);
-
   animation: spin 1s linear infinite;
 
+  color: var(--color-primary);
 }
 
-@keyframes spin {
 
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }
@@ -27,5 +30,4 @@
   to {
     transform: rotate(360deg);
   }
-
 }

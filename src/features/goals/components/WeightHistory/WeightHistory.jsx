@@ -1,4 +1,5 @@
 import { Scale } from "lucide-react";
+import Card from "@/shared/ui/Card/Card";
 import { useSelector } from "react-redux";
 import {
   ResponsiveContainer,
@@ -41,7 +42,7 @@ export default function WeightHistory() {
 
   if (!history || history.length === 0) {
   return (
-    <section className="WeightHistory">
+    <Card className="WeightHistory">
 
       <div className="WeightHistoryHeader">
 
@@ -60,7 +61,7 @@ export default function WeightHistory() {
         No weight history available.
       </div>
 
-    </section>
+    </Card>
   );
 }
 
@@ -72,7 +73,7 @@ export default function WeightHistory() {
     }));
 
   return (
-  <section className="WeightHistory">
+  <Card className="WeightHistory">
 
     <div className="WeightHistoryHeader">
 
@@ -133,6 +134,6 @@ export default function WeightHistory() {
       </LineChart>
     </ResponsiveContainer>
 
-  </section>
+  </Card>
 );
 }

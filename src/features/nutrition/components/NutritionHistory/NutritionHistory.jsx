@@ -13,7 +13,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-
+import Card from "@/shared/ui/Card/Card";
 import "./NutritionHistory.css";
 
 export default function NutritionHistory() {
@@ -44,7 +44,7 @@ export default function NutritionHistory() {
 
   return (
 
-    <section className="NutritionHistory">
+    <Card className="NutritionHistory">
 
       <div className="NutritionHistoryHeader">
 
@@ -139,7 +139,7 @@ export default function NutritionHistory() {
 
       </ResponsiveContainer>
 
-    </section>
+    </Card>
 
   );
 

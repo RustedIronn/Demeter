@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Pencil, Save, X } from "lucide-react";
-
+import Card from "@/shared/ui/Card/Card";
+import Button from "@/shared/ui/Button/Button";
+import Input from "@/shared/ui/Input/Input";
 import { updatePersonalData } from "@/features/profile/store/thunks";
 
 import "./NutritionGoals.css";
@@ -55,16 +57,16 @@ export default function NutritionGoals() {
   };
 
   return (
-    <section className="NutritionGoals">
+    <Card className="NutritionGoals">
 
       <div className="NutritionGoalsHeader">
         <h2>Nutrition Goals</h2>
 
         {!isEditing && (
-          <button onClick={() => setIsEditing(true)}>
-            <Pencil size={16} />
-            Edit
-          </button>
+          <Button onClick={() => setIsEditing(true)}>
+    <Pencil size={16} />
+    Edit
+</Button>
         )}
       </div>
 
@@ -107,26 +109,25 @@ export default function NutritionGoals() {
       {isEditing && (
         <div className="NutritionGoalActions">
 
-          <button
-            className="Cancel"
-            onClick={cancelEdit}
-          >
+          <Button
+    variant="secondary"
+    onClick={cancelEdit}
+>
             <X size={16} />
             Cancel
-          </button>
+          </Button>
 
-          <button
-            className="Save"
-            onClick={saveGoals}
-          >
+          <Button
+    onClick={saveGoals}
+>
             <Save size={16} />
             Save
-          </button>
+          </Button>
 
         </div>
       )}
 
-    </section>
+    </Card>
   );
 }
 
@@ -143,13 +144,14 @@ function GoalInput({
       <span>{label}</span>
 
       {editing ? (
-        <input
-          type="number"
-          value={value}
-          onChange={(e) =>
-            onChange(Number(e.target.value))
-          }
-        />
+        <Input
+    className="GoalInputField"
+    type="number"
+    value={value}
+    onChange={(e) =>
+        onChange(Number(e.target.value))
+    }
+/>
       ) : (
         <strong>
           {value} {unit}

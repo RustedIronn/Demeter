@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Button from "@/shared/ui/Button/Button";
 
 import {
   Minus,
@@ -59,13 +60,14 @@ export default function InputNumberCustom({
       <div className="ServingControl">
 
 
-        <button
-          onClick={decrease}
-          type="button"
-        >
-          <Minus size={16}/>
-        </button>
-
+        <Button
+  variant="secondary"
+  onClick={decrease}
+  type="button"
+  className="ServingButton"
+>
+  <Minus size={16}/>
+</Button>
 
 
         <span className="ServingValue">
@@ -74,12 +76,14 @@ export default function InputNumberCustom({
 
 
 
-        <button
-          onClick={increase}
-          type="button"
-        >
-          <Plus size={16}/>
-        </button>
+        <Button
+  variant="secondary"
+  onClick={increase}
+  type="button"
+  className="ServingButton"
+>
+  <Plus size={16}/>
+</Button>
 
 
       </div>

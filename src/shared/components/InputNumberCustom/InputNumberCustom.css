@@ -13,7 +13,6 @@
   color: var(--color-text-secondary);
 }
 
-
 .ServingControl {
   display: flex;
 
@@ -28,36 +27,12 @@
   border-radius: var(--radius-md);
 }
 
-
-.ServingControl button {
+.ServingButton {
   width: 34px;
-
   height: 34px;
 
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 50%;
-
-  border: none;
-
-  background: var(--color-primary);
-
-  color: var(--color-bg);
-
-  cursor: pointer;
-
-  transition: var(--transition);
+  padding: 0;
 }
-
-
-.ServingControl button:hover {
-  transform: scale(1.05);
-}
-
 
 .ServingValue {
   min-width: 45px;
@@ -70,7 +45,6 @@
 
   color: var(--color-text);
 }
-
 
 .InputNumberCustomSubtitle {
   color: var(--color-text-muted);

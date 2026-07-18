@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import { Flame } from "lucide-react";
 
+import Card from "@/shared/ui/Card/Card";
+
 import { getStreakData } from "@/shared/utils/nutritionAnalytics";
 
 import "./Streak.css";
@@ -19,7 +21,7 @@ export default function Streak() {
   );
 
   return (
-    <section className="Streak">
+    <Card className="Streak">
 
       <div className="StreakHeader">
 
@@ -34,26 +36,32 @@ export default function Streak() {
 
       </div>
 
+
       <div className="StreakGrid">
 
         <div className="StreakItem">
+
           <span>Current</span>
 
           <strong>
             {streak.currentStreak} days
           </strong>
+
         </div>
 
+
         <div className="StreakItem">
+
           <span>Longest</span>
 
           <strong>
             {streak.longestStreak} days
           </strong>
+
         </div>
 
       </div>
 
-    </section>
+    </Card>
   );
 }

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Button from "@/shared/ui/Button/Button";
 
 import {
   Plus,
@@ -30,26 +31,26 @@ export default function QuickActions() {
 
       <div className="ActionGrid">
 
-        <button
+        <Button
           onClick={() => navigate("/diary")}
         >
           <Plus />
           Add Food
-        </button>
+        </Button>
 
 
-        <button
+        <Button
           onClick={() => dispatch(increaseWater())}
         >
           <Droplets />
           Add Water
-        </button>
+        </Button>
 
 
-        <button>
+        <Button>
           <Scale />
           Update Weight
-        </button>
+        </Button>
 
       </div>
 

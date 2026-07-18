@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import Card from "@/shared/ui/Card/Card";
 import "./ProgressCard.css";
 
 export default function ProgressCard({
@@ -14,10 +14,7 @@ export default function ProgressCard({
       : Math.min((current / goal) * 100, 100);
 
   return (
-    <motion.div
-  className="ProgressCard"
-  whileHover={{ y: -3 }}
->
+    <Card className="ProgressCard">
       <div className="ProgressCardHeader">
         <span>{title}</span>
 
@@ -39,6 +36,6 @@ export default function ProgressCard({
         />
       </div>
 
-    </motion.div>
+    </Card>
   );
 }

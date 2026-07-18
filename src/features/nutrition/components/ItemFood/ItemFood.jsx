@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import Card from "@/shared/ui/Card/Card";
 import {
   Pencil,
   Trash2,
@@ -84,7 +84,7 @@ export default function ItemFood({ item, index }) {
 
 
   return (
-    <div className="ItemFood">
+    <Card className="ItemFood">
 
       <div className="ItemFoodImage">
 
@@ -169,6 +169,6 @@ export default function ItemFood({ item, index }) {
 
       </div>
 
-    </div>
+    </Card>
   );
 }

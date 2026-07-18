@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Dumbbell } from "lucide-react";
 import { useSelector } from "react-redux";
-
+import Card from "@/shared/ui/Card/Card";
 import "./Exercise.css";
 
 export default function Exercise() {
@@ -31,7 +31,7 @@ export default function Exercise() {
   }, [caloriesConsumed]);
 
   return (
-    <section className="Exercise">
+    <Card className="Exercise">
 
       <div className="ExerciseHeader">
 
@@ -65,6 +65,6 @@ export default function Exercise() {
 
       </div>
 
-    </section>
+    </Card>
   );
 }

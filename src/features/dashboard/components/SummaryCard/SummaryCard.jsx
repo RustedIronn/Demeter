@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import Card from "@/shared/ui/Card/Card";
 import "./SummaryCard.css";
 
 export default function SummaryCard({
@@ -9,12 +9,7 @@ export default function SummaryCard({
   accent,
 }) {
   return (
-    <motion.div
-  className="SummaryCard"
-  whileHover={{
-    y: -5,
-  }}
->
+    <Card className="SummaryCard">
       <div className="SummaryCardHeader">
         <div
           className="SummaryCardIcon"
@@ -29,6 +24,6 @@ export default function SummaryCard({
       <h2>{value}</h2>
 
       <p>{subtitle}</p>
-    </motion.div>
+    </Card>
   );
 }
