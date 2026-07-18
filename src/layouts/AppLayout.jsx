@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-import NavigationRail from "@/components/navigation/NavigationRail/NavigationRail";
-import TopBar from "@/components/navigation/TopBar/TopBar";
+import NavigationRail from "@/app/navigation/NavigationRail/NavigationRail";
+import TopBar from "@/app/navigation/TopBar/TopBar";
 
 import "./AppLayout.css";
 
