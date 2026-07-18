@@ -1,40 +1,75 @@
 .CardHeader {
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   gap: 1rem;
-  margin-bottom: 1rem;
+
+  margin-bottom: var(--space-lg);
 }
+
 
 .CardHeaderContent {
   display: flex;
+
   align-items: center;
-  gap: 0.75rem;
+
+  gap: var(--space-md);
 }
+
 
 .CardHeaderIcon {
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
+
   width: 2.75rem;
+
   height: 2.75rem;
+
+
   border-radius: 50%;
-  background: var(--surface-secondary);
-  color: var(--primary);
+
+
+  background: var(--color-surface);
+
+  color: var(--color-primary);
+
 }
+
 
 .CardHeader h2 {
+
   margin: 0;
+
   font-size: 1rem;
+
+  color: var(--color-text);
+
 }
+
 
 .CardHeader p {
+
   margin: 0.2rem 0 0;
-  color: var(--text-secondary);
+
+  color: var(--color-text-secondary);
+
   font-size: 0.875rem;
+
 }
 
+
 .CardHeaderAction {
+
   display: flex;
+
   align-items: center;
+
 }
