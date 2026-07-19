@@ -1,64 +1,57 @@
 import { useSelector } from "react-redux";
-import Card from "@/shared/ui/Card/Card";
-import ItemFood from "@/features/nutrition/components/ItemFood/ItemFood";
+
+import MealSection from "@/features/nutrition/components/MealSection/MealSection";
 
 import "./ListFood.css";
 
+const MEALS = [
+  {
+    key: "breakfast",
+    title: "🍳 Breakfast",
+  },
+  {
+    key: "lunch",
+    title: "🍛 Lunch",
+  },
+  {
+    key: "dinner",
+    title: "🌙 Dinner",
+  },
+  {
+    key: "snack",
+    title: "🥤 Snacks",
+  },
+];
 
 export default function ListFood() {
   const intakeList = useSelector(
     (state) => state.personal.intakeList
   );
 
+  const grouped = MEALS.map((meal) => ({
+    ...meal,
+    items: intakeList
+      .map((item, index) => ({
+        ...item,
+        originalIndex: index,
+      }))
+      .filter(
+        (item) => item.meal_type === meal.key
+      ),
+  }));
 
   return (
-    <Card className="ListFood">
+    <div className="ListFood">
 
-      <div className="ListFoodHeader">
-        <h2>
-          Today's Meals
-        </h2>
+      {grouped.map((meal) => (
+        <MealSection
+          key={meal.key}
+          title={meal.title}
+          mealType={meal.key}
+          items={meal.items}
+        />
+      ))}
 
-        <span>
-          {intakeList.length} items
-        </span>
-      </div>
-
-
-      {intakeList.length === 0 ? (
-
-        <div className="ListFoodEmpty">
-          <p>
-            No meals added yet.
-          </p>
-
-          <span>
-            Start tracking your nutrition by adding food.
-          </span>
-        </div>
-
-      ) : (
-
-        <div className="FoodItems">
-
-          {intakeList.map((item, index) => (
-
-            <div
-              className="FoodItemWrapper"
-              key={index}
-            >
-              <ItemFood
-                item={item}
-                index={index}
-              />
-            </div>
-
-          ))}
-
-        </div>
-
-      )}
-
-    </Card>
+    </div>
   );
 }

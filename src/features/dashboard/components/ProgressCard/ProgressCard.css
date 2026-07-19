@@ -1,11 +1,32 @@
+.ProgressCard {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
 .ProgressCardHeader {
   display: flex;
 
   justify-content: space-between;
 
-  margin-bottom: 12px;
+  align-items: center;
+}
+
+
+.ProgressTitle {
+  font-weight: 600;
 
   color: var(--color-text);
+}
+
+
+.ProgressValue {
+  color: var(--color-text-secondary);
+
+  font-size: .9rem;
 }
 
 
@@ -26,4 +47,15 @@
   border-radius: inherit;
 
   transition: width .3s ease;
+}
+
+
+.ProgressFooter {
+  display: flex;
+
+  justify-content: flex-end;
+
+  font-size: .85rem;
+
+  color: var(--color-text-muted);
 }

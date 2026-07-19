@@ -16,7 +16,7 @@ import {
 
 import SearchResultCard from "./SearchResultCard";
 
-import "./SearchResultsModal.css";
+import "./SearchModal.css";
 
 
 export default function SearchResultsModal() {

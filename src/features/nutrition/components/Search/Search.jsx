@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import InputSearch from "./InputSearch";
+import SearchBar from "./SearchBar";
 import DatePicker from "@/features/dashboard/components/DatePicker/DatePicker";
 
 import { selectIsMobile } from "@/features/nutrition/store/selectors";
@@ -19,13 +19,11 @@ export default function Search() {
       }
     >
       <div className="SearchContent">
-
-        <InputSearch />
+        <SearchBar />
 
         {!isMobile && (
           <DatePicker />
         )}
-
       </div>
     </section>
   );

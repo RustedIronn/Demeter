@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-
+import DatePicker from "@/features/dashboard/components/DatePicker/DatePicker";
 import SummaryCard from "@/features/dashboard/components/SummaryCard/SummaryCard";
 import RecentMeals from "@/features/dashboard/components/RecentMeals/RecentMeals";
 import ProgressCard from "@/features/dashboard/components/ProgressCard/ProgressCard";
@@ -95,9 +95,16 @@ const fat =
         Good Morning {firstName ? firstName : "there"} 👋
       </h1>
 
-      <p>
-        Here's your progress for today.
-      </p>
+      <div className="TodayHeaderBottom">
+
+  <p>
+    Here's your progress for today.
+  </p>
+
+  <DatePicker />
+
+</div>
+
     </motion.section>
 
 
@@ -151,7 +158,10 @@ const fat =
   transition={{ duration: 0.4, delay: 0.2 }}
 >
 
+<div className="SectionHeader">
   <h2>Today's Nutrition</h2>
+  <p>Track your macro progress</p>
+</div>
 
   <div className="ProgressGrid">
 
@@ -183,11 +193,10 @@ const fat =
 
 </motion.section>
 
-
-    <RecentMeals />
-
     <QuickActions />
 
+    <RecentMeals />
+    
   </div>
 );
 }

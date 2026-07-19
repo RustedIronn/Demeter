@@ -1,129 +1,118 @@
 .ItemFood {
   display: flex;
+  gap: 18px;
+  align-items: center;
 
-  gap: 16px;
+  margin-top: 14px;
+  padding: 16px;
+
+  transition: 0.2s ease;
 }
 
+.ItemFood:hover {
+  transform: translateY(-2px);
+}
 
 .ItemFoodImage img {
   width: 80px;
-
   height: 80px;
 
   object-fit: cover;
 
   border-radius: var(--radius-md);
-}
 
+  flex-shrink: 0;
+}
 
 .ItemFoodContent {
   flex: 1;
 
   display: flex;
-
   justify-content: space-between;
+  align-items: center;
 
   gap: 20px;
 }
 
-
 .ItemFoodMain h3 {
   margin: 0;
 
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
-
 
 .ItemFoodMain p {
-  margin-top: 8px;
-
-  color: var(--color-text-muted);
-}
-
-
-.MealType {
-  display: inline-block;
-
   margin-top: 6px;
 
-  color: var(--color-primary);
-
+  color: var(--color-text-muted);
   font-size: .9rem;
 }
 
-
 .ItemFoodStats {
-  text-align: right;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 
+  gap: 8px;
+}
 
 .ItemFoodStats strong {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
-
 
 .MacroText {
+  font-size: .82rem;
   color: var(--color-text-muted);
-
-  font-size: .85rem;
-
-  margin-top: 6px;
 }
-
 
 .ItemFoodActions {
   display: flex;
-
-  justify-content: flex-end;
-
   gap: 8px;
-
-  margin-top: 12px;
 }
 
+.FoodAction {
+  width: 34px;
+  height: 34px;
 
-.ItemFoodActions button {
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
-  width: 32px;
-
-  height: 32px;
-
+  border: none;
   border-radius: 50%;
 
-  border: none;
-
   cursor: pointer;
+
+  transition: .2s ease;
 }
 
+.FoodAction:hover {
+  transform: scale(1.08);
+}
 
 .EditButton {
   background: var(--color-primary);
-
   color: var(--color-bg);
 }
 
-
 .DeleteButton {
   background: var(--color-danger);
-
   color: white;
 }
 
+@media (max-width:700px) {
 
-@media(max-width:700px) {
+  .ItemFood {
+    align-items: flex-start;
+  }
 
   .ItemFoodContent {
     flex-direction: column;
+    align-items: flex-start;
   }
-
 
   .ItemFoodStats {
-    text-align: left;
+    width: 100%;
+    align-items: flex-start;
   }
-
 }

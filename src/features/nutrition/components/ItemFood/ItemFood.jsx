@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@/shared/ui/Card/Card";
+
 import {
   Pencil,
   Trash2,
 } from "lucide-react";
 
 import { removeItemFood } from "@/features/profile/store/thunks";
-
-import { capitalize, capitalizeAll } from "@/shared/utils/utils";
 
 import {
   addModalSet,
@@ -17,10 +16,16 @@ import {
   startEditingFood,
 } from "@/features/nutrition/store/slice";
 
+import { capitalizeAll } from "@/shared/utils/utils";
+
 import "./ItemFood.css";
 
 
-export default function ItemFood({ item, index }) {
+export default function ItemFood({
+  item,
+  index,
+}) {
+
   const dispatch = useDispatch();
 
   const dataPoints = useSelector(
@@ -40,13 +45,46 @@ export default function ItemFood({ item, index }) {
   } = item;
 
 
+  const calories =
+    Math.round(
+      serving.calories * serving_size
+    );
+
+
+  const protein =
+    Math.round(
+      serving.protein * serving_size
+    );
+
+
+  const carbs =
+    Math.round(
+      serving.carbs * serving_size
+    );
+
+
+  const fat =
+    Math.round(
+      serving.fat * serving_size
+    );
+
+
   const handleDelete = () => {
-    dispatch(removeItemFood(dataPoints, index));
+    dispatch(
+      removeItemFood(
+        dataPoints,
+        index
+      )
+    );
   };
 
 
   const handleEdit = () => {
-    dispatch(startEditingFood(index));
+
+    dispatch(
+      startEditingFood(index)
+    );
+
 
     dispatch(
       itemFoodSelectedSet({
@@ -61,7 +99,9 @@ export default function ItemFood({ item, index }) {
     );
 
 
-    dispatch(servingSizeSet(serving_size));
+    dispatch(
+      servingSizeSet(serving_size)
+    );
 
 
     const mealTypes = [
@@ -79,12 +119,17 @@ export default function ItemFood({ item, index }) {
     );
 
 
-    dispatch(addModalSet(true));
+    dispatch(
+      addModalSet(true)
+    );
+
   };
 
 
   return (
+
     <Card className="ItemFood">
+
 
       <div className="ItemFoodImage">
 
@@ -96,18 +141,16 @@ export default function ItemFood({ item, index }) {
       </div>
 
 
+
       <div className="ItemFoodContent">
 
+
         <div className="ItemFoodMain">
+
 
           <h3>
             {capitalizeAll(name)}
           </h3>
-
-
-          <span className="MealType">
-            {capitalize(meal_type)}
-          </span>
 
 
           <p>
@@ -118,7 +161,9 @@ export default function ItemFood({ item, index }) {
                 serving.metricAmount * serving_size
               )} ${serving.metricUnit})`
             }
+
           </p>
+
 
         </div>
 
@@ -126,49 +171,62 @@ export default function ItemFood({ item, index }) {
 
         <div className="ItemFoodStats">
 
+
           <strong>
-            {Math.round(
-              serving.calories * serving_size
-            )} kcal
+            {calories} kcal
           </strong>
 
 
           <div className="MacroText">
-            P {Math.round(serving.protein * serving_size)}g
+
+            P {protein}g
 
             {" • "}
 
-            C {Math.round(serving.carbs * serving_size)}g
+            C {carbs}g
 
             {" • "}
 
-            F {Math.round(serving.fat * serving_size)}g
+            F {fat}g
+
           </div>
+
 
 
           <div className="ItemFoodActions">
 
+
             <button
               onClick={handleEdit}
-              className="EditButton"
+              className="FoodAction EditButton"
             >
-              <Pencil size={16}/>
+
+              <Pencil size={15}/>
+
             </button>
+
 
 
             <button
               onClick={handleDelete}
-              className="DeleteButton"
+              className="FoodAction DeleteButton"
             >
-              <Trash2 size={16}/>
+
+              <Trash2 size={15}/>
+
             </button>
+
 
           </div>
 
+
         </div>
+
 
       </div>
 
+
     </Card>
+
   );
 }
