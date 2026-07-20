@@ -94,7 +94,7 @@ const servings = rawServings.map((serving) => ({
       image: await getFoodImage(food.food_name),
       servings,
     };
-console.dir(formattedFood, { depth: null });
+
     res.json(formattedFood);
   } catch (error) {
     console.error(error);

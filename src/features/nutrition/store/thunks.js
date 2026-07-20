@@ -39,10 +39,7 @@ export const searchModal =
     dispatch(loadingSearchSet(true));
 
     try {
-      console.log("Searching:", query);
       const foods = await searchFoods(query);
-console.log("Results for:", query, foods.length);
-      // Ignore stale responses
       if (latestSearch !== query) return;
 
       dispatch(
@@ -80,8 +77,4 @@ export const itemFoodSelected = (foodId) => async (dispatch) => {
   } finally {
     dispatch(loadingAddSet(false));
   }
-};
-
-export const itemFoodSelectedById = () => () => {
-  console.warn("TODO: Replace FatSecret food lookup endpoint.");
 };

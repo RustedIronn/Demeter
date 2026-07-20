@@ -122,33 +122,28 @@ export default function Analytics() {
       <div className="AnalyticsGrid">
 
         <Stat
-          title="Calories"
-          value={analytics.averageCalories}
-          unit="kcal"
-        />
+  title="Calories"
+  value={analytics.calories}
+  unit="kcal"
+/>
 
-        <Stat
-          title="Protein"
-          value={analytics.averageProtein}
-          unit="g"
-        />
+<Stat
+  title="Protein"
+  value={analytics.protein}
+  unit="g"
+/>
 
-        <Stat
-          title="Carbs"
-          value={analytics.averageCarbs}
-          unit="g"
-        />
+<Stat
+  title="Carbs"
+  value={analytics.carbs}
+  unit="g"
+/>
 
-        <Stat
-          title="Fat"
-          value={analytics.averageFat}
-          unit="g"
-        />
-
-        <Stat
-          title="Logged Days"
-          value={analytics.loggedDays}
-        />
+<Stat
+  title="Fat"
+  value={analytics.fat}
+  unit="g"
+/>
 
       </div>
 

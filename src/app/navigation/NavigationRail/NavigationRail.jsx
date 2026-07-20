@@ -22,7 +22,7 @@ export default function NavigationRail() {
   </div>
 </div>
 
-      <NavLink to="/">
+      <NavLink to="/today">
   <Home size={20} />
   <span>Today</span>
 </NavLink>

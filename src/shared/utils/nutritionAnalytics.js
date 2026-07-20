@@ -136,57 +136,71 @@ export const getStreakData = (
   dataPoints = [],
   goals = {}
 ) => {
-  let currentStreak = 0;
   let longestStreak = 0;
 
+  const completedDays = dataPoints
+    .filter(
+      (day) =>
+        day.intake_list &&
+        day.intake_list.length > 0
+    )
+    .filter((day) => {
+      const totals = getNutritionTotals(
+        day.intake_list
+      );
+
+      return (
+        totals.calories <= goals.calories &&
+        totals.protein >= goals.protein
+      );
+    })
+    .map((day) => {
+      const date = new Date(day.date);
+      date.setHours(0, 0, 0, 0);
+      return date.getTime();
+    })
+    .sort((a, b) => a - b);
+
+
   let tempStreak = 0;
-
-  const sortedDays = [...dataPoints].sort(
-    (a, b) =>
-      new Date(a.date) - new Date(b.date)
-  );
+  let currentStreak = 0;
 
 
-  sortedDays.forEach((day) => {
-    if (
-      !day.intake_list ||
-      day.intake_list.length === 0
-    ) {
-      tempStreak = 0;
-      return;
-    }
-
-    const totals = getNutritionTotals(
-      day.intake_list
-    );
-
-    const caloriesGood =
-      goals.calories &&
-      totals.calories <= goals.calories;
-
-    const proteinGood =
-      goals.protein &&
-      totals.protein >= goals.protein;
-
-
-    const dayCompleted =
-      caloriesGood &&
-      proteinGood;
-
-
-    if (dayCompleted) {
-      tempStreak++;
-
-      if (tempStreak > longestStreak) {
-        longestStreak = tempStreak;
-      }
+  for (let i = 0; i < completedDays.length; i++) {
+    if (i === 0) {
+      tempStreak = 1;
     } else {
-      tempStreak = 0;
+      const difference =
+        (completedDays[i] - completedDays[i - 1]) /
+        (1000 * 60 * 60 * 24);
+
+      if (difference === 1) {
+        tempStreak++;
+      } else {
+        tempStreak = 1;
+      }
     }
-  });
+
+    longestStreak = Math.max(
+      longestStreak,
+      tempStreak
+    );
+  }
 
 
-  currentStreak = tempStreak;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  let checkDate = today.getTime();
+
+  for (let i = completedDays.length - 1; i >= 0; i--) {
+    if (completedDays[i] === checkDate) {
+      currentStreak++;
+      checkDate -= 1000 * 60 * 60 * 24;
+    } else if (completedDays[i] < checkDate) {
+      break;
+    }
+  }
 
 
   return {
