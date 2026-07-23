@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ChevronLeft,
   ChevronRight,
+  CalendarDays,
 } from "lucide-react";
 
 import { setDate } from "@/features/nutrition/store/thunks";
@@ -64,14 +65,14 @@ export default function DatePicker() {
 
 
   const formatted =
-    dateSelected.toLocaleDateString(
-      "en-US",
-      {
-        weekday: "long",
-        month: "short",
-        day: "numeric",
-      }
-    );
+  dateSelected.toLocaleDateString(
+    "en-US",
+    {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    }
+  );
 
 
   return (
@@ -87,13 +88,13 @@ export default function DatePicker() {
 
       <div className="DatePickerDate">
 
-        <span>
-          {isToday
-            ? "Today"
-            : formatted}
-        </span>
+  <CalendarDays size={16}/>
 
-      </div>
+  <span>
+    {formatted}
+  </span>
+
+</div>
 
 
       <button

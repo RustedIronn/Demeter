@@ -8,7 +8,7 @@ export default function CircleData({
     <div className="CircleData">
 
       <strong>
-        {number || "--"}
+        {number ?? "--"}
       </strong>
 
       <span>

@@ -64,23 +64,24 @@ export default function WaterCard() {
       />
     </div>
 
-    <div className="WaterActions">
+<div className="WaterActions">
 
-     <Button
-  variant="secondary"
+<button
+  className="WaterButton Secondary"
   onClick={() => dispatch(decreaseWater())}
 >
-  <Minus size={18} />
-</Button>
+  <Minus size={18}/>
+</button>
 
-<Button
-  variant="primary"
+
+<button
+  className="WaterButton Primary"
   onClick={() => dispatch(increaseWater())}
 >
-  <Plus size={18} />
-</Button>
+  <Plus size={18}/>
+</button>
 
-    </div>
+</div>
 
   </Card>
 );

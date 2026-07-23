@@ -32,25 +32,29 @@ export default function QuickActions() {
       <div className="ActionGrid">
 
         <Button
-          onClick={() => navigate("/diary")}
-        >
-          <Plus />
-          Add Food
-        </Button>
+  className="ActionButton"
+  onClick={() => navigate("/diary")}
+>
+  <Plus />
+  Add Food
+</Button>
 
 
-        <Button
-          onClick={() => dispatch(increaseWater())}
-        >
-          <Droplets />
-          Add Water
-        </Button>
+<Button
+  className="ActionButton"
+  onClick={() => dispatch(increaseWater())}
+>
+  <Droplets />
+  Add Water
+</Button>
 
 
-        <Button>
-          <Scale />
-          Update Weight
-        </Button>
+<Button
+  className="ActionButton"
+>
+  <Scale />
+  Update Weight
+</Button>
 
       </div>
 

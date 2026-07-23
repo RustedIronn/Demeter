@@ -3,7 +3,12 @@
 
   font-size: 1.3rem;
 }
-/* calorie progress */
+
+
+
+/* ===================== */
+/* CALORIES */
+/* ===================== */
 
 .GoalProgress {
 
@@ -21,7 +26,6 @@
 
 }
 
-
 .GoalProgress svg {
 
   width: 34px;
@@ -32,22 +36,37 @@
 
 }
 
+.GoalProgressContent {
 
-.GoalProgress strong {
+  flex: 1;
+
+}
+
+.GoalProgressContent strong {
 
   display: block;
 
   font-size: 1.2rem;
 
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 
 }
 
+.GoalProgressContent span {
 
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: .9rem;
+
+  color: var(--color-text-muted);
+
+}
 
 .ProgressTrack {
 
-  width: 220px;
+  width: 100%;
 
   height: 10px;
 
@@ -58,7 +77,6 @@
   overflow: hidden;
 
 }
-
 
 .ProgressFill {
 
@@ -74,7 +92,9 @@
 
 
 
-/* macros */
+/* ===================== */
+/* MACROS */
+/* ===================== */
 
 .MacroGrid {
 
@@ -88,8 +108,7 @@
 
 }
 
-
-.MacroGrid > div {
+.MacroCard {
 
   display: flex;
 
@@ -107,15 +126,13 @@
 
 }
 
-
-.MacroGrid svg {
+.MacroCard svg {
 
   color: var(--color-secondary);
 
 }
 
-
-.MacroGrid span {
+.MacroCard span {
 
   color: var(--color-text-muted);
 
@@ -123,18 +140,27 @@
 
 }
 
+.MacroCard strong {
 
-.MacroGrid strong {
+  font-size: 1.15rem;
 
-  font-size: 1.1rem;
+}
+
+.MacroCard small {
+
+  color: var(--color-text-muted);
+
+  font-size: .8rem;
 
 }
 
 
 
-/* mobile */
+/* ===================== */
+/* MOBILE */
+/* ===================== */
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
 
   .GoalProgress {
 
@@ -143,14 +169,6 @@
     align-items: stretch;
 
   }
-
-
-  .ProgressTrack {
-
-    width: 100%;
-
-  }
-
 
   .MacroGrid {
 

@@ -1,63 +1,94 @@
 .DatePicker {
-  display: flex;
 
-  align-items: center;
+  display:flex;
 
-  justify-content: space-between;
+  align-items:center;
 
-  background: var(--color-card);
+  gap:6px;
 
-  border: 1px solid var(--color-border);
+  padding:6px;
 
-  border-radius: var(--radius-md);
+  background:var(--color-card);
 
-  padding: 12px 16px;
+  border:1px solid var(--color-border);
 
-  margin-bottom: var(--space-xl);
+  border-radius:var(--radius-lg);
+
 }
 
-
-.DatePickerDate {
-  color: var(--color-text);
-
-  font-weight: 600;
-
-  font-size: 1.05rem;
-}
 
 
 .DatePickerButton {
-  display: flex;
 
-  align-items: center;
+  width:34px;
 
-  justify-content: center;
+  height:34px;
 
-  width: 36px;
+  display:flex;
 
-  height: 36px;
+  align-items:center;
 
-  border-radius: 50%;
+  justify-content:center;
 
-  border: none;
+  border:none;
 
-  background: transparent;
+  border-radius:50%;
 
-  color: var(--color-primary);
+  background:transparent;
 
-  cursor: pointer;
+  color:var(--color-text-secondary);
 
-  transition: var(--transition);
+  cursor:pointer;
+
+  transition:.2s ease;
+
 }
+
 
 
 .DatePickerButton:hover:not(:disabled) {
-  background: rgba(232,163,61,0.15);
+
+  background:var(--color-overlay-light);
+
+  color:var(--color-primary);
+
 }
 
 
-.DatePickerButton:disabled {
-  opacity: 0.35;
 
-  cursor: not-allowed;
+.DatePickerButton:disabled {
+
+  opacity:.35;
+
+  cursor:not-allowed;
+
+}
+
+
+
+.DatePickerDate {
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:7px;
+
+  min-width:150px;
+
+  color:var(--color-text);
+
+  font-weight:600;
+
+  font-size:.9rem;
+
+}
+
+
+.DatePickerDate svg {
+
+  color:var(--color-primary);
+
 }

@@ -14,7 +14,12 @@ export default function ProgressCard({
       : Math.min((current / goal) * 100, 100);
 
   return (
-    <Card className="ProgressCard">
+    <Card
+      className="ProgressCard"
+      style={{
+        "--progress-color": color,
+      }}
+    >
 
       <div className="ProgressCardHeader">
 
@@ -22,13 +27,26 @@ export default function ProgressCard({
           {title}
         </span>
 
-        <span className="ProgressValue">
-          {current}
-          {unit} / {goal}
-          {unit}
+        <span className="ProgressPercentage">
+          {Math.round(percentage)}%
         </span>
 
       </div>
+
+
+      <div className="ProgressNumbers">
+
+        <strong>
+          {current}
+          {unit}
+        </strong>
+
+        <span>
+          / {goal}{unit}
+        </span>
+
+      </div>
+
 
       <div className="ProgressTrack">
 
@@ -36,19 +54,11 @@ export default function ProgressCard({
           className="ProgressFill"
           style={{
             width: `${percentage}%`,
-            background: color,
           }}
         />
 
       </div>
 
-      <div className="ProgressFooter">
-
-        <span>
-          {Math.round(percentage)}%
-        </span>
-
-      </div>
 
     </Card>
   );

@@ -11,24 +11,41 @@ export default function Goals() {
     <div className="Goals">
 
       <section className="PageHeader">
+
         <h1>Goals</h1>
 
         <p>
           Manage your daily targets and long-term progress.
         </p>
+
       </section>
+
 
       <div className="GoalsGrid">
 
-        <NutritionGoals />
+        <div className="NutritionCard">
+          <NutritionGoals />
+        </div>
 
-        <WaterCard />
 
-        <GoalWeight />
+        <div className="WaterCardWrapper">
+          <WaterCard />
+        </div>
 
-        <Exercise />
 
-        <Streak />
+        <div className="GoalWeightWrapper">
+          <GoalWeight />
+        </div>
+
+
+        <div className="StreakWrapper">
+          <Streak />
+        </div>
+
+
+        <div className="ExerciseWrapper">
+          <Exercise />
+        </div>
 
       </div>
 

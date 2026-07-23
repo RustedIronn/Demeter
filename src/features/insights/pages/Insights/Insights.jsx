@@ -9,20 +9,31 @@ export default function Insights() {
     <div className="Insights">
 
       <section className="PageHeader">
+
         <h1>Insights</h1>
 
         <p>
           Analyze your nutrition and progress over time.
         </p>
+
       </section>
+
 
       <div className="InsightsGrid">
 
-        <Analytics />
+        <div className="AnalyticsWrapper">
+          <Analytics />
+        </div>
 
-        <NutritionHistory />
 
-        <WeightHistory />
+        <div className="NutritionWrapper">
+          <NutritionHistory />
+        </div>
+
+
+        <div className="WeightWrapper">
+          <WeightHistory />
+        </div>
 
       </div>
 

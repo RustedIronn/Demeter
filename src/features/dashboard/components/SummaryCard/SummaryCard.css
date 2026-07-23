@@ -1,13 +1,44 @@
 .SummaryCard {
+
   display: flex;
 
   flex-direction: column;
 
-  min-height: 170px;
+  min-height: 180px;
+
+  position: relative;
+
+  overflow: hidden;
+
 }
 
 
+.SummaryCard::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 120px;
+
+  height: 120px;
+
+  right: -30px;
+
+  bottom: -30px;
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  opacity: .08;
+
+}
+
+
+
 .SummaryCardHeader {
+
   display: flex;
 
   align-items: center;
@@ -18,48 +49,73 @@
 
   font-weight: 600;
 
-  font-size: 0.95rem;
 }
 
 
 .SummaryCardIcon {
-  display: flex;
 
-  align-items: center;
+  width: 44px;
 
-  justify-content: center;
+  height: 44px;
 
-  width: 42px;
+  display:flex;
 
-  height: 42px;
+  align-items:center;
 
-  border-radius: 50%;
+  justify-content:center;
 
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
 
-  font-size: 1.2rem;
+  background: color-mix(
+    in srgb,
+    var(--accent) 15%,
+    transparent
+  );
 
-  flex-shrink: 0;
+  color: var(--accent);
+
+}
+
+
+.SummaryCardIcon svg {
+
+  width: 22px;
+
+  height: 22px;
+
+}
+
+
+
+.SummaryCardValue {
+
+  margin-top: auto;
+
 }
 
 
 .SummaryCard h2 {
-  margin: auto 0 0;
 
-  font-size: 2.4rem;
+  margin: 0;
 
-  font-weight: 700;
+  font-size: 2.5rem;
+
+  font-weight: 800;
 
   line-height: 1.1;
 
   color: var(--color-text);
+
 }
 
 
+
 .SummaryCard p {
-  margin-top: 10px;
+
+  margin-top: 8px;
 
   color: var(--color-text-muted);
 
-  font-size: 0.95rem;
+  font-size: .9rem;
+
 }

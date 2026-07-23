@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import Button from "@/shared/ui/Button/Button";
 import {
   selectSelectedDate,
 } from "@/features/nutrition/store/selectors";

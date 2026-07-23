@@ -10,9 +10,8 @@ export default function SearchResultCard({ food }) {
 
 
   return (
-    <Card
+   <div
   className="SearchResultCard"
-  clickable
   onClick={() =>
     dispatch(itemFoodSelected(food.id))
   }
@@ -48,6 +47,6 @@ export default function SearchResultCard({ food }) {
       </div>
 
 
-    </Card>
+    </div>
   );
 }

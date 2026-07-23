@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@/shared/ui/Button/Button";
-import {
-  ChevronDown,
-} from "lucide-react";
 
 import {
   addModalSet,
@@ -88,7 +85,7 @@ const editingFoodIndex = useSelector(
       itemFoodSelected?.selectedServing ?? 0
     ];
 
-  const multiplier = Number(servingSize);
+  const multiplier = Number(servingSize) || 0;
 
   const grams =
     serving && multiplier > 0

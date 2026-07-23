@@ -6,16 +6,82 @@
   padding: var(--space-lg);
 }
 
+
+
+/* ====================== */
+/* HEADER */
+/* ====================== */
+
 .PageHeader {
-  margin-bottom: var(--space-xl);
+  margin-bottom: 36px;
+}
+
+.PageHeader h1 {
+  margin: 0 0 6px;
 }
 
 .PageHeader p {
+  margin: 0;
+
   color: var(--color-text-muted);
 }
+
+
+
+/* ====================== */
+/* GRID */
+/* ====================== */
 
 .InsightsGrid {
   display: grid;
 
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
   gap: var(--space-lg);
+
+  align-items: stretch;
+}
+
+
+
+/* Stretch every card */
+
+.InsightsGrid > div {
+  display: flex;
+}
+
+.InsightsGrid > div > * {
+  flex: 1;
+}
+
+
+
+/* ====================== */
+/* LAYOUT */
+/* ====================== */
+
+.AnalyticsWrapper {
+  grid-column: 1 / -1;
+}
+
+
+
+/* ====================== */
+/* MOBILE */
+/* ====================== */
+
+@media (max-width: 900px) {
+
+  .InsightsGrid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .AnalyticsWrapper {
+
+    grid-column: auto;
+
+  }
+
 }

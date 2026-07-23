@@ -1,56 +1,140 @@
-
 .NutritionGoalsHeader {
-  display: flex;
 
-  justify-content: space-between;
+  display:flex;
 
-  align-items: center;
+  justify-content:space-between;
 
-  margin-bottom: var(--space-lg);
+  align-items:center;
+
+  margin-bottom:20px;
+
 }
+
 
 .NutritionGoalsHeader h2 {
-  margin: 0;
+
+  margin:0;
+
 }
+
+
+.NutritionGoalsHeader p {
+
+  margin:4px 0 0;
+
+  color:var(--color-text-muted);
+
+}
+
+
 
 .NutritionGoalsGrid {
-  display: grid;
 
-  gap: 14px;
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:14px;
+
 }
+
+
 
 .GoalInput {
-  display: flex;
 
-  justify-content: space-between;
+  padding:18px;
 
-  align-items: center;
+  background:var(--color-surface);
 
-  padding: 14px;
+  border-radius:var(--radius-md);
 
-  background: var(--color-surface);
-
-  border-radius: var(--radius-md);
 }
 
-.GoalInputField {
-    width: 100px;
+
+
+.GoalLabel {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-bottom:12px;
+
 }
 
-.GoalInput span {
-  color: var(--color-text-muted);
+
+.GoalLabel span {
+
+  font-size:1.3rem;
+
 }
+
+
+.GoalLabel p {
+
+  margin:0;
+
+  color:var(--color-text-muted);
+
+}
+
+
 
 .GoalInput strong {
-  color: var(--color-text);
+
+  display:flex;
+
+  align-items:baseline;
+
+  gap:6px;
+
+  font-size:1.8rem;
+
 }
 
+
+
+.GoalInput strong small {
+
+  font-size:.9rem;
+
+  color:var(--color-text-muted);
+
+}
+
+
+
+.GoalInputField {
+
+  width:100%;
+
+}
+
+
+
 .NutritionGoalActions {
-  display: flex;
 
-  justify-content: flex-end;
+  display:flex;
 
-  gap: 12px;
+  justify-content:flex-end;
 
-  margin-top: var(--space-lg);
+  gap:12px;
+
+  margin-top:20px;
+
+}
+
+
+
+@media(max-width:700px){
+
+  .NutritionGoalsGrid {
+
+    grid-template-columns:1fr;
+
+  }
+
 }

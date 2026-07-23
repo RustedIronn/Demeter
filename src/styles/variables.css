@@ -17,6 +17,8 @@
 
   --color-water: #67A9E4;
 
+  --color-overlay-light: rgba(255, 255, 255, 0.05);
+
   --color-text: #F7EFE4;
   --color-text-secondary: #CDBFAF;
   --color-text-muted: #988A91;

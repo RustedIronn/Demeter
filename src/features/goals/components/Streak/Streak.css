@@ -1,61 +1,127 @@
-.StreakHeader {
-  display: flex;
+.Streak {
 
-  align-items: center;
+  overflow:hidden;
 
-  gap: 16px;
-
-  margin-bottom: var(--space-lg);
 }
+
+
+.StreakHeader {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+
+  margin-bottom:20px;
+
+}
+
 
 .StreakIcon {
-  width: 52px;
 
-  height: 52px;
+  width:52px;
 
-  display: flex;
+  height:52px;
 
-  align-items: center;
+  display:flex;
 
-  justify-content: center;
+  align-items:center;
 
-  border-radius: 50%;
+  justify-content:center;
 
-  background: rgba(214, 104, 69, 0.15);
+  border-radius:50%;
 
-  color: var(--color-secondary);
+  background:rgba(214,104,69,.15);
+
+  color:var(--color-secondary);
+
 }
+
 
 .StreakHeader h2 {
-  margin: 0;
+
+  margin:0;
+
 }
+
 
 .StreakHeader p {
-  margin: 4px 0 0;
 
-  color: var(--color-text-muted);
+  margin:4px 0 0;
+
+  color:var(--color-text-muted);
+
 }
 
-.StreakGrid {
-  display: grid;
 
-  gap: 14px;
+
+.CurrentStreak {
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:12px 0 20px;
+
 }
 
-.StreakItem {
-  display: flex;
 
-  justify-content: space-between;
 
-  align-items: center;
+.CurrentStreak strong {
 
-  padding: 14px;
+  font-size:3rem;
 
-  background: var(--color-surface);
+  line-height:1;
 
-  border-radius: var(--radius-md);
+  color:var(--color-secondary);
+
 }
 
-.StreakItem span {
-  color: var(--color-text-muted);
+
+
+.CurrentStreak span {
+
+  color:var(--color-text-muted);
+
+  font-weight:600;
+
+}
+
+
+
+.LongestStreak {
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:14px;
+
+  background:var(--color-surface);
+
+  border-radius:var(--radius-md);
+
+}
+
+
+
+.LongestStreak span {
+
+  color:var(--color-text-muted);
+
+}
+
+
+
+.LongestStreak strong {
+
+  color:var(--color-text);
+
 }

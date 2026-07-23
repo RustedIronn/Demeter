@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Pencil,
   Save,
   X,
+  Camera,
 } from "lucide-react";
 
 import Card from "@/shared/ui/Card/Card";
@@ -21,11 +22,14 @@ import {
 import "./BasicInformation.css";
 
 export default function BasicInformation() {
+
   const dispatch = useDispatch();
 
   const personal = useSelector(
     (state) => state.personal
   );
+
+  const fileInputRef = useRef(null);
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -44,40 +48,48 @@ export default function BasicInformation() {
   const [profilePhoto, setProfilePhoto] =
     useState(ImageProfile);
 
-
   useEffect(() => {
+
     setFirstName(personal.first_name);
     setLastName(personal.last_name);
     setWeight(personal.weight_kg);
     setHeight(personal.height_cm);
+
   }, [personal]);
 
-
   const handleCancel = () => {
+
     setFirstName(personal.first_name);
     setLastName(personal.last_name);
     setWeight(personal.weight_kg);
     setHeight(personal.height_cm);
 
     setIsEditing(false);
+
   };
 
-
   const handleSave = () => {
+
     dispatch(
       updatePersonalData({
+
         first_name: firstName,
+
         last_name: lastName,
+
         weight_kg: Number(weight),
+
         height_cm: Number(height),
+
       })
     );
 
     setIsEditing(false);
+
   };
 
-
   const handleFileChange = (e) => {
+
     const file = e.target.files[0];
 
     if (!file) return;
@@ -89,26 +101,56 @@ export default function BasicInformation() {
     };
 
     reader.readAsDataURL(file);
+
   };
 
-
   return (
+
     <section className="BasicInformation">
 
       <Card className="ProfileCard">
 
-        <img
-          src={profilePhoto}
-          className="ProfileImage"
-          alt="profile"
+        <div className="ProfileImageWrapper">
+
+          <img
+            src={profilePhoto}
+            className="ProfileImage"
+            alt="Profile"
+          />
+
+          {isEditing && (
+
+            <button
+              className="ChangePhotoButton"
+              onClick={() =>
+                fileInputRef.current?.click()
+              }
+            >
+              <Camera size={18}/>
+            </button>
+
+          )}
+
+        </div>
+
+        <input
+          ref={fileInputRef}
+          hidden
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
         />
 
-
         <h2>
+
           {firstName || "Your"}{" "}
           {lastName || "Profile"}
+
         </h2>
 
+        <p className="ProfileSubtitle">
+          Personal Information
+        </p>
 
         <div className="ProfileStats">
 
@@ -124,63 +166,47 @@ export default function BasicInformation() {
 
         </div>
 
-
         {isEditing && (
 
           <div className="ProfileInputs">
 
             <Input
-              className="ProfileInput"
               value={firstName}
               placeholder="First name"
-              onChange={(e) =>
+              onChange={(e)=>
                 setFirstName(e.target.value)
               }
             />
 
-
             <Input
-              className="ProfileInput"
               value={lastName}
               placeholder="Last name"
-              onChange={(e) =>
+              onChange={(e)=>
                 setLastName(e.target.value)
               }
             />
 
-
             <Input
-              className="ProfileInput"
               type="number"
               value={weight}
               placeholder="Weight"
-              onChange={(e) =>
+              onChange={(e)=>
                 setWeight(e.target.value)
               }
             />
 
-
             <Input
-              className="ProfileInput"
               type="number"
               value={height}
               placeholder="Height"
-              onChange={(e) =>
+              onChange={(e)=>
                 setHeight(e.target.value)
               }
-            />
-
-
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
             />
 
           </div>
 
         )}
-
 
         <div className="ProfileActions">
 
@@ -191,8 +217,11 @@ export default function BasicInformation() {
                 setIsEditing(true)
               }
             >
+
               <Pencil size={16}/>
-              Edit
+
+              Edit Profile
+
             </Button>
 
           ) : (
@@ -203,16 +232,21 @@ export default function BasicInformation() {
                 variant="secondary"
                 onClick={handleCancel}
               >
-                <X size={16}/>
-                Cancel
-              </Button>
 
+                <X size={16}/>
+
+                Cancel
+
+              </Button>
 
               <Button
                 onClick={handleSave}
               >
+
                 <Save size={16}/>
+
                 Save
+
               </Button>
 
             </>
@@ -224,5 +258,7 @@ export default function BasicInformation() {
       </Card>
 
     </section>
+
   );
+
 }

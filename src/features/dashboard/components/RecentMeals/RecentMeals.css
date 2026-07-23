@@ -1,72 +1,155 @@
 .RecentMealsHeader {
-  display: flex;
+  display:flex;
 
-  justify-content: space-between;
+  justify-content:space-between;
 
-  align-items: center;
+  align-items:center;
 
-  margin-bottom: 20px;
+  margin-bottom:20px;
 }
+
+
+.RecentMealsHeader h2 {
+  margin:0;
+}
+
 
 .RecentMealsHeader button {
-  background: none;
 
-  border: none;
+  background:none;
 
-  color: var(--color-primary);
+  border:none;
 
-  cursor: pointer;
+  color:var(--color-primary);
 
-  font-weight: 600;
+  cursor:pointer;
+
+  font-weight:600;
+
 }
 
-.RecentMealsHeader span {
-  color: var(--color-text-muted);
-}
 
 
 .MealItem {
-  display: flex;
 
-  justify-content: space-between;
+  display:flex;
 
-  align-items: center;
+  justify-content:space-between;
 
-  padding: 16px 0;
+  align-items:center;
 
-  border-bottom:
-    1px solid var(--color-border);
+  padding:16px 0;
+
+  border-bottom:1px solid var(--color-border);
+
 }
+
 
 
 .MealItem:last-child {
-  border-bottom: none;
+
+  border-bottom:none;
+
 }
 
 
-.MealItem h4 {
-  margin: 0;
 
-  font-size: 1rem;
+.MealInfo h4 {
+
+  margin:0;
+
+  color:var(--color-text);
+
 }
 
 
-.MealItem p {
-  margin: 4px 0 0;
 
-  color: var(--color-text-muted);
+.MealInfo p {
 
-  text-transform: capitalize;
+  margin:4px 0 0;
+
+  color:var(--color-text-muted);
+
+  text-transform:capitalize;
+
 }
+
 
 
 .MealItem span {
-  color: var(--color-primary);
 
-  font-weight: 600;
+  color:var(--color-primary);
+
+  font-weight:700;
+
 }
 
 
+
 .EmptyMeals {
-  color: var(--color-text-muted);
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:32px 16px;
+
+}
+
+
+
+.EmptyMeals svg {
+
+  width:42px;
+
+  height:42px;
+
+  color:var(--color-primary);
+
+  margin-bottom:12px;
+
+}
+
+
+
+.EmptyMeals h3 {
+
+  margin:0 0 8px;
+
+}
+
+
+
+.EmptyMeals p {
+
+  margin:0 0 20px;
+
+  color:var(--color-text-muted);
+
+}
+
+
+
+.EmptyMeals button {
+
+  background:var(--color-primary);
+
+  color:var(--color-bg);
+
+  border:none;
+
+  padding:10px 20px;
+
+  border-radius:var(--radius-md);
+
+  font-weight:700;
+
+  cursor:pointer;
+
 }

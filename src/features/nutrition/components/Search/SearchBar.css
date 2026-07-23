@@ -5,6 +5,8 @@
 
     width: 100%;
 
+    max-width:900px;
+
     padding: 14px 18px;
 
     background: var(--color-card);

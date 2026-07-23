@@ -3,6 +3,8 @@
 @import "@fontsource/manrope/600.css";
 @import "@fontsource/manrope/700.css";
 
+@import "@/assets/fonts/fonts.css";
+
 html,
 body {
   font-family: "Manrope", sans-serif;
@@ -14,6 +16,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: "Sebino", serif;
   color: var(--color-text);
   font-weight: 700;
   margin: 0;

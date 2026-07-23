@@ -68,10 +68,14 @@ export default function Analytics() {
 
     };
 
-  },[
-    period,
-    personal,
-  ]);
+},[
+  period,
+  personal.data_points,
+  personal.daily_goal,
+  personal.protein_goal,
+  personal.carbs_goal,
+  personal.fat_goal,
+]);
 
   return (
 

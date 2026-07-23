@@ -7,10 +7,13 @@ import { getStreakData } from "@/shared/utils/nutritionAnalytics";
 
 import "./Streak.css";
 
+
 export default function Streak() {
+
   const personal = useSelector(
     (state) => state.personal
   );
+
 
   const streak = getStreakData(
     personal.data_points,
@@ -20,48 +23,75 @@ export default function Streak() {
     }
   );
 
+
   return (
+
     <Card className="Streak">
+
 
       <div className="StreakHeader">
 
+
         <div className="StreakIcon">
+
           <Flame />
+
         </div>
+
 
         <div>
-          <h2>Streak</h2>
-          <p>Keep your momentum going</p>
+
+          <h2>
+            Streak
+          </h2>
+
+          <p>
+            Keep your momentum going
+          </p>
+
         </div>
+
 
       </div>
 
 
-      <div className="StreakGrid">
-
-        <div className="StreakItem">
-
-          <span>Current</span>
-
-          <strong>
-            {streak.currentStreak} days
-          </strong>
-
-        </div>
 
 
-        <div className="StreakItem">
+      <div className="CurrentStreak">
 
-          <span>Longest</span>
 
-          <strong>
-            {streak.longestStreak} days
-          </strong>
+        <strong>
+          {streak.currentStreak}
+        </strong>
 
-        </div>
+
+        <span>
+          days
+        </span>
+
 
       </div>
+
+
+
+
+      <div className="LongestStreak">
+
+        <span>
+          Longest streak
+        </span>
+
+
+        <strong>
+          {streak.longestStreak} days
+        </strong>
+
+
+      </div>
+
 
     </Card>
+
   );
+
 }

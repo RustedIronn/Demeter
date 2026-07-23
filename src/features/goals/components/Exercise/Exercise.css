@@ -1,69 +1,141 @@
 .ExerciseHeader {
-  display: flex;
 
-  align-items: center;
+  display:flex;
 
-  gap: 16px;
+  align-items:center;
 
-  margin-bottom: var(--space-lg);
+  gap:16px;
+
+  margin-bottom:20px;
+
 }
+
+
 
 .ExerciseIcon {
-  width: 52px;
 
-  height: 52px;
+  width:52px;
 
-  display: flex;
+  height:52px;
 
-  align-items: center;
+  display:flex;
 
-  justify-content: center;
+  align-items:center;
 
-  border-radius: 50%;
+  justify-content:center;
 
-  background: rgba(214, 104, 69, 0.15);
+  border-radius:50%;
 
-  color: var(--color-secondary);
+  background:rgba(214,104,69,.15);
+
+  color:var(--color-secondary);
+
 }
+
+
 
 .ExerciseHeader h2 {
-  margin: 0;
+
+  margin:0;
+
 }
+
+
 
 .ExerciseHeader p {
-  margin: 4px 0 0;
 
-  color: var(--color-text-muted);
+  margin:4px 0 0;
+
+  color:var(--color-text-muted);
+
 }
+
+
 
 .ExerciseCalories {
-  font-size: 1.8rem;
 
-  font-weight: 700;
+  display:flex;
 
-  margin-bottom: var(--space-lg);
+  flex-direction:column;
 
-  color: var(--color-primary);
+  align-items:center;
+
+  padding:12px 0 20px;
+
 }
+
+
+
+.ExerciseCalories strong {
+
+  font-size:2.8rem;
+
+  line-height:1;
+
+  color:var(--color-primary);
+
+}
+
+
+
+.ExerciseCalories span {
+
+  margin-top:6px;
+
+  color:var(--color-text-muted);
+
+}
+
+
 
 .ExerciseSuggestion {
-  background: var(--color-surface);
 
-  border-radius: var(--radius-md);
+  padding:18px;
 
-  padding: var(--space-lg);
+  background:var(--color-surface);
+
+  border-radius:var(--radius-md);
+
 }
+
+
+
+.SuggestionTitle {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-bottom:10px;
+
+}
+
+
+
+.SuggestionTitle span {
+
+  font-size:1.4rem;
+
+}
+
+
 
 .ExerciseSuggestion strong {
-  display: block;
 
-  margin-bottom: 8px;
+  color:var(--color-text);
+
 }
 
+
+
 .ExerciseSuggestion p {
-  margin: 0;
 
-  color: var(--color-text-muted);
+  margin:0;
 
-  line-height: 1.5;
+  color:var(--color-text-muted);
+
+  line-height:1.6;
+
 }

@@ -6,28 +6,82 @@
   padding: var(--space-lg);
 }
 
+
+
+/* ====================== */
+/* HEADER */
+/* ====================== */
+
 .PageHeader {
-  margin-bottom: var(--space-xl);
+  margin-bottom: 36px;
 }
 
 .PageHeader h1 {
-  margin: 0;
+  margin: 0 0 6px;
 }
 
 .PageHeader p {
+  margin: 0;
+
   color: var(--color-text-muted);
 }
+
+
+
+/* ====================== */
+/* GRID */
+/* ====================== */
 
 .GoalsGrid {
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 2fr 1fr;
 
   gap: var(--space-lg);
+
+  align-items: stretch;
 }
 
+
+
+/* Every grid item stretches */
+
+.GoalsGrid > div {
+  display: flex;
+}
+
+.GoalsGrid > div > * {
+  flex: 1;
+}
+
+
+
+/* ====================== */
+/* LAYOUT */
+/* ====================== */
+
+.ExerciseWrapper {
+  grid-column: 1 / -1;
+}
+
+
+
+/* ====================== */
+/* MOBILE */
+/* ====================== */
+
 @media (max-width: 900px) {
+
   .GoalsGrid {
+
     grid-template-columns: 1fr;
+
   }
+
+  .ExerciseWrapper {
+
+    grid-column: auto;
+
+  }
+
 }

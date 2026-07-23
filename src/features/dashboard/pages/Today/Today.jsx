@@ -6,6 +6,9 @@ import RecentMeals from "@/features/dashboard/components/RecentMeals/RecentMeals
 import ProgressCard from "@/features/dashboard/components/ProgressCard/ProgressCard";
 import QuickActions from "@/features/dashboard/components/QuickActions/QuickActions";
 
+import {
+  selectSelectedDate,
+} from "@/features/nutrition/store/selectors";
 
 import {
   selectFirstName,
@@ -38,29 +41,30 @@ export default function Today() {
   const carbsGoal = useSelector(selectCarbsGoal);
   const fatGoal = useSelector(selectFatGoal);
   const waterGoal = useSelector(selectWaterGoal);
+  const selectedDate = useSelector(selectSelectedDate);
 
 
-  const today = getDateFormatted(new Date());
+  const selected = getDateFormatted(selectedDate);
 
 
-  const todayData =
-    dataPoints.find(
-      (day) => day.date === today
-    ) ?? {};
+const selectedData =
+  dataPoints.find(
+    (day) => day.date === selected
+  ) ?? {};
 
 
-  const water = todayData.water ?? 0;
+  const water = selectedData.water ?? 0;
 
 
   const calories =
-    todayData.intake_list?.reduce(
+    selectedData.intake_list?.reduce(
       (total, item) =>
         total + Number(item.serving?.calories ?? 0),
       0
     ) ?? 0;
 
   const protein =
-  todayData.intake_list?.reduce(
+  selectedData.intake_list?.reduce(
     (total, item) =>
       total + Number(item.serving?.protein ?? 0),
     0
@@ -68,7 +72,7 @@ export default function Today() {
 
 
 const carbs =
-  todayData.intake_list?.reduce(
+  selectedData.intake_list?.reduce(
     (total, item) =>
       total + Number(item.serving?.carbs ?? 0),
     0
@@ -76,7 +80,7 @@ const carbs =
 
 
 const fat =
-  todayData.intake_list?.reduce(
+  selectedData.intake_list?.reduce(
     (total, item) =>
       total + Number(item.serving?.fat ?? 0),
     0
@@ -92,7 +96,7 @@ const fat =
   transition={{ duration: 0.4 }}
   >
       <h1>
-        Good Morning {firstName ? firstName : "there"} 👋
+        Good morning, {firstName || "there"} 👋
       </h1>
 
       <div className="TodayHeaderBottom">
@@ -159,8 +163,8 @@ const fat =
 >
 
 <div className="SectionHeader">
-  <h2>Today's Nutrition</h2>
-  <p>Track your macro progress</p>
+  <h2>Macro Progress</h2>
+  <p>Track your daily nutrition goals</p>
 </div>
 
   <div className="ProgressGrid">

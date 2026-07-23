@@ -18,7 +18,7 @@
 .SearchResultsModalContainer {
   width: 100%;
 
-  max-width: 600px;
+  max-width: 520px;
 
   max-height: 85vh;
 
@@ -35,7 +35,7 @@
 
   box-shadow: var(--shadow-lg);
 
-  padding: var(--space-lg);
+  padding:20px;
 
   max-height: 85vh;
 
@@ -87,7 +87,7 @@
 
   flex-direction: column;
 
-  gap: 12px;
+  gap: 0;
 
   overflow-y: auto;
 

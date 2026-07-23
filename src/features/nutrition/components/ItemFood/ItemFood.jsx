@@ -45,27 +45,29 @@ export default function ItemFood({
   } = item;
 
 
-  const calories =
-    Math.round(
-      serving.calories * serving_size
-    );
+  const amount = serving_size ?? 1;
+
+const calories =
+  Math.round(
+    (serving?.calories ?? 0) * amount
+  );
 
 
   const protein =
     Math.round(
-      serving.protein * serving_size
+      (serving?.protein ?? 0) * amount
     );
 
 
   const carbs =
     Math.round(
-      serving.carbs * serving_size
+      (serving?.carbs ?? 0) * amount
     );
 
 
   const fat =
     Math.round(
-      serving.fat * serving_size
+      (serving?.fat ?? 0) * amount
     );
 
 

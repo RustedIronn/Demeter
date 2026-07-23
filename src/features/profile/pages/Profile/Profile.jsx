@@ -3,7 +3,6 @@ import GoalSummary from "@/features/profile/components/GoalSummary/GoalSummary";
 
 import "./Profile.css";
 
-
 export default function Profile() {
   return (
     <div className="Profile">
@@ -20,15 +19,17 @@ export default function Profile() {
 
       </section>
 
-
       <div className="ProfileGrid">
 
-        <BasicInformation />
+        <div className="ProfileInfo">
+          <BasicInformation />
+        </div>
 
-        <GoalSummary />
+        <div className="ProfileGoals">
+          <GoalSummary />
+        </div>
 
       </div>
-
 
     </div>
   );

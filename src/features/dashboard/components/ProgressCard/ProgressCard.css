@@ -1,61 +1,106 @@
 .ProgressCard {
-  display: flex;
 
-  flex-direction: column;
+  display:flex;
 
-  gap: 12px;
+  flex-direction:column;
+
+  gap:16px;
+
+  min-height:150px;
+
 }
+
 
 
 .ProgressCardHeader {
-  display: flex;
 
-  justify-content: space-between;
+  display:flex;
 
-  align-items: center;
+  justify-content:space-between;
+
+  align-items:center;
+
 }
+
 
 
 .ProgressTitle {
-  font-weight: 600;
 
-  color: var(--color-text);
+  font-weight:700;
+
+  color:var(--color-text);
+
+  font-size:1rem;
+
 }
 
 
-.ProgressValue {
-  color: var(--color-text-secondary);
 
-  font-size: .9rem;
+.ProgressPercentage {
+
+  color:var(--progress-color);
+
+  font-weight:700;
+
 }
+
+
+
+.ProgressNumbers {
+
+  display:flex;
+
+  align-items:baseline;
+
+  gap:6px;
+
+}
+
+
+
+.ProgressNumbers strong {
+
+  font-size:2rem;
+
+  color:var(--color-text);
+
+}
+
+
+
+.ProgressNumbers span {
+
+  color:var(--color-text-muted);
+
+  font-size:.9rem;
+
+}
+
 
 
 .ProgressTrack {
-  height: 10px;
 
-  background: var(--color-surface);
+  height:12px;
 
-  border-radius: 999px;
+  background:var(--color-overlay-light);
 
-  overflow: hidden;
+  border-radius:999px;
+
+  overflow:hidden;
+
 }
+
 
 
 .ProgressFill {
-  height: 100%;
 
-  border-radius: inherit;
+  height:100%;
 
-  transition: width .3s ease;
-}
+  background:var(--progress-color);
 
+  border-radius:inherit;
 
-.ProgressFooter {
-  display: flex;
+  transition:
+    width .5s ease;
 
-  justify-content: flex-end;
-
-  font-size: .85rem;
-
-  color: var(--color-text-muted);
 }

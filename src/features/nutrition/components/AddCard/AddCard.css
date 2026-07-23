@@ -1,176 +1,229 @@
 .AddCard {
-  display: flex;
 
-  flex-direction: column;
+  display:flex;
 
-  gap: var(--space-lg);
+  flex-direction:column;
 
-  color: var(--color-text);
+  gap:20px;
+
+  color:var(--color-text);
+
 }
+
 
 
 /* Header */
 
 .AddCardHeader {
-  display: flex;
 
-  align-items: center;
+  display:flex;
 
-  gap: 16px;
+  align-items:center;
+
+  gap:14px;
+
 }
+
 
 
 .AddCardImage {
-  width: 90px;
 
-  height: 90px;
+  width:72px;
 
-  object-fit: cover;
+  height:72px;
 
-  border-radius: var(--radius-md);
+  object-fit:cover;
+
+  border-radius:var(--radius-md);
+
 }
+
 
 
 .AddCardHeader h2 {
-  margin: 0;
 
-  font-size: 1.4rem;
+  margin:0;
+
+  font-size:1.25rem;
+
 }
+
 
 
 .AddCardHeader p {
-  margin-top: 6px;
 
-  color: var(--color-text-muted);
+  margin:4px 0 0;
+
+  color:var(--color-text-muted);
+
 }
+
+
 
 
 
 /* Stats */
 
 .AddCardStats {
-  display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  display:grid;
 
-  gap: var(--space-md);
+  grid-template-columns:repeat(2,1fr);
+
+  gap:12px;
+
 }
+
 
 
 .AddCardStats div {
-  background: var(--color-surface);
 
-  border-radius: var(--radius-md);
+  padding:14px;
 
-  padding: var(--space-md);
+  border-radius:var(--radius-md);
 
-  text-align: center;
+  background:var(--color-overlay-light);
+
+  text-align:center;
+
 }
+
 
 
 .AddCardStats strong {
-  display: block;
 
-  font-size: 1.6rem;
+  display:block;
 
-  color: var(--color-primary);
+  font-size:1.4rem;
+
+  color:var(--color-primary);
+
 }
+
 
 
 .AddCardStats span {
-  color: var(--color-text-muted);
 
-  font-size: .9rem;
+  color:var(--color-text-muted);
+
+  font-size:.85rem;
+
 }
+
+
 
 
 
 /* Serving */
 
 .AddCardServing {
-  background: var(--color-surface);
 
-  padding: var(--space-md);
+  padding:0;
 
-  border-radius: var(--radius-md);
+  background:none;
+
 }
 
 
 
-/* Meal selection */
+
+
+/* Meal */
 
 .AddCardMeal p {
-  margin-bottom: 12px;
 
-  color: var(--color-text-secondary);
+  margin:0 0 10px;
 
-  font-weight: 600;
+  font-weight:700;
+
+  color:var(--color-text-secondary);
+
 }
+
 
 
 .MealButtons {
-  display: flex;
 
-  flex-wrap: wrap;
+  display:flex;
 
-  gap: 10px;
+  flex-wrap:wrap;
+
+  gap:8px;
+
 }
+
 
 
 .MealButton {
-  padding: 10px 18px;
 
-  border-radius: 999px;
+  padding:8px 16px;
 
-  border: 1px solid var(--color-border);
+  border-radius:999px;
 
-  background: transparent;
+  border:1px solid var(--color-border);
 
-  color: var(--color-text);
+  background:transparent;
 
-  cursor: pointer;
+  color:var(--color-text);
 
-  transition: var(--transition);
+  cursor:pointer;
+
+  transition:.2s ease;
+
 }
+
 
 
 .MealButton:hover {
-  border-color: var(--color-primary);
+
+  border-color:var(--color-primary);
+
 }
+
 
 
 .MealButton.active {
-  background: var(--color-primary);
 
-  color: var(--color-bg);
+  background:var(--color-primary);
 
-  border-color: var(--color-primary);
+  color:var(--color-bg);
+
+  border-color:var(--color-primary);
+
 }
+
+
+
+
 
 .AddFoodButton {
-  width: 100%;
 
-  padding: 14px;
+  width:100%;
 
-  border-radius: var(--radius-md);
+  padding:12px;
 
-  font-weight: 700;
+  border-radius:var(--radius-md);
 
-  font-size: 1rem;
+  font-weight:700;
 
-  transition: var(--transition);
+  font-size:1rem;
+
 }
+
 
 
 .AddFoodButton:hover:not(:disabled) {
-  transform: translateY(-2px);
 
-  background: var(--color-primary-hover);
+  transform:translateY(-2px);
+
 }
 
 
-.AddFoodButton:disabled {
-  opacity: .5;
 
-  cursor: not-allowed;
+.AddFoodButton:disabled {
+
+  opacity:.5;
+
+  cursor:not-allowed;
+
 }
