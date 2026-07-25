@@ -1,4 +1,4 @@
-import { getDateFormatted } from "../utils/utils";
+import { getDateFormatted } from "@/shared/utils/utils";
 
 const today = new Date();
 const yesterday = new Date(

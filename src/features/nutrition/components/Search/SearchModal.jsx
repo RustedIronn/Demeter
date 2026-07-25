@@ -6,13 +6,16 @@ import {
 
 import {
   searchModalSet,
-} from "@/features/nutrition/store/slice";
+} from "@/shared/store/uiSlice";
+
+import {
+  selectSearchResults,
+} from "@/features/nutrition/store/selectors";
 
 import {
   selectLoadingSearch,
-  selectSearchResults,
   selectSearchVisible,
-} from "@/features/nutrition/store/selectors";
+} from "@/shared/store/selectors";
 
 import SearchResultCard from "./SearchResultCard";
 

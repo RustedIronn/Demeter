@@ -8,7 +8,7 @@ import QuickActions from "@/features/dashboard/components/QuickActions/QuickActi
 
 import {
   selectSelectedDate,
-} from "@/features/nutrition/store/selectors";
+} from "@/shared/store/selectors";
 
 import {
   selectFirstName,

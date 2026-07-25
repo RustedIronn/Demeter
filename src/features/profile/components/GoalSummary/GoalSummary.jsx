@@ -11,25 +11,25 @@ import "./GoalSummary.css";
 
 export default function GoalSummary() {
 
-  const personal = useSelector(
-    (state) => state.personal
+  const profile = useSelector(
+    (state) => state.profile
   );
 
-  const {
-    caloriesConsumed,
-    proteinConsumed,
-    carbsConsumed,
-    fatConsumed,
-  } = useSelector(
-    (state) => state.calculatedInformation
-  );
+const {
+  caloriesConsumed,
+  proteinConsumed,
+  carbsConsumed,
+  fatConsumed,
+} = useSelector(
+  (state) => state.goals
+);
 
   const percentage =
-    personal.daily_goal
+    profile.daily_goal
       ? Math.min(
           Math.round(
             (caloriesConsumed /
-              personal.daily_goal) *
+              profile.daily_goal) *
               100
           ),
           100
@@ -50,7 +50,7 @@ export default function GoalSummary() {
         <div className="GoalProgressContent">
 
           <strong>
-            {caloriesConsumed} / {personal.daily_goal} kcal
+            {caloriesConsumed} / {profile.daily_goal} kcal
           </strong>
 
           <span>
@@ -78,21 +78,21 @@ export default function GoalSummary() {
           icon={<Beef />}
           label="Protein"
           value={proteinConsumed}
-          goal={personal.protein_goal}
+          goal={profile.protein_goal}
         />
 
         <MacroCard
           icon={<Wheat />}
           label="Carbs"
           value={carbsConsumed}
-          goal={personal.carbs_goal}
+          goal={profile.carbs_goal}
         />
 
         <MacroCard
           icon={<Droplet />}
           label="Fat"
           value={fatConsumed}
-          goal={personal.fat_goal}
+          goal={profile.fat_goal}
         />
 
       </div>

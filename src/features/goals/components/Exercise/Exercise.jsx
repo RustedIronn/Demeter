@@ -7,9 +7,9 @@ import "./Exercise.css";
 
 export default function Exercise() {
 
-  const caloriesConsumed = useSelector(
-    (state) => state.calculatedInformation.caloriesConsumed
-  );
+const caloriesConsumed = useSelector(
+  (state) => state.goals.caloriesConsumed
+);
 
 
   const recommendation = useMemo(() => {

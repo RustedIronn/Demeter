@@ -1,27 +1,27 @@
-const STORAGE_KEY = "demeter-personal";
+const STORAGE_KEY = "demeter-profile";
 
-export const loadPersonalStorage = () => {
+export const loadProfileStorage = () => {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
 
     return saved ? JSON.parse(saved) : null;
   } catch (error) {
-    console.error("Failed to load personal data:", error);
+    console.error("Failed to load profile data:", error);
     return null;
   }
 };
 
-export const savePersonalStorage = (personalData) => {
+export const saveProfileStorage = (profileData) => {
   try {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify(personalData)
+      JSON.stringify(profileData)
     );
   } catch (error) {
-    console.error("Failed to save personal data:", error);
+    console.error("Failed to save profile data:", error);
   }
 };
 
-export const clearPersonalStorage = () => {
+export const clearProfileStorage = () => {
   localStorage.removeItem(STORAGE_KEY);
 };

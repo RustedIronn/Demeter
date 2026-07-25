@@ -11,7 +11,7 @@ import Button from "@/shared/ui/Button/Button";
 import Input from "@/shared/ui/Input/Input";
 
 import {
-  updatePersonalData,
+  updateProfileData,
 } from "@/features/profile/store/thunks";
 
 import "./NutritionGoals.css";
@@ -22,8 +22,8 @@ export default function NutritionGoals() {
   const dispatch = useDispatch();
 
 
-  const personal = useSelector(
-    (state) => state.personal
+  const profile = useSelector(
+    (state) => state.profile
   );
 
 
@@ -32,31 +32,31 @@ export default function NutritionGoals() {
 
 
   const [calories,setCalories] =
-    useState(personal.daily_goal);
+    useState(profile.daily_goal);
 
   const [protein,setProtein] =
-    useState(personal.protein_goal);
+    useState(profile.protein_goal);
 
   const [carbs,setCarbs] =
-    useState(personal.carbs_goal);
+    useState(profile.carbs_goal);
 
   const [fat,setFat] =
-    useState(personal.fat_goal);
+    useState(profile.fat_goal);
 
 
 
   useEffect(()=>{
 
-    setCalories(personal.daily_goal);
-    setProtein(personal.protein_goal);
-    setCarbs(personal.carbs_goal);
-    setFat(personal.fat_goal);
+    setCalories(profile.daily_goal);
+    setProtein(profile.protein_goal);
+    setCarbs(profile.carbs_goal);
+    setFat(profile.fat_goal);
 
   },[
-    personal.daily_goal,
-    personal.protein_goal,
-    personal.carbs_goal,
-    personal.fat_goal
+    profile.daily_goal,
+    profile.protein_goal,
+    profile.carbs_goal,
+    profile.fat_goal
   ]);
 
 
@@ -64,7 +64,7 @@ export default function NutritionGoals() {
   const saveGoals = () => {
 
     dispatch(
-      updatePersonalData({
+      updateProfileData({
 
         daily_goal: calories,
 
@@ -86,10 +86,10 @@ export default function NutritionGoals() {
 
   const cancelEdit = () => {
 
-    setCalories(personal.daily_goal);
-    setProtein(personal.protein_goal);
-    setCarbs(personal.carbs_goal);
-    setFat(personal.fat_goal);
+    setCalories(profile.daily_goal);
+    setProtein(profile.protein_goal);
+    setCarbs(profile.carbs_goal);
+    setFat(profile.fat_goal);
 
     setIsEditing(false);
 

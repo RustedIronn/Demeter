@@ -25,12 +25,12 @@ export default function GoalWeight() {
 
 
   const currentWeight = useSelector(
-    (state) => state.personal.weight_kg
+    (state) => state.profile.weight_kg
   );
 
 
   const goalWeight = useSelector(
-    (state) => state.personal.goal_weight
+    (state) => state.profile.goal_weight
   );
 
 

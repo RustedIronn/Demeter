@@ -20,7 +20,7 @@ export default function InputNumberCustom({
 
 
   const servingSize = useSelector(
-    (state) => state.general.servingSize
+    (state) => state.nutrition.servingSize
   );
 
 

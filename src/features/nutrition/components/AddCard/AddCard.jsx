@@ -1,230 +1,376 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import Button from "@/shared/ui/Button/Button";
 
 import {
-  addModalSet,
   servingSizeSet,
   mealTypeSelectedSet,
   stopEditingFood,
 } from "@/features/nutrition/store/slice";
 
+
+import {
+  addModalSet,
+} from "@/shared/store/uiSlice";
+
+
 import {
   addItemFood,
   updateItemFood,
-} from "@/features/profile/store/thunks";
+} from "@/features/nutrition/store/thunks";
+
+
+import {
+  selectDataPoints,
+} from "@/features/profile/store/selectors";
+
+
+import {
+  selectSelectedFood,
+  selectServingSize,
+  selectMealType,
+  selectIsEditingFood,
+  selectEditingFoodIndex,
+} from "@/features/nutrition/store/selectors";
+
+
+import {
+  selectAddVisible,
+  selectLoadingAdd,
+} from "@/shared/store/selectors";
+
+
+import {
+  selectCaloriesByMealType,
+} from "@/features/goals/store/selectors";
+
 
 import ModalPortal from "@/shared/components/ModalAdd/ModalPortal";
 import ModalAdd from "@/shared/components/ModalAdd/ModalAdd";
 import Loading from "@/shared/components/Loading/Loading";
 import InputNumberCustom from "@/shared/components/InputNumberCustom/InputNumberCustom";
+
 import { capitalize } from "@/shared/utils/utils";
 
 import "./AddCard.css";
 
+
 export default function AddCard() {
+
   const dispatch = useDispatch();
 
-  const dataPoints = useSelector((state) => state.personal.data_points);
-  const addVisible = useSelector((state) => state.general.addVisible);
-  const loadingAdd = useSelector((state) => state.general.loadingAdd);
+
+  const dataPoints = useSelector(
+    selectDataPoints
+  );
+
+
+  const addVisible = useSelector(
+    selectAddVisible
+  );
+
+
+  const loadingAdd = useSelector(
+    selectLoadingAdd
+  );
+
+
   const itemFoodSelected = useSelector(
-    (state) => state.general.itemFoodSelected
+    selectSelectedFood
   );
-  const servingSize = useSelector((state) => state.general.servingSize);
+
+
+  const servingSize = useSelector(
+    selectServingSize
+  );
+
+
   const mealTypeSelected = useSelector(
-    (state) => state.general.mealTypeSelected
+    selectMealType
   );
+
+
   const caloriesByMealType = useSelector(
-    (state) => state.calculatedInformation.caloriesByMealType
+    selectCaloriesByMealType
   );
+
+
   const isEditingFood = useSelector(
-  (state) => state.general.isEditingFood
-);
+    selectIsEditingFood
+  );
 
-const editingFoodIndex = useSelector(
-  (state) => state.general.editingFoodIndex
-);
 
-  const mealTypes = Object.keys(caloriesByMealType);
+  const editingFoodIndex = useSelector(
+    selectEditingFoodIndex
+  );
 
- const closeModalAdd = () => {
-  dispatch(addModalSet(false));
-  dispatch(servingSizeSet(0));
-  dispatch(stopEditingFood());
-};
 
-  const handleMealClick = (index) => {
-    dispatch(mealTypeSelectedSet(index));
+
+  const mealTypes =
+    Object.keys(caloriesByMealType);
+
+
+
+  const closeModalAdd = () => {
+
+    dispatch(
+      addModalSet(false)
+    );
+
+
+    dispatch(
+      servingSizeSet(0)
+    );
+
+
+    dispatch(
+      stopEditingFood()
+    );
+
   };
 
+
+
+  const handleMealClick = (index) => {
+
+    dispatch(
+      mealTypeSelectedSet(index)
+    );
+
+  };
+
+
+
   const handleAddClick = () => {
-  if (isEditingFood) {
-    dispatch(
-      updateItemFood(
-        dataPoints,
-        itemFoodSelected,
-        mealTypes[mealTypeSelected],
-        servingSize,
-        editingFoodIndex
-      )
-    );
-  } else {
-    dispatch(
-      addItemFood(
-        dataPoints,
-        itemFoodSelected,
-        mealTypes[mealTypeSelected],
-        servingSize
-      )
-    );
-  }
-};
+
+    if (isEditingFood) {
+
+      dispatch(
+        updateItemFood(
+          dataPoints,
+          itemFoodSelected,
+          mealTypes[mealTypeSelected],
+          servingSize,
+          editingFoodIndex
+        )
+      );
+
+    } else {
+
+      dispatch(
+        addItemFood(
+          dataPoints,
+          itemFoodSelected,
+          mealTypes[mealTypeSelected],
+          servingSize
+        )
+      );
+
+    }
+
+  };
+
+
 
   const serving =
     itemFoodSelected?.servings?.[
       itemFoodSelected?.selectedServing ?? 0
     ];
 
-  const multiplier = Number(servingSize) || 0;
+
+
+  const multiplier =
+    Number(servingSize) || 0;
+
+
 
   const grams =
     serving && multiplier > 0
-      ? Math.round(serving.metricAmount * multiplier)
+      ? Math.round(
+          serving.metricAmount * multiplier
+        )
       : "-";
+
+
 
   const calories =
     serving && multiplier > 0
-      ? Math.round(serving.calories * multiplier)
+      ? Math.round(
+          serving.calories * multiplier
+        )
       : "-";
+
+
 
   if (!addVisible) return null;
 
+
+
   return (
+
     <ModalPortal>
-<ModalAdd closeModal={closeModalAdd}>
 
-  <Loading loading={loadingAdd} />
-
-
-  {!loadingAdd && itemFoodSelected && serving && (
-
-    <div className="AddCard">
+      <ModalAdd closeModal={closeModalAdd}>
 
 
-      <div className="AddCardHeader">
-
-        <img
-          className="AddCardImage"
-          src={itemFoodSelected.image}
-          alt={itemFoodSelected.name}
-        />
-
-
-        <div>
-
-          <h2>
-            {capitalize(itemFoodSelected.name)}
-          </h2>
-
-
-          {itemFoodSelected.brand && (
-            <p>
-              {capitalize(itemFoodSelected.brand)}
-            </p>
-          )}
-
-        </div>
-
-      </div>
+        <Loading loading={loadingAdd} />
 
 
 
-      <div className="AddCardStats">
+        {!loadingAdd &&
+          itemFoodSelected &&
+          serving && (
 
-        <div>
-          <strong>
-            {grams}
-          </strong>
-
-          <span>
-            grams
-          </span>
-        </div>
+          <div className="AddCard">
 
 
-        <div>
-          <strong>
-            {calories}
-          </strong>
+            <div className="AddCardHeader">
 
-          <span>
-            calories
-          </span>
-        </div>
-
-      </div>
+              <img
+                className="AddCardImage"
+                src={itemFoodSelected.image}
+                alt={itemFoodSelected.name}
+              />
 
 
+              <div>
 
-      <div className="AddCardServing">
-
-        <InputNumberCustom
-          serving_unit={serving.description}
-        />
-
-      </div>
+                <h2>
+                  {capitalize(itemFoodSelected.name)}
+                </h2>
 
 
+                {itemFoodSelected.brand && (
 
-      <div className="AddCardMeal">
+                  <p>
+                    {capitalize(itemFoodSelected.brand)}
+                  </p>
 
-        <p>
-          {isEditingFood
-            ? "Edit food"
-            : "Add to today"}
-        </p>
+                )}
+
+              </div>
+
+            </div>
 
 
-        <div className="MealButtons">
 
-          {mealTypes.map((type, index) => (
+            <div className="AddCardStats">
 
-            <button
-              key={type}
-              className={
-                mealTypeSelected === index
-                  ? "MealButton active"
-                  : "MealButton"
-              }
-              onClick={() =>
-                handleMealClick(index)
-              }
+              <div>
+
+                <strong>
+                  {grams}
+                </strong>
+
+                <span>
+                  grams
+                </span>
+
+              </div>
+
+
+
+              <div>
+
+                <strong>
+                  {calories}
+                </strong>
+
+                <span>
+                  calories
+                </span>
+
+              </div>
+
+
+            </div>
+
+
+
+            <div className="AddCardServing">
+
+              <InputNumberCustom
+                serving_unit={serving.description}
+              />
+
+            </div>
+
+
+
+            <div className="AddCardMeal">
+
+
+              <p>
+                {isEditingFood
+                  ? "Edit food"
+                  : "Add to today"}
+              </p>
+
+
+
+              <div className="MealButtons">
+
+
+                {mealTypes.map(
+                  (type, index) => (
+
+                  <button
+
+                    key={type}
+
+                    className={
+                      mealTypeSelected === index
+                        ? "MealButton active"
+                        : "MealButton"
+                    }
+
+
+                    onClick={() =>
+                      handleMealClick(index)
+                    }
+
+                  >
+
+                    {capitalize(type)}
+
+                  </button>
+
+                ))}
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <Button
+
+              className="AddFoodButton"
+
+              onClick={handleAddClick}
+
+              disabled={multiplier <= 0}
+
             >
-              {capitalize(type)}
-            </button>
 
-          ))}
+              {isEditingFood
+                ? "Save Changes"
+                : "Add Meal"}
 
-        </div>
-
-      </div>
+            </Button>
 
 
+          </div>
 
-      <Button
-        className="AddFoodButton"
-        onClick={handleAddClick}
-        disabled={multiplier <= 0}
-      >
-        {isEditingFood ? "Save Changes" : "Add Meal"}
-      </Button>
+        )}
 
 
-    </div>
+      </ModalAdd>
 
-  )}
-
-</ModalAdd>
     </ModalPortal>
+
   );
+
 }

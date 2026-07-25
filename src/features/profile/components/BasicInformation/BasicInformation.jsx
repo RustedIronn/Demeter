@@ -16,7 +16,7 @@ import CircleData from "@/features/dashboard/components/CircleData/CircleData";
 import ImageProfile from "@/assets/images/profile.png";
 
 import {
-  updatePersonalData,
+  updateProfileData,
 } from "@/features/profile/store/thunks";
 
 import "./BasicInformation.css";
@@ -25,8 +25,8 @@ export default function BasicInformation() {
 
   const dispatch = useDispatch();
 
-  const personal = useSelector(
-    (state) => state.personal
+  const profile = useSelector(
+    (state) => state.profile
   );
 
   const fileInputRef = useRef(null);
@@ -34,35 +34,35 @@ export default function BasicInformation() {
   const [isEditing, setIsEditing] = useState(false);
 
   const [firstName, setFirstName] =
-    useState(personal.first_name);
+    useState(profile.first_name);
 
   const [lastName, setLastName] =
-    useState(personal.last_name);
+    useState(profile.last_name);
 
   const [weight, setWeight] =
-    useState(personal.weight_kg);
+    useState(profile.weight_kg);
 
   const [height, setHeight] =
-    useState(personal.height_cm);
+    useState(profile.height_cm);
 
   const [profilePhoto, setProfilePhoto] =
     useState(ImageProfile);
 
   useEffect(() => {
 
-    setFirstName(personal.first_name);
-    setLastName(personal.last_name);
-    setWeight(personal.weight_kg);
-    setHeight(personal.height_cm);
+    setFirstName(profile.first_name);
+    setLastName(profile.last_name);
+    setWeight(profile.weight_kg);
+    setHeight(profile.height_cm);
 
-  }, [personal]);
+  }, [profile]);
 
   const handleCancel = () => {
 
-    setFirstName(personal.first_name);
-    setLastName(personal.last_name);
-    setWeight(personal.weight_kg);
-    setHeight(personal.height_cm);
+    setFirstName(profile.first_name);
+    setLastName(profile.last_name);
+    setWeight(profile.weight_kg);
+    setHeight(profile.height_cm);
 
     setIsEditing(false);
 
@@ -71,7 +71,7 @@ export default function BasicInformation() {
   const handleSave = () => {
 
     dispatch(
-      updatePersonalData({
+      updateProfileData({
 
         first_name: firstName,
 
@@ -149,7 +149,7 @@ export default function BasicInformation() {
         </h2>
 
         <p className="ProfileSubtitle">
-          Personal Information
+          profile Information
         </p>
 
         <div className="ProfileStats">

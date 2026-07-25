@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import Card from "@/shared/ui/Card/Card";
 
 import {
@@ -6,19 +7,35 @@ import {
   Trash2,
 } from "lucide-react";
 
-import { removeItemFood } from "@/features/profile/store/thunks";
 
 import {
-  addModalSet,
+  removeItemFood,
+} from "@/features/nutrition/store/thunks";
+
+
+import {
   itemFoodSelectedSet,
   servingSizeSet,
   mealTypeSelectedSet,
   startEditingFood,
 } from "@/features/nutrition/store/slice";
 
+
+import {
+  addModalSet,
+} from "@/shared/store/uiSlice";
+
+
+import {
+  selectDataPoints,
+} from "@/features/profile/store/selectors";
+
+
 import { capitalizeAll } from "@/shared/utils/utils";
 
+
 import "./ItemFood.css";
+
 
 
 export default function ItemFood({
@@ -26,14 +43,18 @@ export default function ItemFood({
   index,
 }) {
 
+
   const dispatch = useDispatch();
 
+
   const dataPoints = useSelector(
-    (state) => state.personal.data_points
+    selectDataPoints
   );
 
 
+
   if (!item) return null;
+
 
 
   const {
@@ -45,12 +66,17 @@ export default function ItemFood({
   } = item;
 
 
-  const amount = serving_size ?? 1;
 
-const calories =
-  Math.round(
-    (serving?.calories ?? 0) * amount
-  );
+  const amount =
+    serving_size ?? 1;
+
+
+
+  const calories =
+    Math.round(
+      (serving?.calories ?? 0) * amount
+    );
+
 
 
   const protein =
@@ -59,10 +85,12 @@ const calories =
     );
 
 
+
   const carbs =
     Math.round(
       (serving?.carbs ?? 0) * amount
     );
+
 
 
   const fat =
@@ -71,39 +99,51 @@ const calories =
     );
 
 
+
   const handleDelete = () => {
+
     dispatch(
       removeItemFood(
         dataPoints,
         index
       )
     );
+
   };
 
 
+
   const handleEdit = () => {
+
 
     dispatch(
       startEditingFood(index)
     );
 
 
+
     dispatch(
       itemFoodSelectedSet({
+
         ...item,
+
         servings: [
           {
             ...serving,
           },
         ],
+
         selectedServing: 0,
+
       })
     );
+
 
 
     dispatch(
       servingSizeSet(serving_size)
     );
+
 
 
     const mealTypes = [
@@ -114,6 +154,7 @@ const calories =
     ];
 
 
+
     dispatch(
       mealTypeSelectedSet(
         mealTypes.indexOf(meal_type)
@@ -121,11 +162,13 @@ const calories =
     );
 
 
+
     dispatch(
       addModalSet(true)
     );
 
   };
+
 
 
   return (
@@ -155,8 +198,11 @@ const calories =
           </h3>
 
 
+
           <p>
+
             {serving_size} {serving.servingUnit}
+
 
             {serving.metricAmount &&
               ` (${Math.round(
@@ -177,6 +223,7 @@ const calories =
           <strong>
             {calories} kcal
           </strong>
+
 
 
           <div className="MacroText">
@@ -231,4 +278,5 @@ const calories =
     </Card>
 
   );
+
 }

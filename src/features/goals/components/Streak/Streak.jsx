@@ -10,16 +10,16 @@ import "./Streak.css";
 
 export default function Streak() {
 
-  const personal = useSelector(
-    (state) => state.personal
+  const profile = useSelector(
+    (state) => state.profile
   );
 
 
   const streak = getStreakData(
-    personal.data_points,
+    profile.data_points,
     {
-      calories: personal.daily_goal,
-      protein: personal.protein_goal,
+      calories: profile.daily_goal,
+      protein: profile.protein_goal,
     }
   );
 

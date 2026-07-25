@@ -8,9 +8,12 @@ import { Search } from "lucide-react";
 import { searchModal } from "@/features/nutrition/store/thunks";
 
 import {
-  selectIsMobile,
   selectSearchText,
 } from "@/features/nutrition/store/selectors";
+
+import {
+  selectIsMobile,
+} from "@/shared/store/selectors";
 
 import "./SearchBar.css";
 
@@ -20,7 +23,7 @@ export default function SearchBar() {
   const isMobile = useSelector(selectIsMobile);
   const searchText = useSelector(selectSearchText);
 
-  const [value, setValue] = useState(searchText);
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     setValue(searchText);

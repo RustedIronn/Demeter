@@ -14,7 +14,7 @@ export default function Profile() {
         </h1>
 
         <p>
-          Manage your personal information and goals.
+          Manage your profile information and goals.
         </p>
 
       </section>

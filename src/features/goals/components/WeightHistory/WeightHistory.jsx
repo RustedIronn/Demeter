@@ -18,7 +18,7 @@ import "./WeightHistory.css";
 export default function WeightHistory() {
 
   const history = useSelector(
-    (state) => state.personal.weight_history
+    (state) => state.profile.weight_history
   );
 
 

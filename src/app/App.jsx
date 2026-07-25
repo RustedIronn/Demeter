@@ -3,10 +3,10 @@ import { useEffect } from "react";
 
 import {
   mobileSet,
-} from "@/features/nutrition/store/slice";
+} from "@/shared/store/uiSlice";
 
 import {
-  setPersonalData,
+  setProfileData,
 } from "@/features/profile/store/thunks";
 
 import AppRoutes from "@/app/AppRoutes";
@@ -36,7 +36,7 @@ export default function App() {
 
     updateWindowDimensions();
 
-    dispatch(setPersonalData());
+    dispatch(setProfileData());
 
 
     return () => {

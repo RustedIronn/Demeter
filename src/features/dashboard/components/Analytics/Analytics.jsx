@@ -14,8 +14,8 @@ export default function Analytics() {
 
   const [period, setPeriod] = useState("week");
 
-  const personal = useSelector(
-    (state) => state.personal
+  const profile = useSelector(
+    (state) => state.profile
   );
 
   const analytics = useMemo(() => {
@@ -23,7 +23,7 @@ export default function Analytics() {
     const now = new Date();
 
     const filtered =
-      personal.data_points.filter((day) => {
+      profile.data_points.filter((day) => {
 
         const date = new Date(day.date);
 
@@ -54,10 +54,10 @@ export default function Analytics() {
 
     const achievements =
       getGoalAchievement(filtered,{
-        calories: personal.daily_goal,
-        protein: personal.protein_goal,
-        carbs: personal.carbs_goal,
-        fat: personal.fat_goal,
+        calories: profile.daily_goal,
+        protein: profile.protein_goal,
+        carbs: profile.carbs_goal,
+        fat: profile.fat_goal,
       });
 
     return {
@@ -70,11 +70,11 @@ export default function Analytics() {
 
 },[
   period,
-  personal.data_points,
-  personal.daily_goal,
-  personal.protein_goal,
-  personal.carbs_goal,
-  personal.fat_goal,
+  profile.data_points,
+  profile.daily_goal,
+  profile.protein_goal,
+  profile.carbs_goal,
+  profile.fat_goal,
 ]);
 
   return (

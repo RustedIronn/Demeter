@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
+
 import {
   selectSelectedDate,
-} from "@/features/nutrition/store/selectors";
+} from "@/shared/store/selectors";
 
 import { CalendarDays } from "lucide-react";
 

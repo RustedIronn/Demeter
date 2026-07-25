@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {
   selectIntakeList,
-} from "@/features/profile/store/selectors";
+} from "@/features/nutrition/store/selectors";
 
 import {
   Utensils,

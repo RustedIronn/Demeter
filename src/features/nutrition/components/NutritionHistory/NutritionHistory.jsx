@@ -25,7 +25,7 @@ export default function NutritionHistory() {
 
 
   const dataPoints = useSelector(
-    (state) => state.personal.data_points
+    (state) => state.profile.data_points
   );
 
 

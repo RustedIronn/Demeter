@@ -8,8 +8,11 @@ import { useDispatch } from "react-redux";
 
 import {
   mealTypeSelectedSet,
-  searchModalSet,
 } from "@/features/nutrition/store/slice";
+
+import {
+  searchModalSet,
+} from "@/shared/store/uiSlice";
 
 import ItemFood from "@/features/nutrition/components/ItemFood/ItemFood";
 

@@ -7,6 +7,10 @@ import {
   Cookie,
 } from "lucide-react";
 
+import {
+  selectIntakeList,
+} from "@/features/nutrition/store/selectors";
+
 import MealSection from "@/features/nutrition/components/MealSection/MealSection";
 
 import "./ListFood.css";
@@ -39,9 +43,8 @@ const MEALS = [
 export default function ListFood() {
 
   const intakeList = useSelector(
-    (state) => state.personal.intakeList
-  );
-
+  selectIntakeList
+) ?? [];
 
   const grouped = MEALS.map((meal) => ({
 

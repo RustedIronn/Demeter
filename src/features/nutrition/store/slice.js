@@ -1,102 +1,159 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
-  isMobile: false,
-  searchVisible: false,
-  addVisible: false,
-  dateSelected: new Date(),
+
   searchText: "",
+
   common: [],
+
   branded: [],
+
+  intakeList: [],
+
   loadingSearch: false,
+
   loadingAdd: false,
+
   itemFoodSelected: null,
+
   servingSize: 0,
+
   mealTypeSelected: 0,
+
   isEditingFood: false,
+
   editingFoodIndex: null,
+
 };
 
-const generalSlice = createSlice({
-  name: "general",
+
+
+const nutritionSlice = createSlice({
+
+  name: "nutrition",
+
   initialState,
+
+
   reducers: {
-    mobileSet(state, action) {
-      state.isMobile = action.payload;
+
+
+    searchTextSet(state, action) {
+
+      state.searchText =
+        action.payload;
+
     },
 
-    searchModalSet(state, action) {
-      const { searchVisible, searchText } = action.payload;
-
-      state.searchVisible = searchVisible;
-
-      if (searchVisible || searchText === "") {
-        state.searchText = searchText;
-      }
-    },
-
-    addModalSet(state, action) {
-      state.addVisible = action.payload;
-    },
-
-    dateSet(state, action) {
-      state.dateSelected = action.payload;
-    },
-
-    loadingSearchSet(state, action) {
-      state.loadingSearch = action.payload;
-    },
-
-    loadingAddSet(state, action) {
-      state.loadingAdd = action.payload;
-    },
 
     searchItemsSet(state, action) {
-      state.common = action.payload.common;
-      state.branded = action.payload.branded;
+
+      state.common =
+        action.payload.common;
+
+
+      state.branded =
+        action.payload.branded;
+
     },
 
+
+    loadingSearchSet(state, action) {
+
+      state.loadingSearch =
+        action.payload;
+
+    },
+
+
+    loadingAddSet(state, action) {
+
+      state.loadingAdd =
+        action.payload;
+
+    },
+
+
     itemFoodSelectedSet(state, action) {
+
       state.itemFoodSelected = {
         ...action.payload,
         serving_size: 0,
       };
+
     },
+
+intakeListSet(state, action) {
+  state.intakeList = action.payload;
+},
+
 
     servingSizeSet(state, action) {
-      state.servingSize = action.payload;
+
+      state.servingSize =
+        action.payload;
+
     },
+
 
     mealTypeSelectedSet(state, action) {
-      state.mealTypeSelected = action.payload;
+
+      state.mealTypeSelected =
+        action.payload;
+
     },
 
-    startEditingFood(state, action) {
-  state.isEditingFood = true;
-  state.editingFoodIndex = action.payload;
-},
 
-stopEditingFood(state) {
-  state.isEditingFood = false;
-  state.editingFoodIndex = null;
-},
+    startEditingFood(state, action) {
+
+      state.isEditingFood = true;
+
+      state.editingFoodIndex =
+        action.payload;
+
+    },
+
+
+    stopEditingFood(state) {
+
+      state.isEditingFood = false;
+
+      state.editingFoodIndex = null;
+
+    },
+
 
   },
+
 });
 
-export const {
-  mobileSet,
-  searchModalSet,
-  addModalSet,
-  dateSet,
-  loadingSearchSet,
-  loadingAddSet,
-  searchItemsSet,
-  itemFoodSelectedSet,
-  servingSizeSet,
-  mealTypeSelectedSet,
-  startEditingFood,
-  stopEditingFood,
-} = generalSlice.actions;
 
-export default generalSlice.reducer;
+
+export const {
+
+  searchTextSet,
+
+  searchItemsSet,
+
+  loadingSearchSet,
+
+  intakeListSet,
+
+  loadingAddSet,
+
+  itemFoodSelectedSet,
+
+  servingSizeSet,
+
+  mealTypeSelectedSet,
+
+  startEditingFood,
+
+  stopEditingFood,
+
+} = nutritionSlice.actions;
+
+
+
+export default nutritionSlice.reducer;

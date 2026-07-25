@@ -1,8 +1,22 @@
-export const selectCalculatedInformation = (state) =>
-  state.calculatedInformation;
+export const selectGoals = (state) =>
+  state.goals;
+
 
 export const selectCaloriesConsumed = (state) =>
-  state.calculatedInformation.caloriesConsumed;
+  state.goals.caloriesConsumed;
+
+
+export const selectProteinConsumed = (state) =>
+  state.goals.proteinConsumed;
+
+
+export const selectCarbsConsumed = (state) =>
+  state.goals.carbsConsumed;
+
+
+export const selectFatConsumed = (state) =>
+  state.goals.fatConsumed;
+
 
 export const selectCaloriesByMealType = (state) =>
-  state.calculatedInformation.caloriesByMealType;
+  state.goals.caloriesByMealType;
