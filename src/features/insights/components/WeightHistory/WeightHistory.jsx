@@ -14,6 +14,8 @@ import {
 
 import "./WeightHistory.css";
 
+import { parseLocalDate } from "@/shared/utils/utils";
+
 
 export default function WeightHistory() {
 
@@ -24,7 +26,7 @@ export default function WeightHistory() {
 
   const formatDate = (dateString) => {
 
-    const date = new Date(dateString);
+    const date = parseLocalDate(dateString);
 
     const today = new Date();
 
@@ -68,8 +70,8 @@ export default function WeightHistory() {
       ?.slice()
       .sort(
         (a,b) =>
-          new Date(a.date) -
-          new Date(b.date)
+          parseLocalDate(a.date) -
+          parseLocalDate(b.date)
       )
       .map((entry)=>({
 

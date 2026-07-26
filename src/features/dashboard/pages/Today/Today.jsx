@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import DatePicker from "@/features/dashboard/components/DatePicker/DatePicker";
+import DatePicker from "@/shared/components/DatePicker/DatePicker";
 import SummaryCard from "@/features/dashboard/components/SummaryCard/SummaryCard";
-import RecentMeals from "@/features/dashboard/components/RecentMeals/RecentMeals";
+import RecentMeals from "@/features/nutrition/components/RecentMeals/RecentMeals";
 import ProgressCard from "@/features/dashboard/components/ProgressCard/ProgressCard";
 import QuickActions from "@/features/dashboard/components/QuickActions/QuickActions";
 

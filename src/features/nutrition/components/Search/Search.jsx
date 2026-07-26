@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 import SearchBar from "./SearchBar";
-import DatePicker from "@/features/dashboard/components/DatePicker/DatePicker";
+import DatePicker from "@/shared/components/DatePicker/DatePicker";
 
 import { selectIsMobile } from "@/shared/store/selectors";
 

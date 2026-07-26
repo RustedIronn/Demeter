@@ -3,7 +3,7 @@ import { Flame } from "lucide-react";
 
 import Card from "@/shared/ui/Card/Card";
 
-import { getStreakData } from "@/shared/utils/nutritionAnalytics";
+import { getStreakData } from "@/features/nutrition/lib/nutritionAnalytics";
 
 import "./Streak.css";
 

@@ -6,7 +6,9 @@ import Card from "@/shared/ui/Card/Card";
 import {
   getNutritionAverage,
   getGoalAchievement,
-} from "@/shared/utils/nutritionAnalytics";
+} from "@/features/nutrition/lib/nutritionAnalytics";
+
+import { parseLocalDate } from "@/shared/utils/utils";
 
 import "./Analytics.css";
 
@@ -25,7 +27,7 @@ export default function Analytics() {
     const filtered =
       profile.data_points.filter((day) => {
 
-        const date = new Date(day.date);
+        const date = parseLocalDate(day.date);
 
         if (period === "week") {
           return (

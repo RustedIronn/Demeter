@@ -1,3 +1,5 @@
+import { parseLocalDate } from "@/shared/utils/utils";
+
 export const getNutritionTotals = (intakeList = []) => {
   let calories = 0;
   let protein = 0;
@@ -155,7 +157,7 @@ export const getStreakData = (
       );
     })
     .map((day) => {
-      const date = new Date(day.date);
+      const date = parseLocalDate(day.date);
       date.setHours(0, 0, 0, 0);
       return date.getTime();
     })

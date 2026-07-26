@@ -1,6 +1,6 @@
-import Analytics from "@/features/dashboard/components/Analytics/Analytics";
-import NutritionHistory from "@/features/nutrition/components/NutritionHistory/NutritionHistory";
-import WeightHistory from "@/features/goals/components/WeightHistory/WeightHistory";
+import Analytics from "@/features/insights/components/Analytics/Analytics";
+import NutritionHistory from "@/features/insights/components/NutritionHistory/NutritionHistory";
+import WeightHistory from "@/features/insights/components/WeightHistory/WeightHistory";
 
 import "./Insights.css";
 

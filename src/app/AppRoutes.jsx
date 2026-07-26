@@ -23,39 +23,46 @@ export default function AppRoutes() {
 
         <Route element={<AppLayout />}>
 
-          <Route
-            path="/today"
-            element={<Today />}
-          />
+  <Route
+    path="/today"
+    element={<Today />}
+  />
 
-          <Route
-            path="/diary"
-            element={<Diary />}
-          />
+  <Route
+    path="/diary"
+    element={<Diary />}
+  />
 
-          <Route
-            path="/goals"
-            element={<Goals />}
-          />
+  <Route
+    path="/goals"
+    element={<Goals />}
+  />
 
-          <Route
-            path="/insights"
-            element={<Insights />}
-          />
+  <Route
+    path="/insights"
+    element={<Insights />}
+  />
 
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
+  <Route
+    path="/profile"
+    element={<Profile />}
+  />
 
-          <Route
-            path="/"
-            element={
-              <Navigate to="/today" />
-            }
-          />
+  <Route
+    path="/"
+    element={
+      <Navigate to="/today" replace />
+    }
+  />
 
-        </Route>
+  <Route
+    path="*"
+    element={
+      <Navigate to="/today" replace />
+    }
+  />
+
+</Route>
 
       </Routes>
 

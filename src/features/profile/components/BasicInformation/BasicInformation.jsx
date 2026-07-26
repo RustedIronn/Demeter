@@ -11,7 +11,7 @@ import Card from "@/shared/ui/Card/Card";
 import Button from "@/shared/ui/Button/Button";
 import Input from "@/shared/ui/Input/Input";
 
-import CircleData from "@/features/dashboard/components/CircleData/CircleData";
+import CircleData from "@/features/profile/components/CircleData/CircleData";
 
 import ImageProfile from "@/assets/images/profile.png";
 

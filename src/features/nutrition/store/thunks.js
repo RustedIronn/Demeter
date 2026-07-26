@@ -160,8 +160,8 @@ async(dispatch)=>{
     const food =
       await getFood(foodId);
 
-
-
+console.log("FOOD FROM API:", food);
+      
     dispatch(
       itemFoodSelectedSet(food)
     );
@@ -201,7 +201,7 @@ export const setDate =
 
   dispatch(
     dateSet(
-      dateSelected.toISOString()
+      getDateFormatted(dateSelected)
     )
   );
 
@@ -359,10 +359,11 @@ servingSize
 
 
 
- const date =
- getDateFormatted(
-  getState().ui.dateSelected
- );
+const selectedDate =
+ new Date(getState().ui.dateSelected);
+
+const date =
+ getDateFormatted(selectedDate);
 
 
 
@@ -427,7 +428,7 @@ servingSize
  dispatch(
   setIntakeList(
     dataPoints,
-    new Date(date)
+    selectedDate
   )
  );
 
@@ -465,10 +466,11 @@ editingIndex
 
 
 
- const date =
- getDateFormatted(
-  getState().ui.dateSelected
- );
+const selectedDate =
+ new Date(getState().ui.dateSelected);
+
+const date =
+ getDateFormatted(selectedDate);
 
 
 
@@ -516,7 +518,7 @@ editingIndex
  dispatch(
   setIntakeList(
     dataPoints,
-    new Date(date)
+    selectedDate
   )
  );
 
@@ -539,10 +541,11 @@ export const removeItemFood =
 (dispatch,getState)=>{
 
 
- const date =
- getDateFormatted(
-  getState().ui.dateSelected
- );
+const selectedDate =
+ new Date(getState().ui.dateSelected);
+
+const date =
+ getDateFormatted(selectedDate);
 
 
 
@@ -581,7 +584,7 @@ export const removeItemFood =
  dispatch(
   setIntakeList(
    dataPoints,
-   new Date(date)
+   selectedDate
   )
  );
 

@@ -1,5 +1,5 @@
 import BasicInformation from "@/features/profile/components/BasicInformation/BasicInformation";
-import GoalSummary from "@/features/profile/components/GoalSummary/GoalSummary";
+import GoalSummary from "@/features/goals/components/GoalSummary/GoalSummary";
 
 import "./Profile.css";
 

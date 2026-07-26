@@ -2,7 +2,9 @@ import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { ChartLine } from "lucide-react";
 
-import { getNutritionTotals } from "@/shared/utils/nutritionAnalytics";
+import { getNutritionTotals } from "@/features/nutrition/lib/nutritionAnalytics";
+
+import { parseLocalDate } from "@/shared/utils/utils";
 
 import {
   ResponsiveContainer,
@@ -42,7 +44,7 @@ export default function NutritionHistory() {
       .map((day) => ({
 
         date:
-          new Date(day.date)
+          parseLocalDate(day.date)
             .toLocaleDateString(
               "en-GB",
               {

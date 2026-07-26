@@ -1,4 +1,4 @@
-.ModalAdd {
+.Modal {
   position: fixed;
 
   inset: 0;
@@ -15,7 +15,7 @@
 }
 
 
-.ModalAddContent {
+.ModalContent {
   width: 100%;
 
   max-width: 520px;
@@ -47,7 +47,7 @@
 }
 
 
-.ModalAddBackdrop {
+.ModalBackdrop {
   position: fixed;
 
   inset: 0;
@@ -126,12 +126,12 @@
 
 @media(max-width:600px) {
 
-  .ModalAdd {
+  .Modal {
     padding: 10px;
   }
 
 
-  .ModalAddContent {
+  .ModalContent {
     max-height: 95vh;
   }
 

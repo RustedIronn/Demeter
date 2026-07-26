@@ -10,7 +10,7 @@ import uiReducer from "@/shared/store/uiSlice";
 const store = configureStore({
 
   reducer: {
-
+ 
     auth: authReducer,
 
     profile: profileReducer,

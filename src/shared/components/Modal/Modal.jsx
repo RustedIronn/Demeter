@@ -1,10 +1,10 @@
 import React from 'react';
-import './ModalAdd.css';
+import './Modal.css';
 
-const ModalAdd = (props) => {
+const Modal = (props) => {
     return (
-        <div className="ModalAdd">
-            <div className="ModalAddContent">
+        <div className="Modal">
+            <div className="ModalContent">
                 <div className="ModalPortal">
                     {props.children}
                 </div>
@@ -14,9 +14,9 @@ const ModalAdd = (props) => {
   className="AddCardClose"
   aria-label="Close modal"
 />
-            <div className="ModalAddBackdrop"></div>
+            <div className="ModalBackdrop"></div>
         </div>
     );
 }
 
-export default ModalAdd;
+export default Modal;

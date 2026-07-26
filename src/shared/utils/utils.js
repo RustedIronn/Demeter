@@ -17,3 +17,11 @@ export const getDateFormatted = (date) =>
     appendLeadingZeroes(date.getMonth() + 1),
     appendLeadingZeroes(date.getDate()),
   ].join("-");
+
+// new Date("YYYY-MM-DD") parses as UTC midnight, which can land on the
+// wrong local calendar day. Use this instead for any date string produced
+// by getDateFormatted, so it's parsed as local midnight.
+export const parseLocalDate = (dateString) => {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+};

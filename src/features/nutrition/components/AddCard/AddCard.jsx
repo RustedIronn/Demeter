@@ -8,7 +8,6 @@ import {
   stopEditingFood,
 } from "@/features/nutrition/store/slice";
 
-
 import {
   addModalSet,
 } from "@/shared/store/uiSlice";
@@ -45,10 +44,10 @@ import {
 } from "@/features/goals/store/selectors";
 
 
-import ModalPortal from "@/shared/components/ModalAdd/ModalPortal";
-import ModalAdd from "@/shared/components/ModalAdd/ModalAdd";
+import ModalPortal from "@/shared/components/Modal/ModalPortal";
+import Modal from "@/shared/components/Modal/Modal";
 import Loading from "@/shared/components/Loading/Loading";
-import InputNumberCustom from "@/shared/components/InputNumberCustom/InputNumberCustom";
+import InputNumberCustom from "@/features/nutrition/components/InputNumberCustom/InputNumberCustom";
 
 import { capitalize } from "@/shared/utils/utils";
 
@@ -84,7 +83,6 @@ export default function AddCard() {
     selectServingSize
   );
 
-
   const mealTypeSelected = useSelector(
     selectMealType
   );
@@ -111,7 +109,7 @@ export default function AddCard() {
 
 
 
-  const closeModalAdd = () => {
+  const closeModal = () => {
 
     dispatch(
       addModalSet(false)
@@ -157,14 +155,14 @@ export default function AddCard() {
 
     } else {
 
-      dispatch(
-        addItemFood(
-          dataPoints,
-          itemFoodSelected,
-          mealTypes[mealTypeSelected],
-          servingSize
-        )
-      );
+dispatch(
+  addItemFood(
+    dataPoints,
+    itemFoodSelected,
+    mealTypes[mealTypeSelected],
+    servingSize
+  )
+);
 
     }
 
@@ -210,7 +208,7 @@ export default function AddCard() {
 
     <ModalPortal>
 
-      <ModalAdd closeModal={closeModalAdd}>
+      <Modal closeModal={closeModal}>
 
 
         <Loading loading={loadingAdd} />
@@ -367,7 +365,7 @@ export default function AddCard() {
         )}
 
 
-      </ModalAdd>
+      </Modal>
 
     </ModalPortal>
 
