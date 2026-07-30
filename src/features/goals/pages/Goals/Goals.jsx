@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 import Exercise from "@/features/goals/components/Exercise/Exercise";
 import WaterCard from "@/features/goals/components/WaterCard/WaterCard";
 import GoalWeight from "@/features/goals/components/GoalWeight/GoalWeight";
@@ -6,49 +8,58 @@ import Streak from "@/features/goals/components/Streak/Streak";
 
 import "./Goals.css";
 
+const sectionAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export default function Goals() {
   return (
-    <div className="Goals">
-
-      <section className="PageHeader">
-
+    <main className="Goals">
+      <motion.header
+        className="GoalsHeader"
+        variants={sectionAnimation}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: .35 }}
+      >
         <h1>Goals</h1>
+        <p>Manage your daily targets and long-term progress.</p>
+      </motion.header>
 
-        <p>
-          Manage your daily targets and long-term progress.
-        </p>
-
-      </section>
-
-
-      <div className="GoalsGrid">
-
-        <div className="NutritionCard">
+      <motion.div
+        className="GoalsGrid"
+        variants={sectionAnimation}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: .35, delay: .1 }}
+      >
+        <div className="GoalsNutrition">
           <NutritionGoals />
         </div>
 
-
-        <div className="WaterCardWrapper">
+        <div className="GoalsWater">
           <WaterCard />
         </div>
 
-
-        <div className="GoalWeightWrapper">
+        <div className="GoalsWeight">
           <GoalWeight />
         </div>
 
-
-        <div className="StreakWrapper">
+        <div className="GoalsStreak">
           <Streak />
         </div>
 
-
-        <div className="ExerciseWrapper">
+        <div className="GoalsExercise">
           <Exercise />
         </div>
-
-      </div>
-
-    </div>
+      </motion.div>
+    </main>
   );
 }

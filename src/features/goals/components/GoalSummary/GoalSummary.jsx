@@ -1,129 +1,169 @@
 import { useSelector } from "react-redux";
+import { Beef, Droplet, Flame, Wheat } from "lucide-react";
+
 import Card from "@/shared/ui/Card/Card";
-import {
-  Flame,
-  Wheat,
-  Beef,
-  Droplet,
-} from "lucide-react";
+import CardHeader from "@/shared/ui/CardHeader/CardHeader";
 
 import "./GoalSummary.css";
 
-export default function GoalSummary() {
+const MACROS = [
+  {
+    key: "protein",
+    label: "Protein",
+    icon: Beef,
+    color: "var(--color-success)",
+  },
+  {
+    key: "carbs",
+    label: "Carbs",
+    icon: Wheat,
+    color: "var(--color-warning)",
+  },
+  {
+    key: "fat",
+    label: "Fat",
+    icon: Droplet,
+    color: "var(--color-primary)",
+  },
+];
 
-  const profile = useSelector(
-    (state) => state.profile
+function getPercentage(value, goal) {
+  if (!goal) return 0;
+
+  return Math.min(
+    Math.max(Math.round((value / goal) * 100), 0),
+    100
+  );
+}
+
+export default function GoalSummary() {
+  const profile = useSelector((state) => state.profile);
+
+  const {
+    caloriesConsumed = 0,
+    proteinConsumed = 0,
+    carbsConsumed = 0,
+    fatConsumed = 0,
+  } = useSelector((state) => state.goals);
+
+  const calorieGoal = Number(profile.daily_goal) || 0;
+
+  const caloriePercentage = getPercentage(
+    caloriesConsumed,
+    calorieGoal
   );
 
-const {
-  caloriesConsumed,
-  proteinConsumed,
-  carbsConsumed,
-  fatConsumed,
-} = useSelector(
-  (state) => state.goals
-);
-
-  const percentage =
-    profile.daily_goal
-      ? Math.min(
-          Math.round(
-            (caloriesConsumed /
-              profile.daily_goal) *
-              100
-          ),
-          100
-        )
-      : 0;
+  const macroValues = {
+    protein: {
+      value: proteinConsumed,
+      goal: Number(profile.protein_goal) || 0,
+    },
+    carbs: {
+      value: carbsConsumed,
+      goal: Number(profile.carbs_goal) || 0,
+    },
+    fat: {
+      value: fatConsumed,
+      goal: Number(profile.fat_goal) || 0,
+    },
+  };
 
   return (
     <Card className="GoalSummary">
-
-      <h2>
-        Today's Goals
-      </h2>
+      <CardHeader
+        title="Today’s Goals"
+        subtitle="Your daily nutrition progress"
+      />
 
       <div className="GoalProgress">
-
-        <Flame />
-
-        <div className="GoalProgressContent">
-
-          <strong>
-            {caloriesConsumed} / {profile.daily_goal} kcal
-          </strong>
-
-          <span>
-            {percentage}% of daily goal
-          </span>
-
-          <div className="ProgressTrack">
-
-            <div
-              className="ProgressFill"
-              style={{
-                width: `${percentage}%`,
-              }}
-            />
-
-          </div>
-
+        <div className="GoalProgressIcon">
+          <Flame size={22} />
         </div>
 
+        <div className="GoalProgressContent">
+          <div className="GoalProgressValues">
+            <strong>
+              {Math.round(caloriesConsumed)} kcal
+            </strong>
+
+            <span>
+              of {calorieGoal || "--"} kcal
+            </span>
+          </div>
+
+          <div
+            className="GoalProgressTrack"
+            role="progressbar"
+            aria-label="Daily calorie progress"
+            aria-valuemin="0"
+            aria-valuemax={calorieGoal}
+            aria-valuenow={Math.round(caloriesConsumed)}
+          >
+            <div
+              className="GoalProgressFill"
+              style={{ width: `${caloriePercentage}%` }}
+            />
+          </div>
+
+          <span className="GoalProgressPercentage">
+            {caloriePercentage}% of daily goal
+          </span>
+        </div>
       </div>
 
       <div className="MacroGrid">
+        {MACROS.map(({ key, label, icon: Icon, color }) => {
+          const { value, goal } = macroValues[key];
 
-        <MacroCard
-          icon={<Beef />}
-          label="Protein"
-          value={proteinConsumed}
-          goal={profile.protein_goal}
-        />
-
-        <MacroCard
-          icon={<Wheat />}
-          label="Carbs"
-          value={carbsConsumed}
-          goal={profile.carbs_goal}
-        />
-
-        <MacroCard
-          icon={<Droplet />}
-          label="Fat"
-          value={fatConsumed}
-          goal={profile.fat_goal}
-        />
-
+          return (
+            <MacroCard
+              key={key}
+              icon={Icon}
+              label={label}
+              value={value}
+              goal={goal}
+              color={color}
+            />
+          );
+        })}
       </div>
-
     </Card>
   );
 }
 
 function MacroCard({
-  icon,
+  icon: Icon,
   label,
   value,
   goal,
+  color,
 }) {
+  const percentage = getPercentage(value, goal);
+
   return (
-    <div className="MacroCard">
+    <div
+      className="GoalMacroCard"
+      style={{ "--macro-color": color }}
+    >
+      <div className="GoalMacroHeader">
+        <div className="GoalMacroIcon">
+          <Icon size={18} />
+        </div>
 
-      {icon}
+        <span>{label}</span>
+      </div>
 
-      <span>
-        {label}
-      </span>
+      <div className="GoalMacroValue">
+        <strong>{Math.round(value)}</strong>
+        <span>/ {goal || "--"} g</span>
+      </div>
 
-      <strong>
-        {value}g
-      </strong>
-
-      <small>
-        Goal: {goal} g
-      </small>
-
+      <div className="GoalMacroTrack">
+        <div
+          className="GoalMacroFill"
+          style={{ width: `${percentage}%` }}
+        />
+      </div>
     </div>
   );
 }

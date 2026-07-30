@@ -2,66 +2,86 @@
   margin-top: var(--space-xl);
 }
 
-
-.QuickActions h2 {
+.QuickActionsHeader {
   margin-bottom: var(--space-lg);
 }
 
+.QuickActionsHeader h2 {
+  margin: 0;
+}
+
+.QuickActionsHeader p {
+  margin: var(--space-xs) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
 
 .ActionGrid {
   display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: var(--space-lg);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
 }
-
 
 .ActionButton {
+  --action-color: var(--color-primary);
   width: 100%;
-
-  min-height: 72px;
-
-  display: flex;
-
-  align-items: center;
-
+  min-height: 64px;
   justify-content: center;
-
-  gap: 12px;
-
-  border-radius: var(--radius-lg);
-
-  font-size: 1rem;
-
-  font-weight: 700;
-
-  box-shadow: var(--shadow-sm);
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
+  gap: var(--space-sm);
+  border-color: color-mix(
+    in srgb,
+    var(--action-color) 28%,
+    var(--color-border)
+  );
 }
-
-
-.ActionButton:hover {
-  transform: translateY(-3px);
-
-  box-shadow: var(--shadow-md);
-}
-
 
 .ActionButton svg {
-  width: 22px;
-
-  height: 22px;
+  flex-shrink: 0;
+  color: var(--action-color);
 }
 
+.ActionButton:hover {
+  border-color: var(--action-color);
+  background: color-mix(
+    in srgb,
+    var(--action-color) 12%,
+    var(--color-surface)
+  );
+}
+
+.ActionButtonFood {
+  --action-color: var(--color-primary);
+}
+
+.ActionButtonWater {
+  --action-color: var(--color-water);
+}
+
+.ActionButtonWeight {
+  --action-color: var(--color-success);
+}
 
 @media (max-width: 900px) {
+  .ActionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .QuickActions {
+    margin-top: var(--space-lg);
+  }
+
+  .QuickActionsHeader {
+    margin-bottom: var(--space-md);
+  }
 
   .ActionGrid {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
   }
 
+  .ActionButton {
+    min-height: 56px;
+  }
 }

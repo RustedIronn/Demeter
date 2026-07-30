@@ -6,39 +6,25 @@ export default function SummaryCard({
   title,
   value,
   subtitle,
-  accent,
+  accent = "var(--color-primary)",
 }) {
   return (
     <Card
       className="SummaryCard"
-      style={{
-        "--accent": accent,
-      }}
+      style={{ "--summary-accent": accent }}
     >
-
       <div className="SummaryCardHeader">
-
         <div className="SummaryCardIcon">
           {icon}
         </div>
 
-        <span>
-          {title}
-        </span>
-
+        <span>{title}</span>
       </div>
 
-
-      <div className="SummaryCardValue">
-        <h2>
-          {value}
-        </h2>
-
-        <p>
-          {subtitle}
-        </p>
+      <div className="SummaryCardContent">
+        <strong>{value}</strong>
+        <p>{subtitle}</p>
       </div>
-
     </Card>
   );
 }

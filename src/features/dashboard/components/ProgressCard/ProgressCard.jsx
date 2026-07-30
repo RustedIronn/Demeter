@@ -1,65 +1,66 @@
 import Card from "@/shared/ui/Card/Card";
+import Badge from "@/shared/ui/Badge/Badge";
+
 import "./ProgressCard.css";
+
+function formatValue(value) {
+  const number = Number(value) || 0;
+  return Number(number.toFixed(2));
+}
 
 export default function ProgressCard({
   title,
-  current,
-  goal,
-  unit,
-  color,
+  current = 0,
+  goal = 0,
+  unit = "",
+  color = "var(--color-primary)",
 }) {
+  const safeCurrent = Number(current) || 0;
+  const safeGoal = Number(goal) || 0;
+
   const percentage =
-    goal === 0
+    safeGoal <= 0
       ? 0
-      : Math.min((current / goal) * 100, 100);
+      : Math.min(Math.max((safeCurrent / safeGoal) * 100, 0), 100);
 
   return (
     <Card
       className="ProgressCard"
-      style={{
-        "--progress-color": color,
-      }}
+      style={{ "--progress-color": color }}
     >
-
       <div className="ProgressCardHeader">
+        <span className="ProgressTitle">{title}</span>
 
-        <span className="ProgressTitle">
-          {title}
-        </span>
-
-        <span className="ProgressPercentage">
+        <Badge className="ProgressPercentage">
           {Math.round(percentage)}%
-        </span>
-
+        </Badge>
       </div>
 
-
       <div className="ProgressNumbers">
-
         <strong>
-          {current}
+          {formatValue(safeCurrent)}
           {unit}
         </strong>
 
         <span>
-          / {goal}{unit}
+          of {formatValue(safeGoal)}
+          {unit}
         </span>
-
       </div>
 
-
-      <div className="ProgressTrack">
-
+      <div
+        className="ProgressTrack"
+        role="progressbar"
+        aria-label={`${title} progress`}
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow={Math.round(percentage)}
+      >
         <div
           className="ProgressFill"
-          style={{
-            width: `${percentage}%`,
-          }}
+          style={{ width: `${percentage}%` }}
         />
-
       </div>
-
-
     </Card>
   );
 }

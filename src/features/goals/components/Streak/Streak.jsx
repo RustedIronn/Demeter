@@ -1,97 +1,60 @@
 import { useSelector } from "react-redux";
-import { Flame } from "lucide-react";
+import { Award, Flame } from "lucide-react";
 
 import Card from "@/shared/ui/Card/Card";
+import CardHeader from "@/shared/ui/CardHeader/CardHeader";
 
 import { getStreakData } from "@/features/nutrition/lib/nutritionAnalytics";
 
 import "./Streak.css";
 
-
 export default function Streak() {
+  const profile = useSelector((state) => state.profile);
 
-  const profile = useSelector(
-    (state) => state.profile
-  );
+  const streak = getStreakData(profile.data_points ?? [], {
+    calories: Number(profile.daily_goal) || 0,
+    protein: Number(profile.protein_goal) || 0,
+  });
 
-
-  const streak = getStreakData(
-    profile.data_points,
-    {
-      calories: profile.daily_goal,
-      protein: profile.protein_goal,
-    }
-  );
-
+  const currentStreak = Number(streak.currentStreak) || 0;
+  const longestStreak = Number(streak.longestStreak) || 0;
 
   return (
-
     <Card className="Streak">
-
-
-      <div className="StreakHeader">
-
-
-        <div className="StreakIcon">
-
-          <Flame />
-
-        </div>
-
-
-        <div>
-
-          <h2>
-            Streak
-          </h2>
-
-          <p>
-            Keep your momentum going
-          </p>
-
-        </div>
-
-
-      </div>
-
-
-
+      <CardHeader
+        title="Streak"
+        subtitle="Keep your momentum going"
+        icon={
+          <div className="StreakIcon">
+            <Flame size={20} />
+          </div>
+        }
+      />
 
       <div className="CurrentStreak">
+        <div className="CurrentStreakValue">
+          <strong>{currentStreak}</strong>
+          <span>{currentStreak === 1 ? "day" : "days"}</span>
+        </div>
 
-
-        <strong>
-          {streak.currentStreak}
-        </strong>
-
-
-        <span>
-          days
-        </span>
-
-
+        <p>
+          {currentStreak > 0
+            ? "You’re building a consistent routine."
+            : "Complete your goals today to start a streak."}
+        </p>
       </div>
-
-
-
 
       <div className="LongestStreak">
+        <div className="LongestStreakLabel">
+          <Award size={18} />
 
-        <span>
-          Longest streak
-        </span>
-
+          <span>Longest streak</span>
+        </div>
 
         <strong>
-          {streak.longestStreak} days
+          {longestStreak} {longestStreak === 1 ? "day" : "days"}
         </strong>
-
-
       </div>
-
-
     </Card>
-
   );
-
 }

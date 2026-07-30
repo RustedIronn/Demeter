@@ -1,298 +1,196 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  Beef,
+  Flame,
   Pencil,
   Save,
+  Wheat,
   X,
+  Zap,
 } from "lucide-react";
 
 import Card from "@/shared/ui/Card/Card";
+import CardHeader from "@/shared/ui/CardHeader/CardHeader";
 import Button from "@/shared/ui/Button/Button";
 import Input from "@/shared/ui/Input/Input";
 
-import {
-  updateProfileData,
-} from "@/features/profile/store/thunks";
+import { updateProfileData } from "@/features/profile/store/thunks";
 
 import "./NutritionGoals.css";
 
+const GOALS = [
+  {
+    key: "daily_goal",
+    label: "Calories",
+    unit: "kcal",
+    icon: Flame,
+    accent: "var(--color-primary)",
+  },
+  {
+    key: "protein_goal",
+    label: "Protein",
+    unit: "g",
+    icon: Beef,
+    accent: "var(--color-success)",
+  },
+  {
+    key: "carbs_goal",
+    label: "Carbs",
+    unit: "g",
+    icon: Wheat,
+    accent: "var(--color-warning)",
+  },
+  {
+    key: "fat_goal",
+    label: "Fat",
+    unit: "g",
+    icon: Zap,
+    accent: "var(--color-maple)",
+  },
+];
+
+function getGoalValues(profile) {
+  return {
+    daily_goal: Number(profile.daily_goal) || 0,
+    protein_goal: Number(profile.protein_goal) || 0,
+    carbs_goal: Number(profile.carbs_goal) || 0,
+    fat_goal: Number(profile.fat_goal) || 0,
+  };
+}
 
 export default function NutritionGoals() {
-
   const dispatch = useDispatch();
+  const profile = useSelector((state) => state.profile);
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [goals, setGoals] = useState(() => getGoalValues(profile));
 
-  const profile = useSelector(
-    (state) => state.profile
-  );
-
-
-  const [isEditing,setIsEditing] =
-    useState(false);
-
-
-  const [calories,setCalories] =
-    useState(profile.daily_goal);
-
-  const [protein,setProtein] =
-    useState(profile.protein_goal);
-
-  const [carbs,setCarbs] =
-    useState(profile.carbs_goal);
-
-  const [fat,setFat] =
-    useState(profile.fat_goal);
-
-
-
-  useEffect(()=>{
-
-    setCalories(profile.daily_goal);
-    setProtein(profile.protein_goal);
-    setCarbs(profile.carbs_goal);
-    setFat(profile.fat_goal);
-
-  },[
+  useEffect(() => {
+    if (!isEditing) {
+      setGoals(getGoalValues(profile));
+    }
+  }, [
     profile.daily_goal,
     profile.protein_goal,
     profile.carbs_goal,
-    profile.fat_goal
+    profile.fat_goal,
+    isEditing,
   ]);
 
+  const updateGoal = (key, value) => {
+    const parsedValue = Number(value);
 
+    setGoals((current) => ({
+      ...current,
+      [key]: Number.isFinite(parsedValue)
+        ? Math.max(0, parsedValue)
+        : 0,
+    }));
+  };
 
   const saveGoals = () => {
-
-    dispatch(
-      updateProfileData({
-
-        daily_goal: calories,
-
-        protein_goal: protein,
-
-        carbs_goal: carbs,
-
-        fat_goal: fat,
-
-      })
-    );
-
-
+    dispatch(updateProfileData(goals));
     setIsEditing(false);
-
   };
-
-
 
   const cancelEdit = () => {
-
-    setCalories(profile.daily_goal);
-    setProtein(profile.protein_goal);
-    setCarbs(profile.carbs_goal);
-    setFat(profile.fat_goal);
-
+    setGoals(getGoalValues(profile));
     setIsEditing(false);
-
   };
 
-
-
   return (
-
     <Card className="NutritionGoals">
-
-
-      <div className="NutritionGoalsHeader">
-
-        <div>
-
-          <h2>
-            Nutrition Goals
-          </h2>
-
-          <p>
-            Your daily targets
-          </p>
-
-        </div>
-
-
-        {!isEditing && (
-
-          <Button
-            onClick={() =>
-              setIsEditing(true)
-            }
-          >
-
-            <Pencil size={16}/>
-
-            Edit
-
-          </Button>
-
-        )}
-
-      </div>
-
-
-
+      <CardHeader
+        title="Nutrition Goals"
+        subtitle="Your daily calorie and macro targets"
+        action={
+          !isEditing ? (
+            <Button
+              variant="secondary"
+              size="small"
+              onClick={() => setIsEditing(true)}
+            >
+              <Pencil size={16} />
+              Edit
+            </Button>
+          ) : null
+        }
+      />
 
       <div className="NutritionGoalsGrid">
-
-
-        <GoalInput
-          label="Calories"
-          icon="🔥"
-          unit="kcal"
-          value={calories}
-          editing={isEditing}
-          onChange={setCalories}
-        />
-
-
-        <GoalInput
-          label="Protein"
-          icon="🥩"
-          unit="g"
-          value={protein}
-          editing={isEditing}
-          onChange={setProtein}
-        />
-
-
-        <GoalInput
-          label="Carbs"
-          icon="🍚"
-          unit="g"
-          value={carbs}
-          editing={isEditing}
-          onChange={setCarbs}
-        />
-
-
-        <GoalInput
-          label="Fat"
-          icon="🥑"
-          unit="g"
-          value={fat}
-          editing={isEditing}
-          onChange={setFat}
-        />
-
-
+        {GOALS.map((goal) => (
+          <GoalInput
+            key={goal.key}
+            {...goal}
+            value={goals[goal.key]}
+            editing={isEditing}
+            onChange={(value) => updateGoal(goal.key, value)}
+          />
+        ))}
       </div>
 
-
-
-
       {isEditing && (
-
         <div className="NutritionGoalActions">
-
-
           <Button
             variant="secondary"
             onClick={cancelEdit}
           >
-
-            <X size={16}/>
-
+            <X size={16} />
             Cancel
-
           </Button>
 
-
-          <Button
-            onClick={saveGoals}
-          >
-
-            <Save size={16}/>
-
-            Save
-
+          <Button onClick={saveGoals}>
+            <Save size={16} />
+            Save Goals
           </Button>
-
-
         </div>
-
       )}
-
-
     </Card>
-
   );
-
 }
-
-
 
 function GoalInput({
   label,
-  icon,
   unit,
+  icon: Icon,
+  accent,
   value,
   editing,
   onChange,
 }) {
-
-
   return (
-
-    <div className="GoalInput">
-
-
+    <div
+      className="GoalInput"
+      style={{ "--goal-accent": accent }}
+    >
       <div className="GoalLabel">
+        <div className="GoalIcon">
+          <Icon size={18} />
+        </div>
 
-        <span>
-          {icon}
-        </span>
-
-
-        <p>
-          {label}
-        </p>
-
+        <span>{label}</span>
       </div>
 
-
-
       {editing ? (
+        <div className="GoalEditField">
+          <Input
+            type="number"
+            min="0"
+            step="1"
+            value={value}
+            onChange={(event) => onChange(event.target.value)}
+            aria-label={`${label} goal`}
+          />
 
-        <Input
-
-          className="GoalInputField"
-
-          type="number"
-
-          value={value}
-
-          onChange={(e)=>
-            onChange(
-              Number(e.target.value)
-            )
-          }
-
-        />
-
-
+          <span>{unit}</span>
+        </div>
       ) : (
-
-        <strong>
-
-          {value}
-
-          <small>
-            {unit}
-          </small>
-
-        </strong>
-
+        <div className="GoalValue">
+          <strong>{value}</strong>
+          <span>{unit}</span>
+        </div>
       )}
-
-
     </div>
-
   );
-
 }

@@ -1,133 +1,83 @@
 import { useMemo } from "react";
-import { Dumbbell } from "lucide-react";
 import { useSelector } from "react-redux";
+import { Dumbbell, Footprints, PersonStanding } from "lucide-react";
+
 import Card from "@/shared/ui/Card/Card";
 
 import "./Exercise.css";
 
 export default function Exercise() {
-
-const caloriesConsumed = useSelector(
-  (state) => state.goals.caloriesConsumed
-);
-
+  const caloriesConsumed =
+    Number(
+      useSelector(
+        (state) => state.goals.caloriesConsumed
+      )
+    ) || 0;
 
   const recommendation = useMemo(() => {
-
     if (caloriesConsumed <= 500) {
-
       return {
-
-        title: "Easy Day",
-
-        emoji: "🚶",
-
-        text:
-          "A light walk, stretching, or mobility work is a good choice today.",
-
+        title: "Keep It Light",
+        text: "A relaxed walk, stretching, or mobility work is a comfortable option today.",
+        icon: PersonStanding,
+        accent: "var(--color-sage)",
       };
-
     }
-
 
     if (caloriesConsumed <= 1500) {
-
       return {
-
         title: "Stay Active",
-
-        emoji: "🏃",
-
-        text:
-          "A moderate workout, brisk walk, cycling, or a gym session would fit well today.",
-
+        text: "A brisk walk, cycling session, or moderate workout could fit well into your day.",
+        icon: Footprints,
+        accent: "var(--color-success)",
       };
-
     }
 
-
     return {
-
-      title: "Fuel Available",
-
-      emoji: "💪",
-
-      text:
-        "You have plenty of energy available today. If you're training, this is a good day for a longer or more intense session.",
-
+      title: "Ready to Train",
+      text: "A longer gym session or higher-intensity workout may suit you, depending on your energy and recovery.",
+      icon: Dumbbell,
+      accent: "var(--color-maple)",
     };
-
   }, [caloriesConsumed]);
 
+  const RecommendationIcon = recommendation.icon;
 
   return (
-
-    <Card className="Exercise">
-
+    <Card
+      className="Exercise"
+      style={{ "--exercise-accent": recommendation.accent }}
+    >
       <div className="ExerciseHeader">
-
         <div className="ExerciseIcon">
-
-          <Dumbbell />
-
+          <Dumbbell size={22} />
         </div>
 
         <div>
-
-          <h2>
-            Activity Suggestion
-          </h2>
-
-          <p>
-            General guidance for today
-          </p>
-
+          <h2>Activity Suggestion</h2>
+          <p>General guidance for today</p>
         </div>
-
       </div>
-
-
 
       <div className="ExerciseCalories">
-
-        <strong>
-
-          {caloriesConsumed}
-
-        </strong>
-
-        <span>
-          kcal consumed
-        </span>
-
+        <strong>{Math.round(caloriesConsumed)}</strong>
+        <span>kcal consumed</span>
       </div>
-
-
 
       <div className="ExerciseSuggestion">
-
-        <div className="SuggestionTitle">
-
-          <span>
-            {recommendation.emoji}
-          </span>
-
-          <strong>
-            {recommendation.title}
-          </strong>
-
+        <div className="SuggestionIcon">
+          <RecommendationIcon size={20} />
         </div>
 
-        <p>
-
-          {recommendation.text}
-
-        </p>
-
+        <div>
+          <strong>{recommendation.title}</strong>
+          <p>{recommendation.text}</p>
+        </div>
       </div>
 
+      <small className="ExerciseNote">
+        Choose an activity based on how you feel, not calories alone.
+      </small>
     </Card>
-
   );
-
 }

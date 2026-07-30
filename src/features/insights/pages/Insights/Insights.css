@@ -1,87 +1,72 @@
 .Insights {
+  width: 100%;
   max-width: 1200px;
-
   margin: 0 auto;
-
-  padding: var(--space-lg);
 }
 
-
-
-/* ====================== */
-/* HEADER */
-/* ====================== */
-
-.PageHeader {
-  margin-bottom: 36px;
+.InsightsHeader {
+  margin-bottom: var(--space-xl);
 }
 
-.PageHeader h1 {
-  margin: 0 0 6px;
-}
-
-.PageHeader p {
+.InsightsHeader h1 {
   margin: 0;
-
-  color: var(--color-text-muted);
 }
 
-
-
-/* ====================== */
-/* GRID */
-/* ====================== */
+.InsightsHeader p {
+  margin: var(--space-sm) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
 
 .InsightsGrid {
   display: grid;
-
   grid-template-columns: repeat(2, minmax(0, 1fr));
-
+  grid-template-areas:
+    "analytics analytics"
+    "nutrition weight";
   gap: var(--space-lg);
-
   align-items: stretch;
 }
 
-
-
-/* Stretch every card */
-
 .InsightsGrid > div {
+  min-width: 0;
   display: flex;
 }
 
 .InsightsGrid > div > * {
+  width: 100%;
   flex: 1;
 }
 
-
-
-/* ====================== */
-/* LAYOUT */
-/* ====================== */
-
-.AnalyticsWrapper {
-  grid-column: 1 / -1;
+.InsightsAnalytics {
+  grid-area: analytics;
 }
 
+.InsightsNutrition {
+  grid-area: nutrition;
+}
 
-
-/* ====================== */
-/* MOBILE */
-/* ====================== */
+.InsightsWeight {
+  grid-area: weight;
+}
 
 @media (max-width: 900px) {
+  .InsightsGrid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "analytics"
+      "nutrition"
+      "weight";
+  }
+}
+
+@media (max-width: 600px) {
+  .InsightsHeader {
+    margin-bottom: var(--space-lg);
+  }
 
   .InsightsGrid {
-
-    grid-template-columns: 1fr;
-
+    gap: var(--space-md);
   }
-
-  .AnalyticsWrapper {
-
-    grid-column: auto;
-
-  }
-
 }

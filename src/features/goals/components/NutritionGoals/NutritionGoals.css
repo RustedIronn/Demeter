@@ -1,140 +1,107 @@
-.NutritionGoalsHeader {
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin-bottom:20px;
-
+.NutritionGoals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
-
-
-.NutritionGoalsHeader h2 {
-
-  margin:0;
-
-}
-
-
-.NutritionGoalsHeader p {
-
-  margin:4px 0 0;
-
-  color:var(--color-text-muted);
-
-}
-
-
 
 .NutritionGoalsGrid {
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:14px;
-
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
 }
-
-
 
 .GoalInput {
-
-  padding:18px;
-
-  background:var(--color-surface);
-
-  border-radius:var(--radius-md);
-
+  min-width: 0;
+  padding: var(--space-md);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--goal-accent) 10%, var(--color-surface)),
+      var(--color-surface)
+    );
 }
-
-
 
 .GoalLabel {
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  margin-bottom:12px;
-
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
-
-.GoalLabel span {
-
-  font-size:1.3rem;
-
+.GoalLabel > span {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
 }
 
-
-.GoalLabel p {
-
-  margin:0;
-
-  color:var(--color-text-muted);
-
+.GoalIcon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--goal-accent) 16%, transparent);
+  color: var(--goal-accent);
 }
 
-
-
-.GoalInput strong {
-
-  display:flex;
-
-  align-items:baseline;
-
-  gap:6px;
-
-  font-size:1.8rem;
-
+.GoalValue {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
 }
 
-
-
-.GoalInput strong small {
-
-  font-size:.9rem;
-
-  color:var(--color-text-muted);
-
+.GoalValue strong {
+  color: var(--color-text);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
 }
 
-
-
-.GoalInputField {
-
-  width:100%;
-
+.GoalValue span {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
 }
 
+.GoalEditField {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-sm);
+}
 
+.GoalEditField span {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
 
 .NutritionGoalActions {
-
-  display:flex;
-
-  justify-content:flex-end;
-
-  gap:12px;
-
-  margin-top:20px;
-
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
 }
 
-
-
-@media(max-width:700px){
-
-  .NutritionGoalsGrid {
-
-    grid-template-columns:1fr;
-
+@media (max-width: 700px) {
+  .NutritionGoals {
+    gap: var(--space-md);
   }
 
+  .NutritionGoalsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .NutritionGoalActions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .NutritionGoalActions .Button {
+    width: 100%;
+  }
 }

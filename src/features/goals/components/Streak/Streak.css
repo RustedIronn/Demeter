@@ -1,127 +1,98 @@
 .Streak {
-
-  overflow:hidden;
-
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  overflow: hidden;
 }
-
-
-.StreakHeader {
-
-  display:flex;
-
-  align-items:center;
-
-  gap:16px;
-
-  margin-bottom:20px;
-
-}
-
 
 .StreakIcon {
-
-  width:52px;
-
-  height:52px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:rgba(214,104,69,.15);
-
-  color:var(--color-secondary);
-
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
 }
-
-
-.StreakHeader h2 {
-
-  margin:0;
-
-}
-
-
-.StreakHeader p {
-
-  margin:4px 0 0;
-
-  color:var(--color-text-muted);
-
-}
-
-
 
 .CurrentStreak {
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:12px 0 20px;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  text-align: center;
 }
 
-
-
-.CurrentStreak strong {
-
-  font-size:3rem;
-
-  line-height:1;
-
-  color:var(--color-secondary);
-
+.CurrentStreakValue {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
 }
 
-
-
-.CurrentStreak span {
-
-  color:var(--color-text-muted);
-
-  font-weight:600;
-
+.CurrentStreakValue strong {
+  color: var(--color-warning);
+  font-size: var(--text-5xl);
+  font-weight: var(--weight-bold);
+  line-height: 1;
 }
 
+.CurrentStreakValue span {
+  color: var(--color-text-secondary);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+}
 
+.CurrentStreak p {
+  max-width: 300px;
+  margin: var(--space-sm) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
 
 .LongestStreak {
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:14px;
-
-  background:var(--color-surface);
-
-  border-radius:var(--radius-md);
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
 }
 
-
-
-.LongestStreak span {
-
-  color:var(--color-text-muted);
-
+.LongestStreakLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-text-muted);
 }
 
+.LongestStreakLabel svg {
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
 
+.LongestStreakLabel span {
+  color: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
 
 .LongestStreak strong {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  white-space: nowrap;
+}
 
-  color:var(--color-text);
+@media (max-width: 600px) {
+  .Streak {
+    gap: var(--space-md);
+  }
 
+  .CurrentStreakValue strong {
+    font-size: var(--text-4xl);
+  }
 }

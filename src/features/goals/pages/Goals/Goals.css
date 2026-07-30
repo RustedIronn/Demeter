@@ -1,87 +1,83 @@
 .Goals {
+  width: 100%;
   max-width: 1200px;
-
   margin: 0 auto;
-
-  padding: var(--space-lg);
 }
 
-
-
-/* ====================== */
-/* HEADER */
-/* ====================== */
-
-.PageHeader {
-  margin-bottom: 36px;
+.GoalsHeader {
+  margin-bottom: var(--space-xl);
 }
 
-.PageHeader h1 {
-  margin: 0 0 6px;
-}
-
-.PageHeader p {
+.GoalsHeader h1 {
   margin: 0;
-
-  color: var(--color-text-muted);
 }
 
-
-
-/* ====================== */
-/* GRID */
-/* ====================== */
+.GoalsHeader p {
+  margin: var(--space-sm) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
 
 .GoalsGrid {
   display: grid;
-
-  grid-template-columns: 2fr 1fr;
-
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "nutrition nutrition"
+    "water weight"
+    "streak exercise";
   gap: var(--space-lg);
-
   align-items: stretch;
 }
 
-
-
-/* Every grid item stretches */
-
 .GoalsGrid > div {
+  min-width: 0;
   display: flex;
 }
 
 .GoalsGrid > div > * {
+  width: 100%;
   flex: 1;
 }
 
-
-
-/* ====================== */
-/* LAYOUT */
-/* ====================== */
-
-.ExerciseWrapper {
-  grid-column: 1 / -1;
+.GoalsNutrition {
+  grid-area: nutrition;
 }
 
+.GoalsWater {
+  grid-area: water;
+}
 
+.GoalsWeight {
+  grid-area: weight;
+}
 
-/* ====================== */
-/* MOBILE */
-/* ====================== */
+.GoalsStreak {
+  grid-area: streak;
+}
+
+.GoalsExercise {
+  grid-area: exercise;
+}
 
 @media (max-width: 900px) {
+  .GoalsGrid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nutrition"
+      "water"
+      "weight"
+      "streak"
+      "exercise";
+  }
+}
+
+@media (max-width: 600px) {
+  .GoalsHeader {
+    margin-bottom: var(--space-lg);
+  }
 
   .GoalsGrid {
-
-    grid-template-columns: 1fr;
-
+    gap: var(--space-md);
   }
-
-  .ExerciseWrapper {
-
-    grid-column: auto;
-
-  }
-
 }

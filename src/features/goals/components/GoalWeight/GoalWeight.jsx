@@ -1,294 +1,162 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import {
-  Pencil,
-  Save,
-  X,
-  Target,
-} from "lucide-react";
+import { Pencil, Save, Target, X } from "lucide-react";
 
 import Card from "@/shared/ui/Card/Card";
+import CardHeader from "@/shared/ui/CardHeader/CardHeader";
 import Input from "@/shared/ui/Input/Input";
 import Button from "@/shared/ui/Button/Button";
 
-import {
-  setGoalWeight,
-} from "@/features/profile/store/thunks";
+import { setGoalWeight } from "@/features/profile/store/thunks";
 
 import "./GoalWeight.css";
 
-
 export default function GoalWeight() {
-
   const dispatch = useDispatch();
 
+  const currentWeight =
+    Number(useSelector((state) => state.profile.weight_kg)) || 0;
 
-  const currentWeight = useSelector(
-    (state) => state.profile.weight_kg
-  );
+  const goalWeight =
+    Number(useSelector((state) => state.profile.goal_weight)) || 0;
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [goal, setGoal] = useState(goalWeight);
 
-  const goalWeight = useSelector(
-    (state) => state.profile.goal_weight
-  );
+  useEffect(() => {
+    if (!isEditing) {
+      setGoal(goalWeight);
+    }
+  }, [goalWeight, isEditing]);
 
-
-  const [isEditing,setIsEditing] =
-    useState(false);
-
-
-  const [goal,setGoal] =
-    useState(goalWeight);
-
-
-
-  useEffect(()=>{
-
-    setGoal(goalWeight);
-
-  },[goalWeight]);
-
-
-
-  const difference =
-    Math.abs(
-      currentWeight - goalWeight
-    );
-
-
-
-  let message =
-    "Set your target weight";
-
-
-
-  if(goalWeight > 0){
-
-    if(currentWeight > goalWeight){
-
-      message =
-        `${difference} kg remaining`;
-
+  const status = useMemo(() => {
+    if (goalWeight <= 0) {
+      return {
+        message: "Set a target weight to begin tracking",
+        type: "neutral",
+      };
     }
 
-    else if(currentWeight < goalWeight){
+    const difference = Math.abs(currentWeight - goalWeight);
 
-      message =
-        `${difference} kg to gain`;
-
+    if (currentWeight > goalWeight) {
+      return {
+        message: `${difference.toFixed(1)} kg remaining`,
+        type: "progress",
+      };
     }
 
-    else {
-
-      message =
-        "Goal achieved 🎉";
-
+    if (currentWeight < goalWeight) {
+      return {
+        message: `${difference.toFixed(1)} kg to gain`,
+        type: "progress",
+      };
     }
 
-  }
-
-
+    return {
+      message: "Goal achieved",
+      type: "success",
+    };
+  }, [currentWeight, goalWeight]);
 
   const saveGoal = () => {
+    const nextGoal = Number(goal);
 
-    dispatch(
-      setGoalWeight(goal)
-    );
+    if (!Number.isFinite(nextGoal) || nextGoal <= 0) return;
 
+    dispatch(setGoalWeight(nextGoal));
     setIsEditing(false);
-
   };
-
-
 
   const cancelEdit = () => {
-
     setGoal(goalWeight);
-
     setIsEditing(false);
-
   };
 
-
-
   return (
-
     <Card className="GoalWeight">
-
-
-      <div className="GoalWeightHeader">
-
-
-        <div className="GoalWeightIcon">
-
-          <Target/>
-
-        </div>
-
-
-        <div>
-
-          <h2>
-            Goal Weight
-          </h2>
-
-
-          <p>
-            Track your weight target
-          </p>
-
-        </div>
-
-
-      </div>
-
-
-
+      <CardHeader
+        title="Goal Weight"
+        subtitle="Track progress toward your weight target"
+        icon={
+          <div className="GoalWeightIcon">
+            <Target size={20} />
+          </div>
+        }
+      />
 
       <div className="WeightComparison">
+        <div className="WeightMetric">
+          <span>Current</span>
 
-
-        <div>
-
-          <span>
-            Current
-          </span>
-
-
-          <strong>
-            {currentWeight}
+          <div className="WeightValue">
+            <strong>{currentWeight || "--"}</strong>
             <small>kg</small>
-          </strong>
-
+          </div>
         </div>
 
+        <div className="WeightDivider" />
 
-
-        <div className="Divider"/>
-
-
-
-        <div>
-
-          <span>
-            Target
-          </span>
-
+        <div className="WeightMetric">
+          <span>Target</span>
 
           {isEditing ? (
+            <div className="GoalWeightField">
+              <Input
+                type="number"
+                min="1"
+                step="0.1"
+                value={goal}
+                onChange={(event) => setGoal(event.target.value)}
+                aria-label="Target weight"
+              />
 
-            <Input
-
-              className="GoalWeightInput"
-
-              type="number"
-
-              value={goal}
-
-              onChange={(e)=>
-                setGoal(
-                  Number(e.target.value)
-                )
-              }
-
-            />
-
+              <span>kg</span>
+            </div>
           ) : (
-
-            <strong>
-
-              {
-                goalWeight > 0
-                ? goalWeight
-                : "--"
-              }
-
-              <small>
-                kg
-              </small>
-
-            </strong>
-
+            <div className="WeightValue">
+              <strong>{goalWeight || "--"}</strong>
+              <small>kg</small>
+            </div>
           )}
-
         </div>
-
-
       </div>
 
-
-
-
-      <div className="GoalWeightStatus">
-
-        {message}
-
+      <div
+        className={`GoalWeightStatus GoalWeightStatus-${status.type}`}
+      >
+        {status.message}
       </div>
-
-
-
 
       <div className="GoalWeightActions">
-
-
         {!isEditing ? (
-
           <Button
-            onClick={()=>
-              setIsEditing(true)
-            }
+            variant="secondary"
+            onClick={() => setIsEditing(true)}
           >
-
-            <Pencil size={16}/>
-
+            <Pencil size={16} />
             Edit Goal
-
           </Button>
-
-
         ) : (
-
           <>
-
             <Button
-
               variant="secondary"
-
               onClick={cancelEdit}
-
             >
-
-              <X size={16}/>
-
+              <X size={16} />
               Cancel
-
             </Button>
-
-
 
             <Button
-
               onClick={saveGoal}
-
+              disabled={!Number(goal) || Number(goal) <= 0}
             >
-
-              <Save size={16}/>
-
-              Save
-
+              <Save size={16} />
+              Save Goal
             </Button>
-
           </>
-
         )}
-
-
       </div>
-
-
     </Card>
-
   );
-
 }
