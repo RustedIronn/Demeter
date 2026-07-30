@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import AppLayout from "@/layouts/AppLayout";
+import AppLayout from "@/app/layouts/AppLayout";
 
 import Today from "@/features/dashboard/pages/Today/Today";
 import Diary from "@/features/nutrition/pages/Diary/Diary";
@@ -13,7 +13,6 @@ import Diary from "@/features/nutrition/pages/Diary/Diary";
 import Goals from "@/features/goals/pages/Goals/Goals";
 import Insights from "@/features/insights/pages/Insights/Insights";
 import Profile from "@/features/profile/pages/Profile/Profile";
-
 
 export default function AppRoutes() {
   return (

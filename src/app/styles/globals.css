@@ -15,7 +15,10 @@ body,
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  transition: var(--transition);
+
+  transition:
+    background-color var(--transition),
+    color var(--transition);
 }
 
 button,
@@ -23,6 +26,11 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 a {

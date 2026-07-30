@@ -1,72 +1,89 @@
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
-  Home,
-  UtensilsCrossed,
   ChartColumn,
+  Home,
+  Menu,
   Target,
   User,
-  Menu,
+  UtensilsCrossed,
 } from "lucide-react";
 
 import "./NavigationRail.css";
+
+const NAVIGATION_ITEMS = [
+  {
+    to: "/today",
+    label: "Today",
+    icon: Home,
+  },
+  {
+    to: "/diary",
+    label: "Diary",
+    icon: UtensilsCrossed,
+  },
+  {
+    to: "/insights",
+    label: "Insights",
+    icon: ChartColumn,
+  },
+  {
+    to: "/goals",
+    label: "Goals",
+    icon: Target,
+  },
+  {
+    to: "/profile",
+    label: "Profile",
+    icon: User,
+  },
+];
 
 export default function NavigationRail() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <aside
-      className={`NavigationRail ${
-        collapsed ? "collapsed" : ""
-      }`}
+      className={`NavigationRail ${collapsed ? "collapsed" : ""}`}
+      aria-label="Main navigation"
     >
-
       <button
+        type="button"
         className="NavigationToggle"
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={() => setCollapsed((current) => !current)}
+        aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
+        aria-expanded={!collapsed}
       >
-        <Menu size={22}/>
+        <Menu size={21} />
       </button>
 
-      <div className="Brand">
+      <div className="NavigationBrand">
+        <img src="https://i.ibb.co/FkY63bLK/Demeter-Fresh-Sleek.png" alt="" />
 
-        <img src="/logo192.png" alt="Demeter" />
-
-        {!collapsed && (
-          <div>
-            <h2>Demeter</h2>
-            <small>Nutrition Tracker</small>
-          </div>
-        )}
-
+        <div className="NavigationBrandText">
+          <h2>Demeter</h2>
+          <span>Nutrition Tracker</span>
+        </div>
       </div>
 
+      <nav className="NavigationLinks">
+        {NAVIGATION_ITEMS.map(({ to, label, icon: Icon }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              isActive
+                ? "NavigationLink active"
+                : "NavigationLink"
+            }
+            title={collapsed ? label : undefined}
+          >
+            <Icon size={20} />
 
-      <NavLink to="/today">
-        <Home size={20}/>
-        {!collapsed && <span>Today</span>}
-      </NavLink>
-
-      <NavLink to="/diary">
-        <UtensilsCrossed size={20}/>
-        {!collapsed && <span>Diary</span>}
-      </NavLink>
-
-      <NavLink to="/insights">
-        <ChartColumn size={20}/>
-        {!collapsed && <span>Insights</span>}
-      </NavLink>
-
-      <NavLink to="/goals">
-        <Target size={20}/>
-        {!collapsed && <span>Goals</span>}
-      </NavLink>
-
-      <NavLink to="/profile">
-        <User size={20}/>
-        {!collapsed && <span>Profile</span>}
-      </NavLink>
-
+            <span>{label}</span>
+          </NavLink>
+        ))}
+      </nav>
     </aside>
   );
 }

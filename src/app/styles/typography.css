@@ -1,0 +1,106 @@
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+
+@import "@/assets/fonts/fonts.css";
+
+
+/* =========================
+   Base
+========================= */
+
+html,
+body {
+  font-family: "Manrope", sans-serif;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================
+   Headings
+========================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+
+  font-family: "Sebino", serif;
+  font-weight: var(--weight-bold);
+
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: -.02em;
+}
+
+h2 {
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  letter-spacing: -.015em;
+}
+
+h3 {
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+}
+
+h4 {
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+}
+
+h5 {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+
+h6 {
+  font-size: var(--text-base);
+  line-height: var(--leading-snug);
+}
+
+
+/* =========================
+   Body Text
+========================= */
+
+p,
+span {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+
+  color: var(--color-text-secondary);
+}
+
+label {
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+
+  font-weight: var(--weight-semibold);
+
+  color: var(--color-text-secondary);
+}
+
+small {
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+
+  color: var(--color-text-muted);
+}
+
+strong {
+  font-weight: var(--weight-bold);
+
+  color: var(--color-text);
+}

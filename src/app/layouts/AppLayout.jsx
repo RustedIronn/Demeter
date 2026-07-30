@@ -10,13 +10,13 @@ export default function AppLayout() {
     <div className="AppLayout">
       <NavigationRail />
 
-      <main className="MainContent">
+      <div className="AppMain">
         <TopBar />
 
-        <div className="PageContent">
+        <main className="PageContent">
           <Outlet />
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

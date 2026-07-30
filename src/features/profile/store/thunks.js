@@ -329,7 +329,7 @@ export const setWaterGoal =
 
 
 
-const persistProfileData =
+export const persistProfileData =
 (getState) => {
 
   saveProfileStorage(

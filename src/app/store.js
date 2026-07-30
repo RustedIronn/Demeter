@@ -4,7 +4,7 @@ import authReducer from "@/features/auth/store/slice";
 import profileReducer from "@/features/profile/store/slice";
 import nutritionReducer from "@/features/nutrition/store/slice";
 import goalsReducer from "@/features/goals/store/slice";
-import uiReducer from "@/shared/store/uiSlice";
+import uiReducer from "@/app/state/uiSlice";
 
 
 const store = configureStore({

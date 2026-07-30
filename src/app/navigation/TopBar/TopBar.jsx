@@ -3,11 +3,14 @@ import "./TopBar.css";
 export default function TopBar() {
   return (
     <header className="TopBar">
-      <h2>Demeter</h2>
+      <div className="TopBarBrand">
+        <img src="https://i.ibb.co/FkY63bLK/Demeter-Fresh-Sleek.png" alt="" />
 
-      <span className="TopBarSubtitle">
-        Nutrition Tracker
-      </span>
+        <div>
+          <h2>Demeter</h2>
+          <span>Nutrition Tracker</span>
+        </div>
+      </div>
     </header>
   );
 }

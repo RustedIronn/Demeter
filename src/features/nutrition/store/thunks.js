@@ -20,12 +20,16 @@ import {
   loadingAddSet,
   addModalSet,
   dateSet,
-} from "@/shared/store/uiSlice";
+} from "@/app/state/uiSlice";
 
 
 import {
   dataPointsSet,
 } from "@/features/profile/store/slice";
+
+import {
+  persistProfileData,
+} from "@/features/profile/store/thunks";
 
 
 import {
@@ -146,11 +150,12 @@ async(dispatch)=>{
   );
 
 
-  dispatch(
-    searchModalSet({
-      searchVisible:false,
-    })
-  );
+dispatch(
+  searchModalSet({
+    searchVisible: false,
+    searchText: "",
+  })
+);
 
 
 
@@ -201,7 +206,7 @@ export const setDate =
 
   dispatch(
     dateSet(
-      getDateFormatted(dateSelected)
+      dateSelected.toISOString()
     )
   );
 
@@ -423,6 +428,8 @@ const date =
   dataPointsSet(dataPoints)
  );
 
+ persistProfileData(getState);
+
 
 
  dispatch(
@@ -513,6 +520,8 @@ const date =
   dataPointsSet(dataPoints)
  );
 
+ persistProfileData(getState);
+
 
 
  dispatch(
@@ -579,6 +588,8 @@ const date =
   dataPointsSet(dataPoints)
  );
 
+ persistProfileData(getState);
+
 
 
  dispatch(
@@ -622,11 +633,12 @@ const closeFoodModal =
  );
 
 
- dispatch(
+dispatch(
   searchModalSet({
-    searchVisible:false,
+    searchVisible: false,
+    searchText: "",
   })
- );
+);
 
 
 };

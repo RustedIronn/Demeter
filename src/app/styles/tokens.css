@@ -1,0 +1,182 @@
+:root {
+
+  /* =========================
+     FOUNDATION
+  ========================= */
+
+  --color-bg: #2B3427;                 /* Forest Shadow */
+  --color-surface: #3F4938;            /* Moss Stone */
+  --color-card: #56634C;               /* Sage Rock */
+  --color-card-elevated: #647158;
+
+  /* =========================
+     TEXT
+  ========================= */
+
+  --color-text: #F4F3EE;
+  --color-text-secondary: #D7D4CB;
+  --color-text-muted: #AAA89E;
+
+  /* =========================
+     TYPOGRAPHY
+  ========================= */
+
+  /* Font sizes */
+
+  --text-xs: .75rem;      /* 12px */
+  --text-sm: .875rem;     /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.75rem;    /* 28px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+
+  /* Line heights */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --leading-loose: 1.8;
+
+  /* Font weights */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* =========================
+     BRAND
+  ========================= */
+
+  --color-primary: #D8C389;            /* Wheat */
+  --color-primary-hover: #E6D6A8;
+  --color-primary-active: #CDB675;
+
+  /* =========================
+     SEMANTIC
+  ========================= */
+
+  --color-success: #8DA878;
+  --color-warning: #C8884D;
+  --color-danger: #A35C55;
+  --color-water: #73B7D7;
+
+  /* =========================
+     SOFT COLORS
+  ========================= */
+
+  --color-primary-soft: rgba(216, 195, 137, .16);
+  --color-success-soft: rgba(141, 168, 120, .16);
+  --color-warning-soft: rgba(200, 136, 77, .16);
+  --color-danger-soft: rgba(163, 92, 85, .16);
+  --color-water-soft: rgba(115, 183, 215, .16);
+
+  --color-primary-soft-active: rgba(216, 195, 137, .24);
+  --color-success-soft-active: rgba(141, 168, 120, .24);
+  --color-warning-soft-active: rgba(200, 136, 77, .24);
+  --color-danger-soft-active: rgba(163, 92, 85, .24);
+  --color-water-soft-active: rgba(115, 183, 215, .24);
+
+  /* =========================
+     NATURE PALETTE
+  ========================= */
+
+  /* Greens */
+
+  --color-forest: #2B3427;
+  --color-moss: #58664A;
+  --color-fern: #728C60;
+  --color-sage: #A4B497;
+
+  /* Browns */
+
+  --color-bark: #715743;
+  --color-walnut: #8B6A4D;
+
+  /* Stone */
+
+  --color-stone: #85887D;
+  --color-granite: #9A9C92;
+
+  /* Harvest */
+
+  --color-wheat: #D8C389;
+  --color-oat: #E9DCB7;
+  --color-honey: #D6A357;
+
+  /* Autumn */
+
+  --color-autumn: #C8884D;
+  --color-maple: #B86A3E;
+
+  /* Reds */
+
+  --color-mushroom: #A35C55;
+  --color-rosewood: #884942;
+
+  /* Water */
+
+  --color-river: #73B7D7;
+  --color-lake: #96CEE8;
+
+  /* =========================
+     UI
+  ========================= */
+
+  --color-border: rgba(244, 243, 238, .10);
+  --color-divider: rgba(244, 243, 238, .06);
+
+  --color-overlay-light: rgba(255, 255, 255, .06);
+  --color-overlay-dark: rgba(0, 0, 0, .15);
+
+  /* =========================
+     SHADOWS
+  ========================= */
+
+  --shadow-sm:
+    0 2px 8px rgba(0, 0, 0, .14);
+
+  --shadow-md:
+    0 8px 24px rgba(0, 0, 0, .20);
+
+  --shadow-lg:
+    0 16px 40px rgba(0, 0, 0, .28);
+
+  /* =========================
+     RADIUS
+  ========================= */
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* =========================
+     SPACING
+  ========================= */
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  --z-dropdown: 10;
+  --z-sticky: 100;      
+  --z-modal-backdrop: 1000;
+  --z-modal: 1010;
+  --z-toast: 1020;
+
+  /* =========================
+     MOTION
+  ========================= */
+
+  --transition-fast: .15s ease;
+  --transition: .2s ease;
+  --transition-slow: .35s ease;
+
+}
