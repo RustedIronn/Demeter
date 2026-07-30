@@ -1,47 +1,129 @@
 import axios from "axios";
 
+
 const BASE_URL =
   "https://api.nal.usda.gov/fdc/v1";
 
+
+const SEARCH_CACHE_TIME =
+  1000 * 60 * 30;
+
+
 const searchCache = new Map();
 
-const CACHE_TIME =
-  1000 * 60 * 30; // 30 minutes
+
+
+const PREPARED_WORDS = [
+
+  "juice",
+  "drink",
+  "smoothie",
+  "shake",
+  "cake",
+  "pie",
+  "cookie",
+  "bar",
+  "cereal",
+  "chips",
+  "snack",
+  "dessert",
+
+  "fried",
+  "baked",
+  "boiled",
+  "steamed",
+  "roasted",
+  "grilled",
+
+  "canned",
+  "dried",
+  "dehydrated",
+  "frozen",
+
+  "sweetened",
+  "salted",
+  "flavored",
+  "seasoned",
+
+  "with sauce",
+  "ready-to-eat",
+
+];
+
+
 
 function normalizeQuery(query) {
 
-  return query
+  return String(query)
     .toLowerCase()
     .trim();
 
 }
 
+
+
 function cleanName(name = "") {
 
   return name
-    .replace(/, raw/gi, "")
-    .replace(/, cooked/gi, "")
-    .replace(/, with skin/gi, "")
-    .replace(/, without skin/gi, "")
-    .replace(/, ripe/gi, "")
-    .replace(/, slightly ripe/gi, "")
-    .trim();
+
+    .toLowerCase()
+
+    // remove technical USDA words
+    .replace(
+      /\b(raw|cooked|fresh|ripe|slightly ripe|whole|uncooked|edible portion)\b/gi,
+      ""
+    )
+
+    .replace(
+      /\b(sulfured|sulphured)\b/gi,
+      ""
+    )
+
+    // remove percentages
+    .replace(
+      /\b\d+%\b/g,
+      ""
+    )
+
+    // move dried/baked style descriptors
+    .replace(
+      /^(.+?)\s+(dried)$/i,
+      "Dried $1"
+    )
+
+    .replace(
+      /,\s*/g,
+      " "
+    )
+
+    .replace(
+      /\s+/g,
+      " "
+    )
+
+    .trim()
+
+    .replace(/\b\w/g, c => c.toUpperCase());
 
 }
+
+
 
 function getNutrient(food, name, id) {
 
   const nutrient =
     food.foodNutrients?.find(
-      (n) => {
+      (item) => {
 
         const nutrientId =
-          n.nutrientId ??
-          n.nutrient?.id;
+          item.nutrientId ??
+          item.nutrient?.id;
+
 
         const nutrientName =
-          n.nutrientName ??
-          n.nutrient?.name;
+          item.nutrientName ??
+          item.nutrient?.name;
+
 
         return (
 
@@ -54,17 +136,16 @@ function getNutrient(food, name, id) {
       }
     );
 
+
   return Number(
-
     nutrient?.value ??
-
     nutrient?.amount ??
-
     0
-
   );
 
 }
+
+
 
 function scaleNutrient(
   food,
@@ -95,49 +176,39 @@ function classifyFood(food, query) {
     food.description
       ?.toLowerCase() ?? "";
 
-  if (
+const isWholeFood =
 
-    food.brandOwner &&
+  !food.brandOwner &&
 
-    name === query
+  (
+    name === query ||
 
-  ) {
+    name.startsWith(`${query},`) ||
 
-    return "reject";
+    name.includes(", raw") ||
+
+    name.includes(", ripe") ||
+
+    name.includes(", fresh")
+  );
+
+  if (isWholeFood) {
+
+    return "whole";
 
   }
 
-  const preparedWords = [
-
-    "juice",
-    "drink",
-    "smoothie",
-    "cake",
-    "pie",
-    "pudding",
-    "cookie",
-    "bar",
-    "cereal",
-    "yogurt",
-    "chips",
-    "snack",
-
-  ];
-
   if (
-
-    preparedWords.some(
-      word =>
-        name.includes(word)
+    PREPARED_WORDS.some(
+      word => name.includes(word)
     )
-
   ) {
 
     return "prepared";
 
   }
 
-  if(food.brandOwner) {
+  if (food.brandOwner) {
 
     return "brand";
 
@@ -150,64 +221,56 @@ function classifyFood(food, query) {
 function scoreFood(food, query) {
 
   const name =
-    food.description
-      ?.toLowerCase() ?? "";
+    cleanName(food.description)
+      .toLowerCase();
 
   const type =
-    classifyFood(
-      food,
-      query
-    );
-
-  if(type === "reject") {
-
-    return -999;
-
-  }
+    classifyFood(food, query);
 
   let score = 0;
 
-  if(type === "generic") {
+  switch(type) {
 
-    score += 100;
+    case "whole":
+      score += 500;
+      break;
+
+    case "generic":
+      score += 300;
+      break;
+
+    case "prepared":
+      score += 100;
+      break;
+
+    case "brand":
+      score += 0;
+      break;
+
+    default:
+      return -9999;
 
   }
 
-  if(type === "brand") {
+  if (name === query)
+    score += 200;
 
-    score += 20;
+  if (name.startsWith(query))
+    score += 120;
 
-  }
-
-  if(type === "prepared") {
-
-    score -= 50;
-
-  }
-
-  if(name === query) {
-
+  if (name.includes(query))
     score += 60;
 
-  }
+  if (name.includes("fresh"))
+    score += 30;
 
-  if(name.startsWith(query)) {
-
-    score += 40;
-
-  }
-
-  if(name.includes("raw")) {
-
-    score += 25;
-
-  }
-
-  if(name.includes("ripe")) {
-
+  if (name.includes("whole"))
     score += 20;
 
-  }
+  if (name.includes("ripe"))
+    score += 20;
+
+  score -= name.length * 0.15;
 
   return score;
 
@@ -215,51 +278,65 @@ function scoreFood(food, query) {
 
 function formatFood(food) {
 
+
   const amount =
     Number(food.servingSize) || 100;
+
 
   const unit =
     food.servingSizeUnit || "g";
 
   return {
 
+
     id:
       food.fdcId,
+
 
     name:
       cleanName(
         food.description
       ),
 
+
     brand:
       food.brandOwner ?? null,
+
 
     type:
       food.brandOwner
         ? "Brand"
         : "Generic",
 
+
     image:
       null,
+
 
     servings: [
 
       {
+
         id:
           String(
             food.fdcId
           ),
 
+
         description:
+
           food.householdServingFullText ??
 
           `${amount}${unit}`,
 
+
         metricAmount:
           amount,
 
+
         metricUnit:
           unit,
+
 
         calories:
           scaleNutrient(
@@ -269,6 +346,7 @@ function formatFood(food) {
             amount
           ),
 
+
         protein:
           scaleNutrient(
             food,
@@ -276,6 +354,7 @@ function formatFood(food) {
             1003,
             amount
           ),
+
 
         carbs:
           scaleNutrient(
@@ -285,6 +364,7 @@ function formatFood(food) {
             amount
           ),
 
+
         fat:
           scaleNutrient(
             food,
@@ -293,8 +373,10 @@ function formatFood(food) {
             amount
           ),
 
+
         servingAmount:
           1,
+
 
         servingUnit:
           unit,
@@ -307,200 +389,340 @@ function formatFood(food) {
 
 }
 
+
+
 export async function searchFood(query) {
+
 
   const normalizedQuery =
     normalizeQuery(query);
+
+
 
   const cached =
     searchCache.get(
       normalizedQuery
     );
 
-  if(
 
-    cached &&
 
-    Date.now() - cached.time < CACHE_TIME
+  if(cached) {
 
-  ) {
 
-    return cached.data;
+    const expired =
+      Date.now() - cached.time >
+      SEARCH_CACHE_TIME;
+
+
+
+    if(!expired) {
+
+      return cached.data;
+
+    }
+
+
+
+    searchCache.delete(
+      normalizedQuery
+    );
 
   }
 
-  console.log(
-    `🌐 USDA search: ${normalizedQuery}`
+
+
+  if(
+
+    process.env.NODE_ENV !== "production"
+
+  ) {
+
+    console.log(
+      `🌐 USDA search: ${normalizedQuery}`
+    );
+
+  }
+
+
+
+  try {
+
+
+    const response =
+      await axios.get(
+
+        `${BASE_URL}/foods/search`,
+
+        {
+
+          params: {
+
+  api_key:
+    process.env.USDA_API_KEY,
+
+  query:
+    normalizedQuery,
+
+  pageSize:
+    50,
+
+},
+        }
+
+      );
+
+
+
+    let foods =
+  response.data.foods ?? [];
+
+const whole = [];
+const generic = [];
+const prepared = [];
+const branded = [];
+
+for (const food of foods) {
+
+  const type =
+    classifyFood(
+      food,
+      normalizedQuery
+    );
+
+  if (type === "whole") {
+
+  whole.push(food);
+  continue;
+
+}
+
+  if (type === "generic") {
+
+    generic.push(food);
+    continue;
+
+  }
+
+  if (type === "prepared") {
+
+    prepared.push(food);
+    continue;
+
+  }
+
+  branded.push(food);
+
+}
+
+const sorter = (a, b) =>
+  scoreFood(b, normalizedQuery)
+  -
+  scoreFood(a, normalizedQuery);
+
+whole.sort(sorter);
+generic.sort(sorter);
+prepared.sort(sorter);
+branded.sort(sorter);
+
+foods = [
+
+  ...whole,
+  ...generic,
+  ...prepared,
+  ...branded,
+
+];
+
+const seen = new Set();
+
+foods = foods.filter(food => {
+
+  const key =
+    cleanName(food.description)
+      .toLowerCase();
+
+  if (seen.has(key)) {
+    return false;
+  }
+
+  seen.add(key);
+  return true;
+
+});
+
+const results = foods.map((food) => {
+
+  const type =
+    classifyFood(
+      food,
+      normalizedQuery
+    );
+
+  const calories = getNutrient(
+    food,
+    "Energy",
+    1008
   );
 
-  const response =
-    await axios.get(
+  const protein = getNutrient(
+    food,
+    "Protein",
+    1003
+  );
+
+  const carbs = getNutrient(
+    food,
+    "Carbohydrate, by difference",
+    1005
+  );
+
+  const fat = getNutrient(
+    food,
+    "Total lipid (fat)",
+    1004
+  );
+
+  return {
+
+    id: food.fdcId,
+
+    name: cleanName(
+      food.description
+    ),
+
+    brand:
+      food.brandOwner ?? null,
+
+    description:
+      type === "brand"
+        ? food.brandOwner
+        : null,
+
+    type:
+      type === "whole"
+        ? "Whole"
+        : type === "generic"
+          ? "Generic"
+          : type === "prepared"
+            ? "Prepared"
+            : "Brand",
+
+    calories:
+      Math.round(calories),
+
+    protein:
+      Number(protein.toFixed(1)),
+
+    carbs:
+      Number(carbs.toFixed(1)),
+
+    fat:
+      Number(fat.toFixed(1)),
+
+  };
+
+});
 
 
-      `${BASE_URL}/foods/search`,
 
+    searchCache.set(
+
+      normalizedQuery,
 
       {
 
-        params: {
+        data:
+          results,
 
-
-          api_key:
-            process.env.USDA_API_KEY,
-
-
-
-          query:
-            normalizedQuery,
-
-
-
-          pageSize:
-            20,
-
-
-        },
-
-
-      }
-
-
-    );
-
-  let foods =
-    response.data.foods ?? [];
-
-  foods =
-
-    foods.filter(
-
-      food =>
-
-        classifyFood(
-          food,
-          normalizedQuery
-        )
-
-        !==
-
-        "reject"
-
-    );
-
-  foods.sort(
-
-    (a,b)=>
-
-      scoreFood(
-        b,
-        normalizedQuery
-      )
-
-      -
-
-      scoreFood(
-        a,
-        normalizedQuery
-      )
-
-  );
-
-  const results =
-
-    foods.map(
-
-      food => {
-
-        const type =
-          classifyFood(
-            food,
-            normalizedQuery
-          );
-
-        return {
-
-          id:
-            food.fdcId,
-
-          name:
-            cleanName(
-              food.description
-            ),
-
-          brand:
-            food.brandOwner ?? null,
-
-          description:
-            type === "brand"
-
-              ? food.brandOwner
-
-              : null,
-
-          type:
-            type === "brand"
-
-              ? "Brand"
-
-              :
-
-              type === "prepared"
-
-                ? "Prepared"
-
-                :
-
-                "Generic",
-        };
-
+        time:
+          Date.now(),
 
       }
 
     );
 
-  searchCache.set(
 
-    normalizedQuery,
 
-    {
-      data:
-        results,
+    return results;
 
-      time:
-        Date.now(),
-    }
 
-  );
+  }
 
-  return results;
+  catch(error) {
+
+
+    console.error(
+      "USDA search failed:",
+      error.message
+    );
+
+
+    throw error;
+
+  }
+
 }
+
+
 
 export async function getFood(id) {
 
-  console.log(
-    `🌐 USDA detail fetch: ${id}`
-  );
 
-  const response =
-    await axios.get(
+  if(
 
-      `${BASE_URL}/food/${id}`,
-      {
+    process.env.NODE_ENV !== "production"
 
-        params: {
+  ) {
 
-
-          api_key:
-            process.env.USDA_API_KEY,
-
-        },
-
-      }
-
+    console.log(
+      `🌐 USDA detail fetch: ${id}`
     );
 
-  return formatFood(
-    response.data
-  );
+  }
+
+
+
+  try {
+
+
+    const response =
+      await axios.get(
+
+        `${BASE_URL}/food/${id}`,
+
+        {
+
+          params: {
+
+            api_key:
+              process.env.USDA_API_KEY,
+
+          },
+
+        }
+
+      );
+
+
+
+    return formatFood(
+      response.data
+    );
+
+
+  }
+
+  catch(error) {
+
+
+    console.error(
+      "USDA detail failed:",
+      error.message
+    );
+
+
+    throw error;
+
+  }
 
 }

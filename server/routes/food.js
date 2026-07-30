@@ -36,40 +36,36 @@ router.get("/search", async (req, res) => {
 
 
 
-    const formattedFoods =
-      await Promise.all(
+const formattedFoods =
+  await Promise.all(
 
-        foods.map(async (food) => ({
+    foods.map(async (food) => ({
 
-          id:
-            food.id,
+      id: food.id,
 
+      name: food.name,
 
-          name:
-            food.name,
+      brand: food.brand ?? null,
 
+      description: food.description,
 
-          brand:
-            food.brand ?? null,
+      type: food.type,
 
+      calories: food.calories,
 
-          description:
-            food.description,
+      protein: food.protein,
 
+      carbs: food.carbs,
 
-          type:
-            food.type,
+      fat: food.fat,
 
+      image:
+        await getFoodImage(food.name)
+          .catch(() => null),
 
-image:
-  await getFoodImage(food.name)
-    .catch(() => null),
+    }))
 
-        }))
-
-      );
-
-
+  );
 
     res.json(formattedFoods);
 
