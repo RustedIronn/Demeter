@@ -1,145 +1,93 @@
 .Modal {
   position: fixed;
-
   inset: 0;
-
+  z-index: var(--z-modal);
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
-  padding: 20px;
-
-  z-index: 10000;
+  padding: var(--space-lg);
+  background: rgba(0, 0, 0, .58);
+  backdrop-filter: blur(6px);
+  animation: ModalBackdropEnter var(--transition);
 }
-
 
 .ModalContent {
-  width: 100%;
-
-  max-width: 520px;
-
-  max-height: 90vh;
-
-  overflow: hidden;
-
-  background: var(--color-card);
-
-  border: 1px solid var(--color-border);
-
-  border-radius: var(--radius-lg);
-
-  box-shadow: var(--shadow-lg);
-
   position: relative;
-
-  animation: modalEnter 0.2s ease;
+  width: min(100%, 520px);
+  max-height: calc(100vh - 48px);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-card);
+  box-shadow: var(--shadow-lg);
+  animation: ModalEnter var(--transition);
 }
 
-
-.ModalPortal {
+.ModalBody {
+  max-height: calc(100vh - 48px);
   overflow-y: auto;
-
-  max-height: 90vh;
-
   padding: var(--space-lg);
 }
 
-
-.ModalBackdrop {
-  position: fixed;
-
-  inset: 0;
-
-  background: rgba(0,0,0,0.55);
-
-  z-index: -1;
+.ModalBody::-webkit-scrollbar {
+  width: 8px;
 }
 
+.ModalBody::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+}
 
-.AddCardClose {
+.ModalClose {
   position: absolute;
-
-  top: 32px;
-
-  right: calc(50% - 220px);
-
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 1;
   width: 36px;
-
-  height: 36px;
-
-  border-radius: 50%;
-
-  border: none;
-
-  background: var(--color-surface);
-
-  cursor: pointer;
-
-  z-index: 10001;
+  min-height: 36px;
+  padding: 0;
+  border-radius: var(--radius-pill);
 }
 
-
-.AddCardClose::before,
-.AddCardClose::after {
-  content: "";
-
-  position: absolute;
-
-  width: 16px;
-
-  height: 2px;
-
-  background: var(--color-text);
-
-  left: 10px;
-
-  top: 17px;
+@keyframes ModalBackdropEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-
-.AddCardClose::before {
-  transform: rotate(45deg);
-}
-
-
-.AddCardClose::after {
-  transform: rotate(-45deg);
-}
-
-
-@keyframes modalEnter {
-
+@keyframes ModalEnter {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px) scale(.98);
   }
-
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
-
 }
 
-
-@media(max-width:600px) {
-
+@media (max-width: 600px) {
   .Modal {
-    padding: 10px;
+    align-items: flex-end;
+    padding: var(--space-sm);
   }
 
+  .ModalContent,
+  .ModalBody {
+    max-height: calc(100vh - 16px);
+  }
 
   .ModalContent {
-    max-height: 95vh;
+    width: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-md) var(--radius-md);
   }
 
-
-  .AddCardClose {
-    top: 20px;
-
-    right: 20px;
+  .ModalBody {
+    padding: var(--space-md);
+    padding-top: var(--space-xl);
   }
 
+  .ModalClose {
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
 }

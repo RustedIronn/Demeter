@@ -1,24 +1,45 @@
 .Badge {
   display: inline-flex;
   align-items: center;
-
-  padding: 4px 10px;
-
-  border-radius: var(--radius-full);
-
-  font-size: 0.8rem;
-  font-weight: 600;
-
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
   background: var(--color-surface);
   color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.Badge--primary {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary-soft-active);
+  color: var(--color-primary);
 }
 
 .Badge--success {
   background: var(--color-success-soft);
+  border-color: var(--color-success-soft-active);
   color: var(--color-success);
+}
+
+.Badge--warning {
+  background: var(--color-warning-soft);
+  border-color: var(--color-warning-soft-active);
+  color: var(--color-warning);
 }
 
 .Badge--danger {
   background: var(--color-danger-soft);
+  border-color: var(--color-danger-soft-active);
   color: var(--color-danger);
+}
+
+.Badge--water {
+  background: var(--color-water-soft);
+  border-color: var(--color-water-soft-active);
+  color: var(--color-water);
 }

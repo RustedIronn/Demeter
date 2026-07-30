@@ -1,0 +1,57 @@
+.EmptyState {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-overlay-dark);
+  text-align: center;
+}
+
+.EmptyState--compact {
+  min-height: 140px;
+  padding: var(--space-md);
+}
+
+.EmptyStateIcon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.EmptyStateText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.EmptyState h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: "Manrope", sans-serif;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+
+.EmptyState p {
+  max-width: 360px;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+.EmptyStateAction {
+  margin-top: var(--space-sm);
+}

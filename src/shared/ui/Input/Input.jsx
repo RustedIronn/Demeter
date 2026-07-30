@@ -3,12 +3,13 @@ import "./Input.css";
 
 export default function Input({
   className = "",
+  error = false,
   ...props
 }) {
   return (
     <input
-      className={clsx("ui-input", className)}
+      className={clsx("ui-input", { "ui-input--error": error }, className)}
       {...props}
     />
   );
-}   
+}

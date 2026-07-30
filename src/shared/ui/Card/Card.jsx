@@ -7,10 +7,11 @@ export default function Card({
   hover = false,
   clickable = false,
   padding = "md",
+  as: Component = "div",
   ...props
 }) {
   return (
-    <div
+    <Component
       className={clsx(
         "ui-card",
         `ui-card--${padding}`,
@@ -23,6 +24,6 @@ export default function Card({
       {...props}
     >
       {children}
-    </div>
+    </Component>
   );
 }

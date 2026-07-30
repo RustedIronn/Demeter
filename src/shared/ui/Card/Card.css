@@ -1,53 +1,33 @@
 .ui-card {
   background: var(--color-card);
-
   border: 1px solid var(--color-border);
-
   border-radius: var(--radius-lg);
-
   box-shadow: var(--shadow-sm);
-
   transition:
-    transform .2s ease,
-    box-shadow .2s ease;
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
 }
-
-
-/* padding variants */
 
 .ui-card--sm {
   padding: var(--space-sm);
 }
 
-
 .ui-card--md {
   padding: var(--space-md);
 }
-
 
 .ui-card--lg {
   padding: var(--space-lg);
 }
 
-
-/* hover */
-
-.ui-card--hover:hover {
-  transform: translateY(-2px);
-
+.ui-card--hover:hover,
+.ui-card--clickable:hover {
+  border-color: var(--color-primary-soft-active);
   box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-
-
-/* clickable */
 
 .ui-card--clickable {
   cursor: pointer;
-}
-
-
-.ui-card--clickable:hover {
-  transform: translateY(-2px);
-
-  box-shadow: var(--shadow-md);
 }
