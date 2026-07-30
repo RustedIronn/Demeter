@@ -1,50 +1,32 @@
 import { useSelector } from "react-redux";
-
-import {
-  selectSelectedDate,
-} from "@/shared/store/selectors";
-
 import { CalendarDays } from "lucide-react";
+
+import { selectSelectedDate } from "@/app/state/selectors";
 
 import "./DiaryHeader.css";
 
 export default function DiaryHeader() {
-    
-  const selectedDate = useSelector(
-  selectSelectedDate
-);
+  const selectedDate = useSelector(selectSelectedDate);
 
-const formatted =
-  selectedDate.toLocaleDateString(
-    "en-US",
-    {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-    }
-  );
+  const date = new Date(selectedDate);
 
+  const formatted = date.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
-    <div className="DiaryHeader">
-
-      <div>
+    <header className="DiaryHeader">
+      <div className="DiaryHeaderContent">
         <h1>Food Diary</h1>
-
-        <p>
-          Track your meals and nutrition
-        </p>
+        <p>Track your meals and nutrition.</p>
       </div>
-
 
       <div className="DiaryDate">
-        <CalendarDays size={20} />
-
-        <span>
-          {formatted}
-        </span>
+        <CalendarDays size={18} />
+        <span>{formatted}</span>
       </div>
-
-    </div>
+    </header>
   );
 }

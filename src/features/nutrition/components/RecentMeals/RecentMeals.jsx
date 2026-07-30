@@ -1,103 +1,69 @@
-import Card from "@/shared/ui/Card/Card";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ArrowRight, Utensils } from "lucide-react";
 
-import {
-  selectIntakeList,
-} from "@/features/nutrition/store/selectors";
-
-import {
-  Utensils,
-} from "lucide-react";
+import Button from "@/shared/ui/Button/Button";
+import Card from "@/shared/ui/Card/Card";
+import CardHeader from "@/shared/ui/CardHeader/CardHeader";
+import EmptyState from "@/shared/ui/EmptyState/EmptyState";
+import { selectIntakeList } from "@/features/nutrition/store/selectors";
 
 import "./RecentMeals.css";
 
-
 export default function RecentMeals() {
-
-  const intakeList = useSelector(selectIntakeList);
-
+  const intakeList = useSelector(selectIntakeList) ?? [];
   const navigate = useNavigate();
+  const recentMeals = [...intakeList].slice(-4).reverse();
+  const openDiary = () => navigate("/diary");
 
+  const getCalories = (item) => {
+    const calories = Number(item.serving?.calories) || 0;
+    const amount = Number(item.serving_size) || 1;
+    return Math.round(calories * amount);
+  };
 
   return (
-
     <Card className="RecentMeals">
+      <CardHeader
+        title="Recent Meals"
+        subtitle="Your latest logged foods"
+        action={
+          <Button variant="ghost" size="sm" onClick={openDiary}>
+            View diary
+            <ArrowRight size={16} />
+          </Button>
+        }
+      />
 
-      <div className="RecentMealsHeader">
-
-        <h2>
-          Recent Meals
-        </h2>
-
-
-        <button
-          onClick={() => navigate("/diary")}
-        >
-          View Diary →
-        </button>
-
-      </div>
-
-
-      {intakeList.length === 0 ? (
-
-        <div className="EmptyMeals">
-
-          <Utensils />
-
-          <h3>
-            No meals tracked yet
-          </h3>
-
-          <p>
-            Add your first meal to start tracking your nutrition.
-          </p>
-
-          <button
-            onClick={() => navigate("/diary")}
-          >
-            Add Food
-          </button>
-
-        </div>
-
+      {recentMeals.length === 0 ? (
+        <EmptyState
+          icon={<Utensils size={22} />}
+          title="No meals tracked yet"
+          description="Add your first food to start tracking your nutrition."
+          action={
+            <Button size="sm" onClick={openDiary}>
+              Add food
+            </Button>
+          }
+        />
       ) : (
-
-        intakeList
-          .slice(0, 4)
-          .map((item,index)=>(
-
-          <div
-            className="MealItem"
-            key={index}
-          >
-
-            <div className="MealInfo">
-
-              <h4>
-                {item.name}
-              </h4>
-
-              <p>
-                {item.meal_type}
-              </p>
-
-            </div>
-
-
-            <span>
-              {item.serving?.calories ?? 0} kcal
-            </span>
-
-
-          </div>
-
-        ))
-
+        <div className="RecentMealsList">
+          {recentMeals.map((item, index) => (
+            <button
+              type="button"
+              className="RecentMealItem"
+              key={item.id ?? `${item.name}-${index}`}
+              onClick={openDiary}
+            >
+              <div className="RecentMealInfo">
+                <h3>{item.name}</h3>
+                <span>{item.meal_type}</span>
+              </div>
+              <strong>{getCalories(item)} kcal</strong>
+            </button>
+          ))}
+        </div>
       )}
-
     </Card>
-
   );
 }

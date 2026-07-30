@@ -1,201 +1,137 @@
+/* =========================
+   ITEM FOOD
+========================= */
+
 .ItemFood {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
 
-  display:flex;
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
 
-  gap:14px;
-
-  align-items:center;
-
-  margin-top:12px;
-
-  padding:12px;
-
-  transition:.2s ease;
-
+  transition: background var(--transition);
 }
-
 
 .ItemFood:hover {
-
-  background:var(--color-overlay-light);
-
+  background: var(--color-overlay-light);
 }
-
-
 
 .ItemFoodImage img {
+  width: 64px;
+  height: 64px;
 
-  width:64px;
-
-  height:64px;
-
-  object-fit:cover;
-
-  border-radius:var(--radius-md);
-
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
 }
-
-
 
 .ItemFoodContent {
+  flex: 1;
+  min-width: 0;
 
-  flex:1;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:16px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
 }
-
-
 
 .ItemFoodMain {
-
-  min-width:0;
-
+  min-width: 0;
 }
-
-
 
 .ItemFoodMain h3 {
-
-  margin:0;
-
-  font-size:1rem;
-
-  font-weight:700;
-
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
 }
-
-
 
 .ItemFoodMain p {
-
-  margin:4px 0 0;
-
-  color:var(--color-text-muted);
-
-  font-size:.85rem;
-
+  margin: var(--space-xs) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
 }
-
-
 
 .ItemFoodStats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
 
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:flex-end;
-
-  gap:5px;
-
+  flex-shrink: 0;
 }
-
-
 
 .ItemFoodStats strong {
-
-  font-size:.95rem;
-
+  font-size: var(--text-base);
+  color: var(--color-text);
 }
-
-
 
 .MacroText {
-
-  font-size:.8rem;
-
-  color:var(--color-text-muted);
-
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
 }
 
 
+/* =========================
+   ACTIONS
+========================= */
 
 .ItemFoodActions {
-
-  display:flex;
-
-  gap:6px;
-
+  display: flex;
+  gap: var(--space-xs);
 }
-
-
 
 .FoodAction {
+  width: 28px;
+  height: 28px;
 
-  width:28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  height:28px;
+  border: none;
+  border-radius: 50%;
 
-  display:flex;
+  cursor: pointer;
 
-  align-items:center;
-
-  justify-content:center;
-
-  border:none;
-
-  border-radius:50%;
-
-  cursor:pointer;
-
-  transition:.2s ease;
-
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast);
 }
-
-
 
 .FoodAction:hover {
-
-  transform:scale(1.1);
-
+  transform: scale(1.1);
 }
 
-
+.FoodAction:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
 
 .EditButton {
-
-  background:var(--color-overlay-light);
-
-  color:var(--color-primary);
-
+  background: var(--color-overlay-light);
+  color: var(--color-primary);
 }
-
-
 
 .DeleteButton {
-
-  background:var(--color-overlay-light);
-
-  color:var(--color-danger);
-
+  background: var(--color-overlay-light);
+  color: var(--color-danger);
 }
 
 
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width:700px){
-
+@media (max-width: 700px) {
   .ItemFoodContent {
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
+    flex-direction: column;
+    align-items: flex-start;
   }
-
 
   .ItemFoodStats {
-
-    width:100%;
-
-    align-items:flex-start;
-
+    width: 100%;
+    align-items: flex-start;
   }
-
 }

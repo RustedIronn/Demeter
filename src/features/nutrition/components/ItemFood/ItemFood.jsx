@@ -23,7 +23,7 @@ import {
 
 import {
   addModalSet,
-} from "@/shared/store/uiSlice";
+} from "@/app/state/uiSlice";
 
 
 import {

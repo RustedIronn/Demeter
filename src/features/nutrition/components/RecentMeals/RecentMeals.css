@@ -1,155 +1,75 @@
-.RecentMealsHeader {
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin-bottom:20px;
+.RecentMeals {
+  overflow: hidden;
 }
 
-
-.RecentMealsHeader h2 {
-  margin:0;
+.RecentMealsList {
+  display: flex;
+  flex-direction: column;
 }
 
-
-.RecentMealsHeader button {
-
-  background:none;
-
-  border:none;
-
-  color:var(--color-primary);
-
-  cursor:pointer;
-
-  font-weight:600;
-
+.RecentMealItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-sm);
+  border: none;
+  border-bottom: 1px solid var(--color-divider);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: background-color var(--transition-fast);
 }
 
-
-
-.MealItem {
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:16px 0;
-
-  border-bottom:1px solid var(--color-border);
-
+.RecentMealItem:last-child {
+  border-bottom: none;
 }
 
-
-
-.MealItem:last-child {
-
-  border-bottom:none;
-
+.RecentMealItem:hover {
+  background: var(--color-overlay-light);
 }
 
-
-
-.MealInfo h4 {
-
-  margin:0;
-
-  color:var(--color-text);
-
+.RecentMealItem:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
 }
 
-
-
-.MealInfo p {
-
-  margin:4px 0 0;
-
-  color:var(--color-text-muted);
-
-  text-transform:capitalize;
-
+.RecentMealInfo {
+  min-width: 0;
 }
 
-
-
-.MealItem span {
-
-  color:var(--color-primary);
-
-  font-weight:700;
-
+.RecentMealInfo h3 {
+  margin: 0;
+  overflow: hidden;
+  font-family: "Manrope", sans-serif;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-
-
-.EmptyMeals {
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  text-align:center;
-
-  padding:32px 16px;
-
+.RecentMealInfo span {
+  display: block;
+  margin-top: var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  text-transform: capitalize;
 }
 
-
-
-.EmptyMeals svg {
-
-  width:42px;
-
-  height:42px;
-
-  color:var(--color-primary);
-
-  margin-bottom:12px;
-
+.RecentMealItem strong {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  font-size: var(--text-sm);
 }
 
-
-
-.EmptyMeals h3 {
-
-  margin:0 0 8px;
-
-}
-
-
-
-.EmptyMeals p {
-
-  margin:0 0 20px;
-
-  color:var(--color-text-muted);
-
-}
-
-
-
-.EmptyMeals button {
-
-  background:var(--color-primary);
-
-  color:var(--color-bg);
-
-  border:none;
-
-  padding:10px 20px;
-
-  border-radius:var(--radius-md);
-
-  font-weight:700;
-
-  cursor:pointer;
-
+@media (max-width: 600px) {
+  .RecentMealItem {
+    padding: var(--space-sm);
+  }
 }

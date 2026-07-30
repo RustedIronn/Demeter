@@ -1,0 +1,40 @@
+.SearchDropdown {
+  position: absolute;
+  top: calc(100% + var(--space-sm));
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: rgba(43, 52, 39, .96);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+}
+
+.SearchResultsList {
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+.SearchLoading,
+.SearchEmpty {
+  padding: var(--space-xl);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.SearchResultsList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.SearchResultsList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.SearchResultsList::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: var(--color-overlay-light);
+}

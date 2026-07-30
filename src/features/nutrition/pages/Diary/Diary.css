@@ -1,0 +1,26 @@
+.Diary {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
+.Diary > * + * {
+  margin-top: var(--space-lg);
+}
+
+@media (max-width: 900px) {
+  .Diary {
+    padding: var(--space-md);
+  }
+
+  .Diary > * + * {
+    margin-top: var(--space-md);
+  }
+}
+
+@media (max-width: 600px) {
+  .Diary {
+    padding: var(--space-sm);
+  }
+}
